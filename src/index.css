@@ -53,11 +53,16 @@
   --color-input: var(--input);
   --color-ring: var(--ring);
 
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
+
+  --color-error: var(--error);
+  --color-error-foreground: var(--error-foreground);
+
   --shadow-panel:
     0 1px 2px oklch(0.2 0.015 240 / 8%),
     0 8px 24px -12px oklch(0.2 0.015 240 / 18%);
 }
-
 
 :root {
   --radius: 0.625rem;
@@ -100,11 +105,15 @@
   --border: oklch(0.905 0.007 245);
   --input: oklch(0.905 0.007 245);
   --ring: var(--primary);
+
+  --info: oklch(0.62 0.16 230);
+  --info-foreground: oklch(0.985 0.005 250);
+
+  --error: oklch(0.577 0.223 25);
+  --error-foreground: oklch(0.985 0.003 250);
 }
 
-
 @layer base {
-
   * {
     border-color: var(--color-border);
     box-sizing: border-box;
@@ -121,18 +130,15 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
-
 }
-
 
 @utility chat-canvas {
   background-color: var(--chat-canvas);
 
-  background-image:
-    radial-gradient(
-      oklch(0.386 0.062 178 / 7%) 1px,
-      transparent 1px
-    );
+  background-image: radial-gradient(
+    oklch(0.386 0.062 178 / 7%) 1px,
+    transparent 1px
+  );
 
   background-size: 18px 18px;
 }
