@@ -164,11 +164,8 @@ Evoluções planejadas:
 
 Desenvolvedor Front-end
 
-GitHub:
-https://github.com/seu-usuario
-
 LinkedIn:
-https://linkedin.com/in/seu-link
+https://www.linkedin.com/in/lucas-coelho-lucinda-4863751b4/
 
 ---
 
