@@ -1,18 +1,7 @@
 /*  ESTRUTURA DE CORES PADRÃO DO SISTEMA PARA SEUS COMPONENTS */
 
-// BOTOES 
 
-export const colorsButtonBackGround = {
-    default: "primary border border-primar",
-    info: "bg-info",
-    error: "bg-error",
-    success: "bg-success",
-    warning: "bg-warning",
-    primary: "bg-primary",
-    secondary: "bg-secondary",
-}
-
-export const colorsButtonsText = {
+export const colorsText = {
     default: "text-primary",
     info: "text-info",
     error: "text-error",
@@ -21,3 +10,27 @@ export const colorsButtonsText = {
     primary: "text-primary",
     secondary: "text-secondary",
 }
+
+
+export const colorsBackGround = {
+    default:
+        "bg-primary border-primary data-[highlighted]:bg-primary/80",
+
+    info:
+        "bg-info border-info data-[highlighted]:bg-info/80",
+
+    error:
+        "bg-error border-error data-[highlighted]:bg-error/80",
+
+    success:
+        "bg-success border-success data-[highlighted]:bg-success/80",
+
+    warning:
+        "bg-warning border-warning data-[highlighted]:bg-warning/80",
+
+    primary:
+        "bg-primary border-primary data-[highlighted]:bg-primary/80",
+
+    secondary:
+        "bg-secondary border-secondary data-[highlighted]:bg-secondary/80",
+};
