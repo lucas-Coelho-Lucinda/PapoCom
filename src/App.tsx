@@ -28,8 +28,8 @@ function App() {
           teste
         </ButtonLib>
       </div>
-      <div className="flex flex-row justify-center">
-        <SelectLib className="flex flex-row gap-5" options={options} size="small" variant="primary"  textColor="secondary" />
+      <div className="flex flex-row justify-center bg-amber-200 h-200">
+        <SelectLib  options={options} size="small" variant="default"textColor="primary" />
       </div>
     </>
   );

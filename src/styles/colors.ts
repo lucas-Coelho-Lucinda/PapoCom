@@ -14,7 +14,7 @@ export const colorsText = {
 
 export const colorsBackGround = {
     default:
-        "bg-primary border-primary data-[highlighted]:bg-primary/80",
+        "bg-background data-[highlighted]:bg-background/80",
 
     info:
         "bg-info border-info data-[highlighted]:bg-info/80",
