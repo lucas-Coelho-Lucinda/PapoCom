@@ -1,6 +1,6 @@
 import React from "react";
 import { Slot } from "@radix-ui/react-slot";
-import { colorsButtonBackGround, colorsButtonsText } from "../../styles/colors";
+import { colorsBackGround, colorsText } from "../../styles/colors";
 import { cva, type VariantProps } from "class-variance-authority";
 
 const buttonDefaultBehavior = [
@@ -17,8 +17,8 @@ const buttonDefaultBehavior = [
 
 const buttonVariants = cva(buttonDefaultBehavior, {
   variants: {
-    variant: colorsButtonBackGround,
-    textColor: colorsButtonsText,
+    variant: colorsBackGround,
+    textColor: colorsText,
     size: {
       small: "w-sm h-8",
       median: "w-4xl h-8",
