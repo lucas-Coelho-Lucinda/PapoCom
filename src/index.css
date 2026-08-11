@@ -67,6 +67,8 @@
 :root {
   --radius: 0.625rem;
 
+  --border-soft: oklch(0.93 0.012 175);
+
   --background: oklch(0.966 0.0035 247);
   --foreground: oklch(0.215 0.018 240);
 
@@ -141,4 +143,28 @@
   );
 
   background-size: 18px 18px;
+}
+
+@keyframes select-content-show {
+  from {
+    opacity: 0;
+    transform: translateY(-4px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes select-content-hide {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateY(-4px) scale(0.98);
+  }
 }
