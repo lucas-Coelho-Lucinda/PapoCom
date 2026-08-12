@@ -168,3 +168,105 @@
     transform: translateY(-4px) scale(0.98);
   }
 }
+
+
+/* ============================================
+   UTILITÁRIOS COMPLEXOS - ANIMAÇÕES
+   ============================================ */
+
+@utility animate-fade-in {
+  animation: fadeIn var(--anim-entrance) var(--ease-linear);
+}
+
+@utility animate-fade-out {
+  animation: fadeOut var(--anim-fast) var(--ease-linear);
+}
+
+@utility animate-slide-in-up {
+  animation: slideInUp var(--anim-entrance) var(--ease-linear) forwards;
+}
+
+@utility animate-slide-in-down {
+  animation: slideInDown var(--anim-entrance) var(--ease-linear);
+}
+
+@utility animate-slide-in-left {
+  animation: slideInLeft var(--anim-entrance) var(--ease-linear) forwards;
+}
+
+@utility animate-slide-in-right {
+  animation: slideInRight var(--anim-entrance) var(--ease-linear) forwards;
+}
+
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    transform: translateY(16px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInDown {
+  from {
+    transform: translateY(-16px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  @theme {
+    --anim-fast: 0.25s;
+    --anim-ui: 0.4s;
+    --anim-entrance: 1s;
+
+    --ease-linear: linear;
+    --ease-smooth: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+}
