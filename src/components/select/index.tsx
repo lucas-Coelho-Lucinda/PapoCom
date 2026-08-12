@@ -1,12 +1,8 @@
-
 import * as Select from "@radix-ui/react-select";
 import { Check, ChevronDown } from "lucide-react";
 import { cva, type VariantProps } from "class-variance-authority";
 
-import {
-  colorsBackGround,
-  colorsText,
-} from "../../styles/colors";
+import { colorsBackGround, colorsText } from "../../styles/colors";
 
 /**
  * ============================================================
@@ -16,12 +12,16 @@ import {
 
 const selectTriggerVariants = cva(
   [
+    "ps-2 pe-2",
+    "relative",
     "cursor-pointer",
     "inline-flex",
     "items-center",
     "justify-between",
     "rounded-md",
     "font-medium",
+    "border",
+    "border-soft",
     "transition-all",
     "duration-200",
     "outline-none",
@@ -45,24 +45,13 @@ const selectTriggerVariants = cva(
       textColor: "default",
       size: "small",
     },
-  }
+  },
 );
 
 /**
  * ============================================================
  * CONTENT
  * ============================================================
- *
- * O Content utiliza a largura real do Trigger através
- * da variável fornecida pelo Radix:
- *
- * --radix-select-trigger-width
- *
- * Dessa maneira:
- *
- * Trigger small  → Content small
- * Trigger median → Content median
- * Trigger large  → Content large
  */
 
 const selectContentVariants = cva(
@@ -73,29 +62,41 @@ const selectContentVariants = cva(
     "rounded-md",
     "p-1",
 
-    // Mesma largura do Trigger
+    // Largura igual ao Trigger
     "w-[var(--radix-select-trigger-width)]",
 
-    // Permite que o conteúdo tenha altura suficiente
+    // Altura disponível
     "max-h-[var(--radix-select-content-available-height)]",
+
+    // Animação de abertura
+    "data-[state=open]:animate-[select-content-show_150ms_ease-out]",
+
+    // Animação de fechamento
+    "data-[state=closed]:animate-[select-content-hide_100ms_ease-in]",
   ].join(" "),
   {
     variants: {
-      variant: colorsBackGround,
+      variant: {
+        default: "bg-background",
+        info: "bg-info",
+        error: "bg-error",
+        success: "bg-success",
+        warning: "bg-warning",
+        primary: "bg-primary",
+        secondary: "bg-secondary",
+      },
     },
 
     defaultVariants: {
       variant: "default",
     },
-  }
+  },
 );
 
 /**
  * ============================================================
- * ITEM
+ * ITEM / OPTION
  * ============================================================
- *
- * O Item ocupa 100% da largura do Content.
  */
 
 const selectItemVariants = cva(
@@ -112,9 +113,14 @@ const selectItemVariants = cva(
     "pl-8",
     "pr-2",
     "outline-none",
-
-    // Garante que o item não diminua
     "box-border",
+
+    "border",
+    "border-soft",
+
+    // Permite a transição entre bg-* e bg-*/80
+    "transition-colors",
+    "duration-150",
 
     // Estados do Radix
     "data-[disabled]:pointer-events-none",
@@ -122,13 +128,24 @@ const selectItemVariants = cva(
   ].join(" "),
   {
     variants: {
+      // Esta é a parte que vincula variant ao hover da option
+      variant: colorsBackGround,
+
       textColor: colorsText,
+
+      size: {
+        small: "h-8",
+        median: "h-8",
+        large: "h-16",
+      },
     },
 
     defaultVariants: {
+      variant: "default",
       textColor: "default",
+      size: "small",
     },
-  }
+  },
 );
 
 /**
@@ -137,11 +154,10 @@ const selectItemVariants = cva(
  * ============================================================
  */
 
-interface SelectProps
-  extends Omit<
-    VariantProps<typeof selectTriggerVariants>,
-    "textColor"
-  > {
+interface SelectProps extends Omit<
+  VariantProps<typeof selectTriggerVariants>,
+  "textColor"
+> {
   options: {
     label: string;
     value: string;
@@ -160,6 +176,10 @@ interface SelectProps
   className?: string;
 
   textColor?: keyof typeof colorsText;
+
+  variant?: keyof typeof colorsBackGround;
+
+  size?: "small" | "median" | "large";
 }
 
 /**
@@ -168,13 +188,35 @@ interface SelectProps
  * ============================================================
  */
 
+type optionsDefineColor =
+  | "default"
+  | "info"
+  | "error"
+  | "success"
+  | "warning"
+  | "primary"
+  | "secondary";
+
+const defineColorItem = (option: optionsDefineColor) => {
+  switch (option) {
+    case "default":
+      return "bg-success border rounded-md";
+
+    case "error":
+      return "bg-success hover:bg-background border rounded-md";
+
+    default:
+      break;
+  }
+};
+
 export function SelectLib({
   options,
   placeholder = "Selecione uma opção",
 
-  variant,
-  textColor,
-  size,
+  variant = "default",
+  textColor = "default",
+  size = "small",
 
   value,
   defaultValue,
@@ -204,7 +246,7 @@ export function SelectLib({
       >
         <Select.Value
           placeholder={placeholder}
-          className={colorsText[textColor ?? "default"]}
+          className={colorsText[textColor]}
         />
 
         <Select.Icon>
@@ -223,33 +265,36 @@ export function SelectLib({
             variant,
           })}
         >
-          <Select.Viewport className="w-full">
+          <Select.Viewport className="flex w-full flex-col gap-1">
             {options.map((option) => (
-              <Select.Item
-                key={option.value}
-                value={option.value}
-                className={selectItemVariants({
-                  textColor,
-                })}
-              >
-                {/* ==================================================
+              <div className={`${defineColorItem(variant)}`} key={option.value}>
+                <Select.Item
+                  value={option.value}
+                  className={selectItemVariants({
+                    variant,
+                    textColor,
+                    size,
+                  })}
+                >
+                  {/* ==================================================
                     INDICATOR
                     ================================================== */}
 
-                <Select.ItemIndicator className="absolute left-2">
-                  <Check className="h-4 w-4" />
-                </Select.ItemIndicator>
+                  <Select.ItemIndicator className="absolute left-2">
+                    <Check className="h-4 w-4" />
+                  </Select.ItemIndicator>
 
-                {/* ==================================================
+                  {/* ==================================================
                     TEXT
                     ================================================== */}
 
-                <Select.ItemText
-                  className={colorsBackGround[textColor ?? "default"]}
-                >
-                  {option.label}
-                </Select.ItemText>
-              </Select.Item>
+                  <Select.ItemText
+                    className={`${colorsText[textColor]} text-center`}
+                  >
+                    {option.label}
+                  </Select.ItemText>
+                </Select.Item>
+              </div>
             ))}
           </Select.Viewport>
         </Select.Content>
@@ -259,4 +304,3 @@ export function SelectLib({
 }
 
 SelectLib.displayName = "SelectLib";
-

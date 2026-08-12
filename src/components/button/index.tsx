@@ -24,7 +24,7 @@ const buttonVariants = cva(buttonDefaultBehavior, {
       median: "w-4xl h-8",
       large: "w-6xl h-16",
     },
-
+  
     align: {
       center: "justify-center",
       between: "justify-between",

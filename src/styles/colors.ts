@@ -2,12 +2,14 @@
 
 
 export const colorsText = {
-    default: "text-primary",
+    default: "text-foreground",
     info: "text-info",
     error: "text-error",
     success: "text-success",
     warning: "text-warning",
     primary: "text-primary",
+    muted: "text-muted-foreground",
+    accent: "text-accent",
     secondary: "text-secondary",
 }
 
@@ -33,4 +35,6 @@ export const colorsBackGround = {
 
     secondary:
         "bg-secondary border-secondary data-[highlighted]:bg-secondary/80",
+        
+     accent: "bg-accent border-accent data-[highlighted]:bg-accent/80"   
 };
