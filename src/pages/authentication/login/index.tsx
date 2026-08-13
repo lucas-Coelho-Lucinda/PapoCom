@@ -1,10 +1,14 @@
-//import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Textlib } from "../../../components/text";
 import { InputLib } from "../../../components/Input";
 import { ButtonLib } from "../../../components/button";
 
 export const Login = () => {
-  //const navigate = useNavigate();
+  const navigate = useNavigate();
+
+  const goToRegister = () => {
+    navigate("/cadastrar");
+  };
 
   return (
     <form>
@@ -50,7 +54,13 @@ export const Login = () => {
             Não tem conta?
           </Textlib>
 
-          <ButtonLib  variant="accent" textColor="primary" size="small" type="button">
+          <ButtonLib
+            variant="accent"
+            textColor="primary"
+            size="small"
+            type="button"
+            onClick={goToRegister}
+          >
             Criar conta
           </ButtonLib>
         </div>

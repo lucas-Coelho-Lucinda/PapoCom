@@ -7,7 +7,7 @@ import { CardLib } from "../../components/card";
 export const HomePage = () => {
   return (
     <>
-      <Helmet title="Login" />
+      <Helmet title="Papo com | Login" />
       <div className="relative min-h-screen flex flex-col lg:flex-row overflow-hidden">
         <div className="hidden lg:block absolute lef-10 top-0 w-1/2 h-full animate-slide-in-left">
           <div
