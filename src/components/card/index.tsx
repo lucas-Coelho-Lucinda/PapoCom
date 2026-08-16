@@ -1,7 +1,7 @@
 import { cva, type VariantProps } from "class-variance-authority";
 import { colorsBackGround } from "../../styles/colors";
 
-const cardVariants = cva("rounded-lg border transition-all", {
+const cardVariants = cva("rounded-lg  transition-all", {
   variants: {
     variant: {
       ...colorsBackGround,

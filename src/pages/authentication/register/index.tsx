@@ -14,16 +14,16 @@ export const Register = () => {
 
   return (
     <>
-      <Helmet title="Papo com | Cadastro" />
+      <Helmet title="Papo Com | Cadastro" />
 
-      <form className="animate-slide-in-right">
+      <form className="animate-slide-in-right w-96">
         <div className="flex flex-col items-start gap-5 mb-5">
           <Textlib as="span" color="default" size="xl">
             Criar Conta
           </Textlib>
         </div>
 
-        <div className="flex flex-col gap-5 w-full">
+        <div className="flex flex-col gap-5">
           <div>
             <Textlib as="label" color="default">
               Nome de Usuario
@@ -76,7 +76,7 @@ export const Register = () => {
           </ButtonLib>
 
           <div className="flex flex-col gap-2">
-            <Textlib as="span" color="muted" size="sm">
+            <Textlib as="span" color="primary" size="sm">
               Já tem Conta?
             </Textlib>
 

@@ -20,11 +20,11 @@ const buttonVariants = cva(buttonDefaultBehavior, {
     variant: colorsBackGround,
     textColor: colorsText,
     size: {
-      small: "w-sm h-8",
-      median: "w-4xl h-8",
-      large: "w-6xl h-16",
+      small: "w-full h-8",
+      median: "w-full h-12",
+      large: "w-full h-24",
     },
-  
+
     align: {
       center: "justify-center",
       between: "justify-between",

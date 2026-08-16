@@ -7,7 +7,7 @@ export const Login = () => {
   const navigate = useNavigate();
 
   const goToRegister = () => {
-    navigate("/cadastrar");
+    navigate("/cadastro");
   };
 
   return (
@@ -19,7 +19,7 @@ export const Login = () => {
           </Textlib>
         </div>
         <div className="flex flex-col items-center gap-5">
-          <Textlib as="span" color="muted" size="md">
+          <Textlib as="span" color="primary" size="md">
             Use seu e-mail corporativo e senha para acessar.
           </Textlib>
         </div>
@@ -49,11 +49,10 @@ export const Login = () => {
           </Textlib>
         </ButtonLib>
 
-        <div className="flex flex-col gap-2">
-          <Textlib as="span" color="muted" size="sm">
+        <div className="flex flex-col gap-2 w-full">
+          <Textlib as="span" color="primary" size="sm">
             Não tem conta?
           </Textlib>
-
           <ButtonLib
             variant="accent"
             textColor="primary"

@@ -1,4 +1,3 @@
-import { X } from "lucide-react";
 import type { ComponentProps } from "react";
 import * as Dialog from "@radix-ui/react-dialog";
 import { cva, type VariantProps } from "class-variance-authority";
@@ -92,22 +91,6 @@ const DrawerContent = ({
         {...props}
       >
         {children}
-
-        <Dialog.Close
-          className="absolute right-4 top-4
-            rounded-sm p-1
-            opacity-70
-            transition-opacity
-            hover:opacity-100
-            focus:outline-none
-            focus:ring-2
-            focus:ring-ring
-            disabled:pointer-events-none"
-        >
-          <X className="h-4 w-4" />
-
-          <span className="sr-only">Fechar</span>
-        </Dialog.Close>
       </Dialog.Content>
     </Dialog.Portal>
   );
