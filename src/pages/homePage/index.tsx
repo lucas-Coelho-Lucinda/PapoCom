@@ -7,7 +7,7 @@ import { CardLib } from "../../components/card";
 export const HomePage = () => {
   return (
     <>
-      <Helmet title="Papo com | Login" />
+      <Helmet title="Papo Com | Login" />
       <div className="relative min-h-screen flex flex-col lg:flex-row overflow-hidden">
         <div className="hidden lg:block absolute lef-10 top-0 w-1/2 h-full animate-slide-in-left">
           <div
@@ -59,21 +59,21 @@ export const HomePage = () => {
           <div className="flex flex-col gap-4 items-start">
             <div className="flex items-center gap-2 justify-center">
               <CircleCheck className="text-accent" size="20" />
-              <Textlib as="span" color="secondary" size="lg">
+              <Textlib as="span" color="muted" size="lg">
                 Distribuição automática por fila
               </Textlib>
             </div>
 
             <div className="flex items-center gap-2 justify-center">
               <CircleCheck className="text-accent" size="20" />
-              <Textlib as="span" color="secondary" size="lg">
+              <Textlib as="span" color="muted" size="lg">
                 Trilha de auditoria das ações críticas
               </Textlib>
             </div>
 
             <div className="flex items-center gap-2 justify-center">
               <CircleCheck className="text-accent" size="20" />
-              <Textlib as="span" color="secondary" size="lg">
+              <Textlib as="span" color="muted" size="lg">
                 Um atendente por conversa, sem conflito
               </Textlib>
             </div>
