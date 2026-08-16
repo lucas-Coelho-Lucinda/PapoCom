@@ -8,7 +8,7 @@ export const colorsText = {
     success: "text-success",
     warning: "text-warning",
     primary: "text-primary",
-    muted: "text-muted-foreground",
+    muted: "text-muted",
     accent: "text-accent",
     secondary: "text-secondary",
 }
