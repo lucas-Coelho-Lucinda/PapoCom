@@ -1,0 +1,72 @@
+import * as AvatarPrimitive from "@radix-ui/react-avatar";
+import { cva, type VariantProps } from "class-variance-authority";
+import { colorsBackGround } from "../../styles/colors";
+
+const avatarVariants = cva(
+  "inline-flex items-center justify-center overflow-hidden bg-gray-200",
+  {
+    variants: {
+      size: {
+        small: "h-10 w-10",
+        median: "h-12 w-12",
+        large: "h-14 w-14",
+        extralarge: "h-20 w-20",
+      },
+      shape: {
+        circle: "rounded-full",
+        square: "rounded-md",
+      },
+    },
+    defaultVariants: {
+      size: "small",
+      shape: "circle",
+    },
+  },
+);
+
+// 🔹 Wrapper para borda
+const wrapperVariants = cva("inline-flex", {
+  variants: {
+    decoration: {
+      ...colorsBackGround,
+    },
+    shape: {
+      circle: "rounded-full",
+      square: "rounded-md",
+    },
+  },
+  defaultVariants: {
+    decoration: "default",
+    shape: "circle",
+  },
+});
+
+interface AvatarProps
+  extends
+    VariantProps<typeof avatarVariants>,
+    VariantProps<typeof wrapperVariants> {
+  src?: string;
+  fallback?: string;
+  alt?: string;
+  fit?: "cover" | "contain";
+}
+//technical-support.png
+//support.png
+export const AvatarLib = ({
+  fallback = "/src/assets/technical-support.png",
+  shape,
+  size,
+  decoration,
+}: AvatarProps) => {
+  return (
+    <div className={wrapperVariants({ decoration, shape })}>
+      <AvatarPrimitive.Root
+        className={`${avatarVariants({ size, shape })}`}
+      >
+        <AvatarPrimitive.Fallback className="flex items-center justify-center bg-accent p-2">
+          <img src={fallback} alt="" />
+        </AvatarPrimitive.Fallback>
+      </AvatarPrimitive.Root>
+    </div>
+  );
+};
