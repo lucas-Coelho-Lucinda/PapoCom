@@ -13,6 +13,7 @@ const buttonDefaultBehavior = [
   "disabled:pointer-events-none",
   "disabled:opacity-50",
   "active:scale-[0.97]",
+  "active:translate-y-0.2",
 ].join(" ");
 
 const buttonVariants = cva(buttonDefaultBehavior, {
@@ -20,9 +21,10 @@ const buttonVariants = cva(buttonDefaultBehavior, {
     variant: colorsBackGround,
     textColor: colorsText,
     size: {
-      small: "w-full h-8",
-      median: "w-full h-12",
-      large: "w-full h-24",
+      small: "w-full h-8 p-3",
+      median: "w-full h-12 p-3",
+      large: "w-full h-24 p-3",
+      collapsed: "w-12 h-8 p-3",
     },
 
     align: {

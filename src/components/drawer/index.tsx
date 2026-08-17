@@ -11,10 +11,9 @@ const drawerVariants = cva(
     "bg-primary",
     "shadow-lg",
     "outline-none",
-    "transition-transform",
+    "transition-[width,transform]",
     "duration-300",
     "ease-in-out",
-
     "data-[state=open]:translate-x-0",
     "data-[state=closed]:duration-200",
   ],
@@ -34,8 +33,7 @@ const drawerVariants = cva(
           "inset-y-0",
           "left-0",
           "h-full",
-          "w-100",
-          "rounded-tr rounded-br",
+          "border-r",
           "data-[state=closed]:-translate-x-full",
         ],
 
@@ -55,18 +53,25 @@ const drawerVariants = cva(
           "data-[state=closed]:translate-y-full",
         ],
       },
+
+      collapsed: {
+        true: "w-25",
+        false: "w-100",
+      },
     },
 
     defaultVariants: {
       side: "right",
+      collapsed: false,
     },
   },
 );
-
 interface DrawerContentProps
   extends
     ComponentProps<typeof Dialog.Content>,
-    VariantProps<typeof drawerVariants> {}
+    VariantProps<typeof drawerVariants> {
+  isCollapsed?: boolean;
+}
 
 const Drawer = Dialog.Root;
 const DrawerTrigger = Dialog.Trigger;
@@ -78,14 +83,15 @@ const DrawerContent = ({
   className,
   side,
   children,
+  collapsed,
   ...props
 }: DrawerContentProps) => {
   return (
     <Dialog.Portal>
-
       <Dialog.Content
         className={drawerVariants({
           side,
+          collapsed,
           className,
         })}
         {...props}
