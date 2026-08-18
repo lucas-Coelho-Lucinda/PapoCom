@@ -1,7 +1,6 @@
 import * as Select from "@radix-ui/react-select";
 import { Check, ChevronDown } from "lucide-react";
 import { cva, type VariantProps } from "class-variance-authority";
-
 import { colorsBackGround, colorsText } from "../../styles/colors";
 
 /**
@@ -12,31 +11,44 @@ import { colorsBackGround, colorsText } from "../../styles/colors";
 
 const selectTriggerVariants = cva(
   [
-    "ps-2 pe-2",
     "relative",
-    "cursor-pointer",
     "inline-flex",
     "items-center",
     "justify-between",
+    "gap-2",
+
+    "cursor-pointer",
+    "select-none",
+
     "rounded-md",
-    "font-medium",
     "border",
     "border-soft",
+
+    "font-medium",
+
+    "outline-none",
+
     "transition-all",
     "duration-200",
-    "outline-none",
+
     "disabled:pointer-events-none",
     "disabled:opacity-50",
+
+    // Impede o conteúdo de estourar o tamanho do Select
+    "overflow-hidden",
   ].join(" "),
   {
     variants: {
       variant: colorsBackGround,
+
       textColor: colorsText,
 
       size: {
-        small: "w-sm h-8",
-        median: "w-4xl h-8",
-        large: "w-6xl h-16",
+        small: ["h-8", "px-2", "text-sm"].join(" "),
+
+        medium: ["h-8", "px-2", "text-sm"].join(" "),
+
+        large: ["h-16", "px-3", "text-base"].join(" "),
       },
     },
 
@@ -57,15 +69,19 @@ const selectTriggerVariants = cva(
 const selectContentVariants = cva(
   [
     "z-50",
-    "mt-1",
+
     "overflow-hidden",
+
     "rounded-md",
+    "border",
+    "border-soft",
+
     "p-1",
 
-    // Largura igual ao Trigger
+    // Mesma largura do Trigger
     "w-[var(--radix-select-trigger-width)]",
 
-    // Altura disponível
+    // Altura máxima disponível
     "max-h-[var(--radix-select-content-available-height)]",
 
     // Animação de abertura
@@ -77,13 +93,7 @@ const selectContentVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-background",
-        info: "bg-info",
-        error: "bg-error",
-        success: "bg-success",
-        warning: "bg-warning",
-        primary: "bg-primary",
-        secondary: "bg-secondary",
+        ...colorsBackGround,
       },
     },
 
@@ -95,7 +105,25 @@ const selectContentVariants = cva(
 
 /**
  * ============================================================
- * ITEM / OPTION
+ * VIEWPORT
+ * ============================================================
+ */
+
+const selectViewportVariants = cva(
+  [
+    "w-full",
+    "flex",
+    "flex-col",
+    "gap-1",
+
+    "overflow-y-auto",
+    "overflow-x-hidden",
+  ].join(" "),
+);
+
+/**
+ * ============================================================
+ * ITEM
  * ============================================================
  */
 
@@ -104,39 +132,49 @@ const selectItemVariants = cva(
     "relative",
     "flex",
     "w-full",
+    "min-w-0",
+
     "cursor-pointer",
     "select-none",
     "items-center",
-    "gap-2",
+
     "rounded-sm",
-    "py-2",
-    "pl-8",
-    "pr-2",
-    "outline-none",
-    "box-border",
 
     "border",
     "border-soft",
 
-    // Permite a transição entre bg-* e bg-*/80
+    "outline-none",
+
+    "box-border",
+
     "transition-colors",
     "duration-150",
+    "bg-amber-500",
 
-    // Estados do Radix
+    // Texto não deve estourar
+    "overflow-hidden",
+
+    // Estados Radix
     "data-[disabled]:pointer-events-none",
     "data-[disabled]:opacity-50",
+
+    // Hover/focus
+    "data-[highlighted]:outline-none",
   ].join(" "),
   {
     variants: {
-      // Esta é a parte que vincula variant ao hover da option
-      variant: colorsBackGround,
+      variant: {
+        ...colorsBackGround,
+      },
 
       textColor: colorsText,
 
       size: {
-        small: "h-8",
-        median: "h-8",
-        large: "h-16",
+        small: ["h-8", "py-1", "pl-8", "pr-2", "text-sm"].join(" "),
+
+        medium: ["h-8", "py-1", "pl-8", "pr-2", "text-sm"].join(" "),
+
+        large: ["h-16", "py-2", "pl-10", "pr-3", "text-base"].join(" "),
       },
     },
 
@@ -146,6 +184,25 @@ const selectItemVariants = cva(
       size: "small",
     },
   },
+);
+
+/**
+ * ============================================================
+ * ITEM TEXT
+ * ============================================================
+ */
+
+const selectItemTextVariants = cva(
+  [
+    "block",
+    "min-w-0",
+    "w-full",
+    "max-w-full",
+    "flex-1",
+    "overflow-hidden",
+    "text-ellipsis",
+    "whitespace-nowrap",
+  ].join(" "),
 );
 
 /**
@@ -179,7 +236,7 @@ interface SelectProps extends Omit<
 
   variant?: keyof typeof colorsBackGround;
 
-  size?: "small" | "median" | "large";
+  size?: "small" | "medium" | "large";
 }
 
 /**
@@ -187,7 +244,6 @@ interface SelectProps extends Omit<
  * COMPONENT
  * ============================================================
  */
-
 type optionsDefineColor =
   | "default"
   | "info"
@@ -195,12 +251,16 @@ type optionsDefineColor =
   | "success"
   | "warning"
   | "primary"
-  | "secondary";
+  | "secondary"
+  | "accent";
 
 const defineColorItem = (option: optionsDefineColor) => {
   switch (option) {
     case "default":
       return "bg-success border rounded-md";
+
+    case "secondary":
+      return "bg-accent border rounded-md";
 
     case "error":
       return "bg-success hover:bg-background border rounded-md";
@@ -209,20 +269,16 @@ const defineColorItem = (option: optionsDefineColor) => {
       break;
   }
 };
-
 export function SelectLib({
   options,
   placeholder = "Selecione uma opção",
-
   variant = "default",
   textColor = "default",
   size = "small",
-
   value,
   defaultValue,
   onValueChange,
-
-  disabled,
+  disabled = false,
   className,
 }: SelectProps) {
   return (
@@ -232,10 +288,6 @@ export function SelectLib({
       onValueChange={onValueChange}
       disabled={disabled}
     >
-      {/* ======================================================
-          TRIGGER
-          ====================================================== */}
-
       <Select.Trigger
         className={selectTriggerVariants({
           variant,
@@ -244,30 +296,26 @@ export function SelectLib({
           className,
         })}
       >
-        <Select.Value
-          placeholder={placeholder}
-          className={colorsText[textColor]}
-        />
+        <span className="block min-w-0 flex-1 overflow-hidden whitespace-nowrap text-ellipsis">
+          <Select.Value
+            placeholder={placeholder}
+            className={`block min-w-0 w-full max-w-full overflow-hidden text-ellipsis whitespace-nowrap ${colorsText[textColor]}`}
+          />
+        </span>
 
-        <Select.Icon>
-          <ChevronDown className="h-4 w-4 shrink-0" />
+        <Select.Icon className="shrink-0">
+          <ChevronDown className="h-4 w-4" />
         </Select.Icon>
       </Select.Trigger>
-
-      {/* ======================================================
-          CONTENT
-          ====================================================== */}
 
       <Select.Portal>
         <Select.Content
           position="popper"
-          className={selectContentVariants({
-            variant,
-          })}
+          className={`${selectContentVariants({ variant })} mt-1`}
         >
-          <Select.Viewport className="flex w-full flex-col gap-1">
+          <Select.Viewport className={selectViewportVariants()}>
             {options.map((option) => (
-              <div className={`${defineColorItem(variant)}`} key={option.value}>
+              <div className={defineColorItem(variant)} key={option.value}>
                 <Select.Item
                   value={option.value}
                   className={selectItemVariants({
@@ -276,21 +324,11 @@ export function SelectLib({
                     size,
                   })}
                 >
-                  {/* ==================================================
-                    INDICATOR
-                    ================================================== */}
-
-                  <Select.ItemIndicator className="absolute left-2">
+                  <Select.ItemIndicator className="absolute left-2 flex items-center">
                     <Check className="h-4 w-4" />
                   </Select.ItemIndicator>
 
-                  {/* ==================================================
-                    TEXT
-                    ================================================== */}
-
-                  <Select.ItemText
-                    className={`${colorsText[textColor]} text-center`}
-                  >
+                  <Select.ItemText className={selectItemTextVariants()}>
                     {option.label}
                   </Select.ItemText>
                 </Select.Item>

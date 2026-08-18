@@ -1,5 +1,9 @@
 import React from "react";
-import { colorsBackGround, colorsText } from "../../styles/colors";
+import {
+  colorsBackGround,
+  colorsBorder,
+  colorsText,
+} from "../../styles/colors";
 import { cva, type VariantProps } from "class-variance-authority";
 
 const headerDefaultBehavior =
@@ -8,9 +12,11 @@ const headerDefaultBehavior =
 const headerVariants = cva(headerDefaultBehavior, {
   variants: {
     variant: colorsBackGround,
+    border: colorsBorder,
     textColor: colorsText,
   },
   defaultVariants: {
+    border: "none",
     textColor: "default",
     variant: "default",
   },
@@ -24,7 +30,7 @@ export interface headerProps
     VariantProps<typeof headerVariants> {}
 
 export const HeaderLib = React.forwardRef<headerElement, headerProps>(
-  ({ variant, className, textColor, children, ...props }, ref) => {
+  ({ variant, className, border, textColor, children, ...props }, ref) => {
     return (
       <header
         ref={ref}
@@ -32,6 +38,7 @@ export const HeaderLib = React.forwardRef<headerElement, headerProps>(
           variant,
           className,
           textColor,
+          border,
         })}
         {...props}
       >

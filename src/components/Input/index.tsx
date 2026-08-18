@@ -5,9 +5,9 @@ import { colorsBackGround } from "../../styles/colors";
 
 const inputVariants = cva(
   `
-  w-full rounded-md border border-soft text-foreground
+  w-full rounded-md border border-1 border-soft text-foreground
   placeholder:text-foreground-muted
-  focus:outline-none focus:ring-2 transition-all
+  focus:outline-none focus:border-primary transition-all
   `,
   {
     variants: {

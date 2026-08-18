@@ -1,6 +1,6 @@
 import * as AvatarPrimitive from "@radix-ui/react-avatar";
 import { cva, type VariantProps } from "class-variance-authority";
-import { colorsBackGround } from "../../styles/colors";
+import { colorsBorder } from "../../styles/colors";
 
 const avatarVariants = cva(
   "inline-flex items-center justify-center overflow-hidden bg-gray-200",
@@ -28,7 +28,7 @@ const avatarVariants = cva(
 const wrapperVariants = cva("inline-flex", {
   variants: {
     decoration: {
-      ...colorsBackGround,
+      ...colorsBorder,
     },
     shape: {
       circle: "rounded-full",
@@ -50,21 +50,28 @@ interface AvatarProps
   alt?: string;
   fit?: "cover" | "contain";
 }
-//technical-support.png
-//support.png
 export const AvatarLib = ({
-  fallback = "/src/assets/technical-support.png",
+  fallback,
+  alt,
+  fit,
+  src,
   shape,
   size,
   decoration,
 }: AvatarProps) => {
   return (
     <div className={wrapperVariants({ decoration, shape })}>
-      <AvatarPrimitive.Root
-        className={`${avatarVariants({ size, shape })}`}
-      >
-        <AvatarPrimitive.Fallback className="flex items-center justify-center bg-accent p-2">
-          <img src={fallback} alt="" />
+      <AvatarPrimitive.Root className={`${avatarVariants({ size, shape })}`}>
+        <AvatarPrimitive.Image
+          src={src}
+          alt={alt}
+          className={`w-20 h-full ${
+            fit === "cover" ? "object-cover" : "object-contain"
+          }`}
+        />
+
+        <AvatarPrimitive.Fallback className="flex items-center justify-center w-full h-full bg-muted/20 text-success">
+          {fallback}
         </AvatarPrimitive.Fallback>
       </AvatarPrimitive.Root>
     </div>

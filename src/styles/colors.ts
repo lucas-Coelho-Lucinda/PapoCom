@@ -18,23 +18,48 @@ export const colorsBackGround = {
     default:
         "bg-background data-[highlighted]:bg-background/80",
 
+    muted: "bg-muted/15 data-[highlighted]:bg-muted/80",
+
     info:
-        "bg-info border-info data-[highlighted]:bg-info/80",
+        "bg-info data-[highlighted]:bg-info/80",
 
     error:
-        "bg-error border-error data-[highlighted]:bg-error/80",
+        "bg-error  data-[highlighted]:bg-error/80",
 
     success:
-        "bg-success border-success data-[highlighted]:bg-success/80",
+        "bg-success data-[highlighted]:bg-success/80",
 
     warning:
-        "bg-warning border-warning data-[highlighted]:bg-warning/80",
+        "bg-warning data-[highlighted]:bg-warning/80",
 
     primary:
-        "bg-primary border-primary data-[highlighted]:bg-primary/80",
+        "bg-primary data-[highlighted]:bg-primary/80",
 
     secondary:
-        "bg-secondary border-secondary data-[highlighted]:bg-secondary/80",
-        
-     accent: "bg-accent border-accent data-[highlighted]:bg-accent/80"   
+        "bg-secondary data-[highlighted]:bg-secondary/80",
+
+    accent: "bg-accent border-accent data-[highlighted]:bg-accent/80"
+};
+
+
+export const colorsBorder = {
+    none: "border-transparent",
+
+    default: "border-background",
+
+    info: "border-info",
+
+    error: "border-error",
+
+    success: "border-success",
+
+    warning: "border-warning",
+
+    primary: "border-primary",
+
+    secondary: "border-secondary",
+
+    accent: "border-accent",
+
+    muted: "border-muted"
 };

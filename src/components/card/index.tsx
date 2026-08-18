@@ -1,14 +1,16 @@
 import { cva, type VariantProps } from "class-variance-authority";
-import { colorsBackGround } from "../../styles/colors";
+import { colorsBackGround, colorsBorder } from "../../styles/colors";
 
-const cardVariants = cva("rounded-lg  transition-all", {
+const cardVariants = cva("rounded-lg transition-all border", {
   variants: {
     variant: {
       ...colorsBackGround,
     },
+
     border: {
-      ...colorsBackGround,
+      ...colorsBorder,
     },
+
     padding: {
       min: "p-2 size-auto",
       small: "p-10 size-auto",
@@ -16,8 +18,10 @@ const cardVariants = cva("rounded-lg  transition-all", {
       large: "p-50 size-full",
     },
   },
+
   defaultVariants: {
     variant: "default",
+    border: "default",
     padding: "large",
   },
 });
@@ -34,7 +38,7 @@ export const CardLib = ({
 }: CardProps) => {
   return (
     <div
-      className={`${cardVariants({ variant, border, padding })} ${className ?? ""}`}
+      className={`${cardVariants({ variant, border, padding })} ${className}`}
       {...props}
     />
   );

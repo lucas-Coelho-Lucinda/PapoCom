@@ -46,6 +46,7 @@ export const DrawerService = ({ isCollapsed }: DrawerServiceProps) => {
         >
           <CardLib
             padding="min"
+            border="accent"
             variant="accent"
             className="
               flex
@@ -93,9 +94,10 @@ export const DrawerService = ({ isCollapsed }: DrawerServiceProps) => {
               <TooltipTriggerLib asChild>
                 <div className="shrink-0">
                   <AvatarLib
+                    src="/src/assets/technical-support.png"
                     decoration="accent"
                     shape="circle"
-                    fit="contain"
+                    fit="cover"
                     size="small"
                   />
                 </div>
@@ -104,9 +106,13 @@ export const DrawerService = ({ isCollapsed }: DrawerServiceProps) => {
               {isCollapsed && (
                 <TooltipLib side="right">
                   <div className="flex flex-col">
-                    <Textlib as="span" color="secondary">Marina Duarte</Textlib>
+                    <Textlib as="span" color="secondary">
+                      Marina Duarte
+                    </Textlib>
                     <hr />
-                    <Textlib as="span" color="secondary">Administrador</Textlib>
+                    <Textlib as="span" color="secondary">
+                      Administrador
+                    </Textlib>
                   </div>
                 </TooltipLib>
               )}
@@ -168,9 +174,7 @@ export const DrawerService = ({ isCollapsed }: DrawerServiceProps) => {
                 </ButtonLib>
               </TooltipTriggerLib>
 
-              {isCollapsed && (
-                <TooltipLib side="right">Sair</TooltipLib>
-              )}
+              {isCollapsed && <TooltipLib side="right">Sair</TooltipLib>}
             </Tooltip>
           </TooltipProviderLib>
         </div>
