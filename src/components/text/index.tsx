@@ -1,26 +1,20 @@
 import { cva, type VariantProps } from "class-variance-authority";
-import { colorsText } from "../../styles/colors";
+import { textSize } from "../../styles/sizes";
+import { colorsHouverText, colorsText } from "../../styles/colors";
+
 
 const textVariants = cva("transition-colors", {
   variants: {
-    size: {
-      xs: "text-xs",
-      sm: "text-sm",
-      md: "text-base",
-      lg: "text-lg",
-      xl: "text-xl",
-      "2xl": "text-2xl",
-      "3xl": "text-3xl",
-      "4xl": "text-4xl",
-      "5xl": "text-5xl",
-    },
+    size: textSize,
     color: colorsText,
+    colorHover: colorsHouverText,
   },
 
-  defaultVariants:{
-    color: "default",
-    size: "sm"
-  }
+  defaultVariants: {
+    color: "none",
+    colorHover: "none",
+    size: "sm",
+  },
 });
 
 // Extrair tipos automaticamente
@@ -32,25 +26,25 @@ interface TextProps extends TextVariants {
   className?: string;
 }
 
-export const Textlib  = ({
+export const Textlib = ({
   as = "p",
   size,
   color,
+  colorHover,
   children,
   className = "",
   ...props
 }: TextProps) => {
-  const combinedClasses = textVariants({ size, color });
+  const combinedClasses = textVariants({ size, color, colorHover });
   const finalClasses = [combinedClasses, className].filter(Boolean).join(" ");
 
   const Component = as;
 
-  const { ...rest } = props; // opcional (clareza)
+  const { ...rest } = props;
 
   return (
     <Component className={finalClasses} {...rest}>
       {children}
     </Component>
   );
-}
-
+};

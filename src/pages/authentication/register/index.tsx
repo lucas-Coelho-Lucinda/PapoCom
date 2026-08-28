@@ -4,11 +4,10 @@ import { Textlib } from "../../../components/text";
 import { InputLib } from "../../../components/Input";
 import { ButtonLib } from "../../../components/button";
 
-
 export const Register = () => {
   const navigate = useNavigate();
 
-   const goToLogin = () => {
+  const goToLogin = () => {
     navigate("/");
   };
 
@@ -67,10 +66,12 @@ export const Register = () => {
           </div>
 
           <ButtonLib
-            variant="primary"
+            colorBackeGround="primary"
+            colorBackeHouverGround="muted"
             textColor="secondary"
-            size="small"
+            size="median"
             type="submit"
+            shadow="default"
           >
             Cadastrar
           </ButtonLib>
@@ -81,10 +82,12 @@ export const Register = () => {
             </Textlib>
 
             <ButtonLib
-              variant="accent"
+              colorBackeGround="accent"
+              colorBackeHouverGround="muted"
               textColor="primary"
-              size="small"
+              size="median"
               type="button"
+              shadow="default"
               onClick={goToLogin}
             >
               Acessar

@@ -1,7 +1,8 @@
-/*  ESTRUTURA DE CORES PADRÃO DO SISTEMA PARA SEUS COMPONENTS */
-
+/* ESTRUTURA DE CORES PADRÃO DO SISTEMA PARA SEUS COMPONENTES */
 
 export const colorsText = {
+    none: "",
+    message: "text-slate-900",
     default: "text-foreground",
     info: "text-info",
     error: "text-error",
@@ -11,55 +12,128 @@ export const colorsText = {
     muted: "text-muted",
     accent: "text-accent",
     secondary: "text-secondary",
-}
+};
+
+
+export const colorsHouverText = {
+    none: "",
+
+    default:
+        "hover:text-primary-hover",
+
+    muted:
+        "hover:text-foreground",
+
+    info:
+        "hover:text-info-active",
+
+    error:
+        "hover:text-error-active",
+
+    success:
+        "hover:text-success-active",
+
+    warning:
+        "hover:text-warning-active",
+
+    primary:
+        "hover:text-primary-hover",
+
+    secondary:
+        "hover:text-secondary",
+
+    accent:
+        "hover:text-accent-active",
+};
 
 
 export const colorsBackGround = {
-    default:
-        "bg-background data-[highlighted]:bg-background/80",
+    none: "",
 
-    muted: "bg-muted/15 data-[highlighted]:bg-muted/80",
+    default:
+        "bg-card",
+
+    muted:
+        "bg-muted/50",
 
     info:
-        "bg-info data-[highlighted]:bg-info/80",
+        "bg-info",
 
     error:
-        "bg-error  data-[highlighted]:bg-error/80",
+        "bg-error",
 
     success:
-        "bg-success data-[highlighted]:bg-success/80",
+        "bg-success",
 
     warning:
-        "bg-warning data-[highlighted]:bg-warning/80",
+        "bg-warning",
 
     primary:
-        "bg-primary data-[highlighted]:bg-primary/80",
+        "bg-primary",
 
     secondary:
-        "bg-secondary data-[highlighted]:bg-secondary/80",
+        "bg-secondary",
 
-    accent: "bg-accent border-accent data-[highlighted]:bg-accent/80"
+    accent:
+        "bg-accent",
+
+    sendMessage: "bg-emerald-100"
+};
+
+
+export const colorsHouverBackGround = {
+    none: "",
+
+    default:
+        "hover:bg-secondary-hover",
+
+    muted:
+        "hover:bg-secondary-hover",
+
+    info:
+        "hover:bg-info-hover",
+
+    error:
+        "hover:bg-error-hover",
+
+    success:
+        "hover:bg-success-hover",
+
+    warning:
+        "hover:bg-warning-hover",
+
+    primary:
+        "hover:bg-primary-hover",
+
+    secondary:
+        "hover:bg-secondary-hover",
+
+    accent:
+        "hover:bg-accent-hover",
 };
 
 
 export const colorsBorder = {
     none: "border-transparent",
 
-    default: "border-background",
+    // Borda neutra padrão para componentes.
+    default: "border-border",
 
-    info: "border-info",
+    // Borda suave para elementos de baixa ênfase.
+    muted: "border-border-soft",
 
-    error: "border-error",
+    // Variantes fortes para indicadores e estados.
+    info: "border-info-strong",
 
-    success: "border-success",
+    error: "border-error-strong",
 
-    warning: "border-warning",
+    success: "border-success-strong",
+
+    warning: "border-warning-strong",
 
     primary: "border-primary",
 
-    secondary: "border-secondary",
+    secondary: "border-border-strong",
 
-    accent: "border-accent",
-
-    muted: "border-muted"
+    accent: "border-accent-strong",
 };

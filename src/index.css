@@ -4,9 +4,11 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
+  /* Tipografia */
   --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
   --font-display: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
 
+  /* Raios */
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -14,8 +16,15 @@
   --radius-2xl: calc(var(--radius) + 8px);
   --radius-3xl: calc(var(--radius) + 12px);
 
+  /* Conteúdo e superfícies */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+
+  --color-text-strong: var(--text-strong);
+  --color-text-default: var(--text-default);
+  --color-text-muted: var(--text-muted);
+  --color-text-disabled: var(--text-disabled);
+  --color-text-on-dark: var(--text-on-dark);
 
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
@@ -23,42 +32,90 @@
   --color-popover: var(--popover);
   --color-popover-foreground: var(--popover-foreground);
 
+  /* Bordas, campos e foco */
+  --color-border-soft: var(--border-soft);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset: var(--ring-offset);
+
+  /* Ação principal */
   --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-active: var(--primary-active);
+  --color-primary-soft: var(--primary-soft);
   --color-primary-foreground: var(--primary-foreground);
 
+  /* Superfície secundária */
   --color-secondary: var(--secondary);
+  --color-secondary-hover: var(--secondary-hover);
+  --color-secondary-active: var(--secondary-active);
   --color-secondary-foreground: var(--secondary-foreground);
 
+  /* Muted */
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
 
+  /* Accent */
   --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-active: var(--accent-active);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-strong: var(--accent-strong);
   --color-accent-foreground: var(--accent-foreground);
 
-  --color-destructive: var(--destructive);
-  --color-destructive-foreground: var(--destructive-foreground);
-
+  /* Sucesso */
   --color-success: var(--success);
+  --color-success-hover: var(--success-hover);
+  --color-success-active: var(--success-active);
+  --color-success-soft: var(--success-soft);
+  --color-success-strong: var(--success-strong);
   --color-success-foreground: var(--success-foreground);
 
+  /* Aviso */
   --color-warning: var(--warning);
+  --color-warning-hover: var(--warning-hover);
+  --color-warning-active: var(--warning-active);
+  --color-warning-soft: var(--warning-soft);
+  --color-warning-strong: var(--warning-strong);
   --color-warning-foreground: var(--warning-foreground);
 
+  /* Erro / destrutivo */
+  --color-destructive: var(--destructive);
+  --color-destructive-hover: var(--destructive-hover);
+  --color-destructive-active: var(--destructive-active);
+  --color-destructive-soft: var(--destructive-soft);
+  --color-destructive-strong: var(--destructive-strong);
+  --color-destructive-foreground: var(--destructive-foreground);
+
+  /* Informação */
+  --color-info: var(--info);
+  --color-info-hover: var(--info-hover);
+  --color-info-active: var(--info-active);
+  --color-info-soft: var(--info-soft);
+  --color-info-strong: var(--info-strong);
+  --color-info-foreground: var(--info-foreground);
+
+  /* Aliases para componentes que usam error em vez de destructive */
+  --color-error: var(--destructive);
+  --color-error-hover: var(--destructive-hover);
+  --color-error-active: var(--destructive-active);
+  --color-error-soft: var(--destructive-soft);
+  --color-error-strong: var(--destructive-strong);
+  --color-error-foreground: var(--destructive-foreground);
+
+  /* Conversas */
   --color-bubble-in: var(--bubble-in);
+  --color-bubble-in-foreground: var(--bubble-in-foreground);
+
   --color-bubble-out: var(--bubble-out);
+  --color-bubble-out-hover: var(--bubble-out-hover);
+  --color-bubble-out-foreground: var(--bubble-out-foreground);
 
   --color-chat-canvas: var(--chat-canvas);
 
-  --color-border: var(--border);
-  --color-input: var(--input);
-  --color-ring: var(--ring);
-
-  --color-info: var(--info);
-  --color-info-foreground: var(--info-foreground);
-
-  --color-error: var(--error);
-  --color-error-foreground: var(--error-foreground);
-
+  /* Sombras */
   --shadow-panel:
     0 1px 2px oklch(0.2 0.015 240 / 8%),
     0 8px 24px -12px oklch(0.2 0.015 240 / 18%);
@@ -67,52 +124,95 @@
 :root {
   --radius: 0.625rem;
 
-  --border-soft: oklch(0.93 0.012 175);
-
+  /* Neutros de estrutura */
   --background: oklch(0.966 0.0035 247);
   --foreground: oklch(0.215 0.018 240);
 
   --card: oklch(1 0 0);
   --card-foreground: var(--foreground);
-
   --popover: oklch(1 0 0);
   --popover-foreground: var(--foreground);
 
-  --primary: oklch(0.386 0.062 178);
-  --primary-foreground: oklch(0.985 0.005 160);
+  --border-soft: oklch(0.93 0.012 175);
+  --border: oklch(0.905 0.007 245);
+  --border-strong: oklch(0.72 0.012 240);
+  --input: var(--border);
 
+  /* Texto reutilizável */
+  --text-strong: var(--foreground);
+  --text-default: oklch(0.31 0.018 240);
+  --text-muted: oklch(0.35 0.018 240);
+  --text-disabled: oklch(0.55 0.012 240);
+  --text-on-dark: oklch(0.985 0.005 160);
+
+  /* Ação principal */
+  --primary: oklch(0.386 0.062 178);
+  --primary-hover: oklch(0.335 0.062 178);
+  --primary-active: oklch(0.295 0.058 178);
+  --primary-soft: oklch(0.93 0.035 175);
+  --primary-foreground: var(--text-on-dark);
+
+  /* Superfície secundária */
   --secondary: oklch(0.94 0.008 200);
+  --secondary-hover: oklch(0.905 0.014 195);
+  --secondary-active: oklch(0.87 0.018 190);
   --secondary-foreground: oklch(0.33 0.04 180);
 
+  /* Muted: usar como superfície, não como texto */
   --muted: oklch(0.807 0.012 240);
-  --muted-foreground: oklch(0.35 0.018 240);
+  --muted-foreground: var(--text-muted);
 
+  /* Accent: verde luminoso para preenchimentos */
   --accent: oklch(0.775 0.185 148);
+  --accent-hover: oklch(0.7 0.17 148);
+  --accent-active: oklch(0.64 0.15 148);
+  --accent-soft: oklch(0.94 0.055 148);
+  --accent-strong: oklch(0.5 0.15 148);
   --accent-foreground: oklch(0.22 0.05 160);
 
-  --destructive: oklch(0.577 0.223 25);
-  --destructive-foreground: oklch(0.985 0.003 250);
-
+  /* Sucesso */
   --success: oklch(0.72 0.16 152);
+  --success-hover: oklch(0.65 0.15 152);
+  --success-active: oklch(0.59 0.14 152);
+  --success-soft: oklch(0.94 0.05 152);
+  --success-strong: oklch(0.52 0.14 152);
   --success-foreground: oklch(0.2 0.04 160);
 
+  /* Aviso: manter texto escuro em fundo amarelo */
   --warning: oklch(0.8 0.15 78);
+  --warning-hover: oklch(0.72 0.14 78);
+  --warning-active: oklch(0.66 0.13 78);
+  --warning-soft: oklch(0.95 0.06 88);
+  --warning-strong: oklch(0.54 0.14 78);
   --warning-foreground: oklch(0.28 0.06 70);
 
-  --bubble-in: oklch(1 0 0);
-  --bubble-out: oklch(0.92 0.07 148);
+  /* Erro */
+  --destructive: oklch(0.577 0.223 25);
+  --destructive-hover: oklch(0.51 0.2 25);
+  --destructive-active: oklch(0.45 0.18 25);
+  --destructive-soft: oklch(0.95 0.035 25);
+  --destructive-strong: oklch(0.52 0.2 25);
+  --destructive-foreground: oklch(0.985 0.003 250);
 
+  /* Informação: texto escuro no azul para AA normal */
+  --info: oklch(0.62 0.16 230);
+  --info-hover: oklch(0.54 0.15 230);
+  --info-active: oklch(0.48 0.14 230);
+  --info-soft: oklch(0.94 0.045 230);
+  --info-strong: oklch(0.5 0.16 230);
+  --info-foreground: oklch(0.22 0.035 235);
+
+  /* Conversas */
+  --bubble-in: var(--card);
+  --bubble-out: oklch(0.92 0.07 148);
+  --bubble-out-hover: oklch(0.88 0.075 148);
+  --bubble-in-foreground: var(--foreground);
+  --bubble-out-foreground: var(--foreground);
   --chat-canvas: oklch(0.945 0.012 100);
 
-  --border: oklch(0.905 0.007 245);
-  --input: oklch(0.905 0.007 245);
-  --ring: var(--primary);
-
-  --info: oklch(0.62 0.16 230);
-  --info-foreground: oklch(0.985 0.005 250);
-
-  --error: oklch(0.577 0.223 25);
-  --error-foreground: oklch(0.985 0.003 250);
+  /* Foco */
+  --ring: oklch(0.45 0.14 178);
+  --ring-offset: var(--background);
 }
 
 @layer base {
@@ -126,11 +226,28 @@
   }
 
   body {
+    @apply font-sans antialiased;
     background-color: var(--background);
     color: var(--foreground);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+@layer utilities {
+  ::-webkit-scrollbar {
+    width: 8px;
+    max-height: 5px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #22c55e;
+    border-radius: 2px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: --foreground;
   }
 }
 

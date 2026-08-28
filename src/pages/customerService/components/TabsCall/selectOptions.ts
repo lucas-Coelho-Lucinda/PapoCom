@@ -21,21 +21,21 @@ export const optionsQueue = [
 
 export const optionsStatus = [
     {
-        label: "Todos os status",
-        value: "Todos os status",
+        label: "Todos os usuarios",
+        value: "Todos os usurios",
     },
     {
-        label: "Aguardando",
-        value: "Aguardando",
+        label: "lucas coelho lucinda",
+        value: "lucas coelho lucinda",
     },
 
     {
-        label: "Em atendimento",
-        value: "Em atendimento",
+        label: "Marcos",
+        value: "Marcos",
     },
 
      {
-        label: "Encerradas",
-        value: "Encerradas",
+        label: "Antonio",
+        value: "Antonio",
     },
 ]

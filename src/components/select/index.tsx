@@ -33,6 +33,9 @@ const selectTriggerVariants = cva(
 
     "disabled:pointer-events-none",
     "disabled:opacity-50",
+    "border border-1 border-soft",
+    "focus:border-primary",
+    "shadow-sm",
 
     // Impede o conteúdo de estourar o tamanho do Select
     "overflow-hidden",
@@ -252,18 +255,19 @@ type optionsDefineColor =
   | "warning"
   | "primary"
   | "secondary"
-  | "accent";
+  | "accent"
+  | "muted";
 
 const defineColorItem = (option: optionsDefineColor) => {
   switch (option) {
     case "default":
-      return "bg-success border rounded-md";
+      return "hover:bg-success";
 
     case "secondary":
-      return "bg-accent border rounded-md";
+      return "hover:bg-accent";
 
     case "error":
-      return "bg-success hover:bg-background border rounded-md";
+      return "hover:bg-accent";
 
     default:
       break;
@@ -315,24 +319,23 @@ export function SelectLib({
         >
           <Select.Viewport className={selectViewportVariants()}>
             {options.map((option) => (
-              <div className={defineColorItem(variant)} key={option.value}>
-                <Select.Item
-                  value={option.value}
-                  className={selectItemVariants({
-                    variant,
-                    textColor,
-                    size,
-                  })}
-                >
-                  <Select.ItemIndicator className="absolute left-2 flex items-center">
-                    <Check className="h-4 w-4" />
-                  </Select.ItemIndicator>
+              <Select.Item
+                key={option.value}
+                value={option.value}
+                className={`${selectItemVariants({
+                  variant,
+                  textColor,
+                  size,
+                })} ${defineColorItem(variant)}`}
+              >
+                <Select.ItemIndicator className="absolute left-2 flex items-center">
+                  <Check className="h-4 w-4" />
+                </Select.ItemIndicator>
 
-                  <Select.ItemText className={selectItemTextVariants()}>
-                    {option.label}
-                  </Select.ItemText>
-                </Select.Item>
-              </div>
+                <Select.ItemText className={selectItemTextVariants()}>
+                  {option.label}
+                </Select.ItemText>
+              </Select.Item>
             ))}
           </Select.Viewport>
         </Select.Content>

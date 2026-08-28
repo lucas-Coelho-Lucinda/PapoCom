@@ -1,28 +1,43 @@
 import { cva, type VariantProps } from "class-variance-authority";
-import { colorsBackGround, colorsBorder } from "../../styles/colors";
+import {
+  colorsBackGround,
+  colorsBorder,
+  colorsHouverBackGround,
+} from "../../styles/colors";
+import { height, padding, rounded, shadow, width } from "../../styles/sizes";
 
-const cardVariants = cva("rounded-lg transition-all border", {
+const cardVariants = cva("transition-all border", {
   variants: {
-    variant: {
+    colorBackeGround: {
       ...colorsBackGround,
+    },
+    rounded: rounded,
+    width: width,
+    height: height,
+
+    colorsHouverBackGround: {
+      ...colorsHouverBackGround,
+    },
+
+    shadow: {
+      ...shadow,
     },
 
     border: {
       ...colorsBorder,
     },
 
-    padding: {
-      min: "p-2 size-auto",
-      small: "p-10 size-auto",
-      median: "p-30 size-auto",
-      large: "p-50 size-full",
-    },
+    padding: padding
   },
 
   defaultVariants: {
-    variant: "default",
+    rounded: "none",
+    height: "full",
+    shadow: "none",
+    width: "full",
+    colorBackeGround: "default",
     border: "default",
-    padding: "large",
+    padding: "none",
   },
 });
 
@@ -31,14 +46,19 @@ type CardProps = React.HTMLAttributes<HTMLDivElement> &
 
 export const CardLib = ({
   className,
-  variant,
   border,
   padding,
+  rounded,
+  shadow,
+  width,
+  height,
+  colorBackeGround,
+  colorsHouverBackGround,
   ...props
 }: CardProps) => {
   return (
     <div
-      className={`${cardVariants({ variant, border, padding })} ${className}`}
+      className={`${cardVariants({ border, padding, colorBackeGround, colorsHouverBackGround, rounded, shadow, width, height })} ${className}`}
       {...props}
     />
   );

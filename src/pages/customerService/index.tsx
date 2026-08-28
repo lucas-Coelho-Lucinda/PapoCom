@@ -1,11 +1,14 @@
 import { useState } from "react";
-import { PanelLeft } from "lucide-react";
+
+import { PanelRightOpen } from "lucide-react";
 import { Helmet } from "react-helmet-async";
+
 import { Textlib } from "../../components/text";
 import { HeaderLib } from "../../components/header";
 import { ButtonLib } from "../../components/button";
+
 import { DrawerService } from "./components/drawerService";
-import { ListCalls } from "./components/listCalls";
+import { Panel } from "../Panel";
 
 export const CustomerService = () => {
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -14,37 +17,66 @@ export const CustomerService = () => {
     <>
       <Helmet title="Papo Com | atendimento" />
 
-      <div className="flex min-h-screen">
+      <div className="h-dvh min-h-0 overflow-hidden">
         <DrawerService isCollapsed={isCollapsed} />
 
-        <div className="flex-1 transition-all duration-300 ease-in-out">
+        <div
+          className={`flex h-full min-h-0 min-w-0 flex-col overflow-hidden pt-18 transition-[margin] duration-300 ease-in-out ${
+            isCollapsed ? "ml-20" : "ml-100"
+          }`}
+        >
           <HeaderLib
-            className={`flex flex-row items-center justify-start gap-2 p-2 border-l-0 border-r-0 ${isCollapsed ? "left-25" : "left-100"}`}
+            className={`fixed ${
+              isCollapsed ? "left-20" : "left-100"
+            } right-0 top-0 z-20 flex h-15 items-center gap-2 border-l-0 border-r-0 p-2`}
             variant="secondary"
             border="muted"
           >
-            <div className="w-12">
+            <div className="w-12 shrink-0">
               <ButtonLib
-                variant="secondary"
-                size="small"
+                colorBackeGround="secondary"
+                colorBackeHouverGround="primary"
+                size="median"
+                shadow="none"
                 onClick={() => setIsCollapsed((prev) => !prev)}
-                className="flex flex-row justify-center items-center hover:bg-accent"
+                className="flex items-center justify-center"
               >
-                <PanelLeft size={20} />
+                <Textlib
+                  as="span"
+                  color="default"
+                  colorHover="secondary"
+                  size="sm"
+                  className="p-3 -m-3"
+                >
+                  <PanelRightOpen size={20} />
+                </Textlib>
               </ButtonLib>
             </div>
 
-            <div className="flex flex-col">
-              <Textlib as="h1" className="font-bold" color="default" size="lg">
+            <div className="min-w-0">
+              <Textlib
+                as="h1"
+                className="truncate font-bold"
+                color="primary"
+                size="lg"
+              >
                 Painel de Atendimento
               </Textlib>
 
-              <Textlib as="span" color="primary" size="md">
+              <Textlib
+                as="span"
+                color="primary"
+                size="md"
+                className="block truncate font-semibold"
+              >
                 Conversas recebidas via WhatsApp, filtradas por fila e status
               </Textlib>
             </div>
           </HeaderLib>
-          <ListCalls isCollapsed={isCollapsed} />
+
+          <div className="flex min-h-0 flex-1 overflow-hidden">
+            <Panel isCollapsed={isCollapsed} />
+          </div>
         </div>
       </div>
     </>

@@ -1,7 +1,12 @@
 import React from "react";
 import { Slot } from "@radix-ui/react-slot";
-import { colorsBackGround, colorsText } from "../../styles/colors";
 import { cva, type VariantProps } from "class-variance-authority";
+import {
+  colorsBackGround,
+  colorsHouverBackGround,
+  colorsHouverText,
+  colorsText,
+} from "../../styles/colors";
 
 const buttonDefaultBehavior = [
   "cursor-pointer",
@@ -18,13 +23,23 @@ const buttonDefaultBehavior = [
 
 const buttonVariants = cva(buttonDefaultBehavior, {
   variants: {
-    variant: colorsBackGround,
     textColor: colorsText,
+    textColorHover: colorsHouverText,
+    colorBackeGround: colorsBackGround,
+    colorBackeHouverGround: colorsHouverBackGround,
+
     size: {
-      small: "w-full h-8 p-3",
-      median: "w-full h-12 p-3",
-      large: "w-full h-24 p-3",
+      small: "w-full h-2 p-3",
+      median: "w-full h-7 p-3",
+      large: "w-full h-12 p-3",
+      extralarge: "w-full h-24 p-3",
       collapsed: "w-12 h-8 p-3",
+    },
+
+    shadow: {
+      default: "shadow-[0_4px_4px_rgba(0,0,0,0.25)]",
+      min: "shadow-[0px_0px_4px_rgba(0,0,0,0.25)]",
+      none: "shadow-none",
     },
 
     align: {
@@ -33,10 +48,13 @@ const buttonVariants = cva(buttonDefaultBehavior, {
     },
   },
   defaultVariants: {
+    colorBackeHouverGround: "default",
+    textColorHover: "default",
     textColor: "default",
-    variant: "default",
+    colorBackeGround: "default",
     size: "small",
     align: "center",
+    shadow: "none",
   },
 });
 
@@ -56,13 +74,16 @@ export const ButtonLib = React.forwardRef<ButtonElement, ButtonProps>(
     {
       size,
       align,
-      variant,
+      colorBackeGround,
+      colorBackeHouverGround,
       leftIcon,
       rightIcon,
       className,
       children,
       disabled,
       textColor,
+      shadow,
+      textColorHover,
       asChild = false,
       ...props
     },
@@ -75,11 +96,14 @@ export const ButtonLib = React.forwardRef<ButtonElement, ButtonProps>(
         ref={ref}
         disabled={disabled}
         className={buttonVariants({
-          variant,
+          colorBackeGround,
           size,
           align,
+          colorBackeHouverGround,
+          textColorHover,
           textColor,
-          className: className,
+          shadow,
+          className,
         })}
         {...props}
       >

@@ -8,6 +8,7 @@ const inputVariants = cva(
   w-full rounded-md border border-1 border-soft text-foreground
   placeholder:text-foreground-muted
   focus:outline-none focus:border-primary transition-all
+  shadow-sm
   `,
   {
     variants: {

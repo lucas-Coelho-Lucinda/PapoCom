@@ -48,7 +48,6 @@ export const ListCalls = ({ isCollapsed }: DrawerServiceProps) => {
       </div>
       <div className="fixed top-50  flex flex-col">
         <ItemCall isCollapsed={isCollapsed} />
-        <ItemCall isCollapsed={isCollapsed} />
       </div>
     </CardLib>
   );

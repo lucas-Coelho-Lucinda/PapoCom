@@ -1,9 +1,9 @@
 import * as AvatarPrimitive from "@radix-ui/react-avatar";
 import { cva, type VariantProps } from "class-variance-authority";
-import { colorsBorder } from "../../styles/colors";
+import { colorsBackGround, colorsBorder } from "../../styles/colors";
 
 const avatarVariants = cva(
-  "inline-flex items-center justify-center overflow-hidden bg-gray-200",
+  "inline-flex items-center justify-center overflow-hidden border-2",
   {
     variants: {
       size: {
@@ -11,6 +11,16 @@ const avatarVariants = cva(
         median: "h-12 w-12",
         large: "h-14 w-14",
         extralarge: "h-20 w-20",
+      },
+      shadow: {
+        default: "shadow-[0_4px_10px_rgba(0,0,0,0.25)]",
+        none: "shadow-none",
+      },
+      color: {
+        ...colorsBackGround,
+      },
+      border: {
+        ...colorsBorder,
       },
       shape: {
         circle: "rounded-full",
@@ -25,9 +35,12 @@ const avatarVariants = cva(
 );
 
 // 🔹 Wrapper para borda
-const wrapperVariants = cva("inline-flex", {
+const wrapperVariants = cva("inline-flex border", {
   variants: {
-    decoration: {
+    color: {
+      ...colorsBackGround,
+    },
+    border: {
       ...colorsBorder,
     },
     shape: {
@@ -36,7 +49,8 @@ const wrapperVariants = cva("inline-flex", {
     },
   },
   defaultVariants: {
-    decoration: "default",
+    border: "default",
+    color: "default",
     shape: "circle",
   },
 });
@@ -45,33 +59,52 @@ interface AvatarProps
   extends
     VariantProps<typeof avatarVariants>,
     VariantProps<typeof wrapperVariants> {
+  className?: string;
   src?: string;
-  fallback?: string;
+  photoOrText?: string;
+  isAdmin?: boolean;
   alt?: string;
   fit?: "cover" | "contain";
 }
 export const AvatarLib = ({
-  fallback,
+  className,
+  shadow,
+  isAdmin,
+  photoOrText,
   alt,
   fit,
   src,
   shape,
   size,
-  decoration,
+  color,
+  border,
 }: AvatarProps) => {
   return (
-    <div className={wrapperVariants({ decoration, shape })}>
-      <AvatarPrimitive.Root className={`${avatarVariants({ size, shape })}`}>
+    <div className={wrapperVariants({ color, border, shape })}>
+      <AvatarPrimitive.Root
+        className={`${avatarVariants({ size, shape, border, color, className, shadow })}`}
+      >
         <AvatarPrimitive.Image
           src={src}
           alt={alt}
-          className={`w-20 h-full ${
+          className={`w-full h-full ${
             fit === "cover" ? "object-cover" : "object-contain"
           }`}
         />
 
-        <AvatarPrimitive.Fallback className="flex items-center justify-center w-full h-full bg-muted/20 text-success">
-          {fallback}
+        <AvatarPrimitive.Fallback className="flex items-center justify-center w-full h-full">
+          {typeof isAdmin === "boolean" && (
+            <img
+              src={
+                isAdmin
+                  ? "/src/assets/technical-support.png"
+                  : "/src/assets/support.png"
+              }
+              width={30}
+              alt=""
+            />
+          )}
+          {photoOrText}
         </AvatarPrimitive.Fallback>
       </AvatarPrimitive.Root>
     </div>

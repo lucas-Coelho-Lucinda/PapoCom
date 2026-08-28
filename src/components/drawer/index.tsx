@@ -55,7 +55,7 @@ const drawerVariants = cva(
       },
 
       collapsed: {
-        true: "w-25",
+        true: "w-21",
         false: "w-100",
       },
     },

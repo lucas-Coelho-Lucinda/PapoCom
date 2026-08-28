@@ -43,7 +43,12 @@ export const Login = () => {
             />
           </div>
         </div>
-        <ButtonLib variant="primary" size="small" type="submit">
+        <ButtonLib
+          colorBackeGround="primary"
+          size="median"
+          shadow="default"
+          type="submit"
+        >
           <Textlib size="md" color="secondary">
             Entrar
           </Textlib>
@@ -54,10 +59,12 @@ export const Login = () => {
             Não tem conta?
           </Textlib>
           <ButtonLib
-            variant="accent"
+            colorBackeGround="accent"
+            colorBackeHouverGround="muted"
             textColor="primary"
-            size="small"
+            size="median"
             type="button"
+            shadow="default"
             onClick={goToRegister}
           >
             Criar conta

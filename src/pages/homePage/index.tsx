@@ -24,7 +24,7 @@ export const HomePage = () => {
                     z-10
                     animate-slide-in-left"
           >
-            <CardLib padding="min" border="accent" variant="accent">
+            <CardLib padding="sm" width="min" rounded="sm" border="accent" colorBackeGround="accent">
                 <MessageCircleCheck size={24} />
             </CardLib>
             <Textlib as="h1" color="secondary" size="4xl">

@@ -1,56 +1,58 @@
-import { Textlib } from "../../../../components/text";
-import { ButtonLib } from "../../../../components/button";
-import type { DrawerServiceProps } from "../drawerService/type";
-import { optinsOperation, optionsAdministration } from "./options";
+import { ButtonLib } from "../../../../../../components/button";
+import { Textlib } from "../../../../../../components/text";
 import {
   TooltipLib,
   Tooltiplib,
   TooltipProviderLib,
   TooltipTriggerLib,
-} from "../../../../components/tooltip";
+} from "../../../../../../components/tooltip";
+import type { DrawerServiceProps } from "../../type";
+import { optinsOperation, optionsAdministration } from "./options";
 
 export const OptinsService = ({ isCollapsed }: DrawerServiceProps) => {
   const renderOption = (option: (typeof optinsOperation)[number]) => {
     const Icon = option.icon;
 
     return (
+      
       <TooltipProviderLib>
         <Tooltiplib>
           <TooltipTriggerLib asChild>
             <ButtonLib
               key={option.title}
-              variant="accent"
-              size={isCollapsed ? "collapsed" : "small"}
+              colorBackeGround="none"
+              colorBackeHouverGround="primary"
+              size={isCollapsed ? "collapsed" : "median"}
               className={`
-          flex
-          flex-row
-          items-center
-          gap-5
-          hover:bg-secondary
-          ${isCollapsed ? "justify-center" : "justify-start"}
-        `}
+                    flex
+                    flex-row
+                    items-center
+                    gap-5
+                    ${isCollapsed ? "justify-center" : "justify-start"}
+                  `}
             >
-              <Icon color="#282C30" size={isCollapsed ? 18 : 20} />
-
               {isCollapsed && (
                 <TooltipLib side="right">
                   <div className="flex flex-col">
-                    <Textlib as="span" color="secondary">
-                      {option?.title}
-                    </Textlib>
+                    <Textlib as="span">{option?.title}</Textlib>
                   </div>
                 </TooltipLib>
               )}
+              
 
-              {!isCollapsed && (
+              {!isCollapsed ? (
                 <Textlib
-                  className="font-bold"
+                  className="font-bold flex flex-row items-center  gap-2"
                   as="h4"
                   size="md"
-                  color="default"
+                  color="success"
+                  colorHover="none"
                 >
+                  <Icon size={isCollapsed ? 18 : 20} />
                   {option?.title}
                 </Textlib>
+              ) : (
+                <Icon color="#42C070" size={isCollapsed ? 18 : 20} />
               )}
             </ButtonLib>
           </TooltipTriggerLib>
