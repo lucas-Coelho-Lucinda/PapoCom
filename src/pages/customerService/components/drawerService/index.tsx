@@ -56,6 +56,7 @@ export const DrawerService = () => {
           flex-col
           gap-5
           overflow-hidden
+          border-primary
           ${drawerPadding}
         `}
       >

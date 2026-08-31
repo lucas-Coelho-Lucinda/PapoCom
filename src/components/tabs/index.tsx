@@ -1,11 +1,19 @@
 import * as React from "react";
+
+
 import * as TabsPrimitive from "@radix-ui/react-tabs";
+
 import { cva, type VariantProps } from "class-variance-authority";
 
 import { colorsBackGround, colorsBorder } from "../../styles/colors";
 
-const cn = (...classes: Array<string | undefined | false>) =>
-  classes.filter(Boolean).join(" ");
+const cn = (
+  ...classes: Array<string | undefined | false>
+) => classes.filter(Boolean).join(" ");
+
+/* -------------------------------------------------------------------------- */
+/*                                    ROOT                                    */
+/* -------------------------------------------------------------------------- */
 
 const tabsVariants = cva("w-full min-w-0 min-h-0", {
   variants: {
@@ -33,6 +41,10 @@ const tabsVariants = cva("w-full min-w-0 min-h-0", {
   },
 });
 
+/* -------------------------------------------------------------------------- */
+/*                                    LIST                                    */
+/* -------------------------------------------------------------------------- */
+
 const tabsListVariants = cva(
   "w-full min-w-0 shrink-0 items-stretch rounded-none p-0",
   {
@@ -54,12 +66,28 @@ const tabsListVariants = cva(
   },
 );
 
+/* -------------------------------------------------------------------------- */
+/*                                   TRIGGER                                  */
+/* -------------------------------------------------------------------------- */
+
 const tabsTriggerVariants = cva(
   [
     "inline-flex min-w-0 w-full items-center justify-center whitespace-nowrap",
     "px-2 py-2 text-sm font-medium transition-all",
-    "outline-none focus-visible:ring-2 focus-visible:ring-blue-500",
+    "outline-none",
+    "focus-visible:ring-2 focus-visible:ring-blue-500",
     "disabled:pointer-events-none disabled:opacity-50",
+
+    /*
+     * Estado ativo da tab.
+     *
+     * O Radix adiciona automaticamente:
+     *
+     * data-state="active"
+     *
+     * quando a tab está selecionada.
+     */
+    "data-[state=active]:bg-primary",
   ],
   {
     variants: {
@@ -72,14 +100,37 @@ const tabsTriggerVariants = cva(
         medium: "px-2 py-2 text-xs sm:text-sm",
         large: "px-3 py-3 text-sm sm:text-base",
       },
+
+      /*
+       * Define se a tab selecionada terá uma aparência
+       * diferenciada.
+       */
+      focus: {
+        true: [
+          "data-[state=active]:bg-primary",
+          "data-[state=active]:text-primary-foreground",
+          "data-[state=active]:shadow-sm",
+        ],
+
+        false: [
+          "data-[state=active]:bg-transparent",
+          "data-[state=active]:text-inherit",
+          "data-[state=active]:shadow-none",
+        ],
+      },
     },
 
     defaultVariants: {
       variant: "default",
       size: "medium",
+      focus: true,
     },
   },
 );
+
+/* -------------------------------------------------------------------------- */
+/*                                   CONTENT                                  */
+/* -------------------------------------------------------------------------- */
 
 const tabsContentVariants = cva(
   "min-w-0 outline-none focus-visible:ring-2 focus-visible:ring-blue-500",
@@ -99,9 +150,12 @@ const tabsContentVariants = cva(
   },
 );
 
-export type TabsLibProps = React.ComponentPropsWithoutRef<
-  typeof TabsPrimitive.Root
-> &
+/* -------------------------------------------------------------------------- */
+/*                                     ROOT                                   */
+/* -------------------------------------------------------------------------- */
+
+export type TabsLibProps =
+  React.ComponentPropsWithoutRef<typeof TabsPrimitive.Root> &
   VariantProps<typeof tabsVariants>;
 
 export const TabsLib = ({
@@ -113,15 +167,25 @@ export const TabsLib = ({
 }: TabsLibProps) => {
   return (
     <TabsPrimitive.Root
-      className={cn(tabsVariants({ variant, border, padding }), className)}
+      className={cn(
+        tabsVariants({
+          variant,
+          border,
+          padding,
+        }),
+        className,
+      )}
       {...props}
     />
   );
 };
 
-export type TabsListLibProps = React.ComponentPropsWithoutRef<
-  typeof TabsPrimitive.List
-> &
+/* -------------------------------------------------------------------------- */
+/*                                     LIST                                   */
+/* -------------------------------------------------------------------------- */
+
+export type TabsListLibProps =
+  React.ComponentPropsWithoutRef<typeof TabsPrimitive.List> &
   VariantProps<typeof tabsListVariants>;
 
 export const TabsListLib = ({
@@ -132,34 +196,54 @@ export const TabsListLib = ({
 }: TabsListLibProps) => {
   return (
     <TabsPrimitive.List
-      className={cn(tabsListVariants({ variant, orientation }), className)}
+      className={cn(
+        tabsListVariants({
+          variant,
+          orientation,
+        }),
+        className,
+      )}
       {...props}
     />
   );
 };
 
-export type TabsTriggerLibProps = React.ComponentPropsWithoutRef<
-  typeof TabsPrimitive.Trigger
-> &
+/* -------------------------------------------------------------------------- */
+/*                                    TRIGGER                                 */
+/* -------------------------------------------------------------------------- */
+
+export type TabsTriggerLibProps =
+  React.ComponentPropsWithoutRef<typeof TabsPrimitive.Trigger> &
   VariantProps<typeof tabsTriggerVariants>;
 
 export const TabsTriggerLib = ({
   className,
   variant,
   size,
+  focus,
   ...props
 }: TabsTriggerLibProps) => {
   return (
     <TabsPrimitive.Trigger
-      className={cn(tabsTriggerVariants({ variant, size }), className)}
+      className={cn(
+        tabsTriggerVariants({
+          variant,
+          size,
+          focus,
+        }),
+        className,
+      )}
       {...props}
     />
   );
 };
 
-export type TabsContentLibProps = React.ComponentPropsWithoutRef<
-  typeof TabsPrimitive.Content
-> &
+/* -------------------------------------------------------------------------- */
+/*                                    CONTENT                                 */
+/* -------------------------------------------------------------------------- */
+
+export type TabsContentLibProps =
+  React.ComponentPropsWithoutRef<typeof TabsPrimitive.Content> &
   VariantProps<typeof tabsContentVariants>;
 
 export const TabsContentLib = ({
@@ -169,8 +253,14 @@ export const TabsContentLib = ({
 }: TabsContentLibProps) => {
   return (
     <TabsPrimitive.Content
-      className={cn(tabsContentVariants({ padding }), className)}
+      className={cn(
+        tabsContentVariants({
+          padding,
+        }),
+        className,
+      )}
       {...props}
     />
   );
 };
+

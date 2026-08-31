@@ -30,11 +30,11 @@ export function TabsCall() {
       variant="default"
       padding="none"
       border="muted"
-      className="flex h-full min-h-0 w-full min-w-0 flex-col gap-1 overflow-hidden"
+      className="flex h-full min-h-0 w-full min-w-0 flex-col gap-0 overflow-hidden"
     >
       <TabsListLib
         variant="success"
-        className="relative z-10 grid min-h-20 w-full min-w-0 shrink-0 grid-cols-3 grid-flow-col overflow-visible p-1"
+        className="relative z-10 grid min-h-20 w-full min-w-0 shrink-0 grid-cols-3 grid-flow-col overflow-visible shadow-sm"
       >
         <TabsTriggerLib
           value="encerradas"
