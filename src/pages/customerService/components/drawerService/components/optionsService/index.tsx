@@ -1,27 +1,34 @@
-import { ButtonLib } from "../../../../../../components/button";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Textlib } from "../../../../../../components/text";
+import { ButtonLib } from "../../../../../../components/button";
 import {
   TooltipLib,
   Tooltiplib,
   TooltipProviderLib,
   TooltipTriggerLib,
 } from "../../../../../../components/tooltip";
-import type { DrawerServiceProps } from "../../type";
 import { optinsOperation, optionsAdministration } from "./options";
+import { CollpasedContext } from "../../../../../../context/collapsed";
 
-export const OptinsService = ({ isCollapsed }: DrawerServiceProps) => {
+export const OptinsService = () => {
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
+  const { isCollapsed } = CollpasedContext();
+
   const renderOption = (option: (typeof optinsOperation)[number]) => {
     const Icon = option.icon;
 
+    const isCurrentRoute = pathname === option.path;
+
     return (
-      
       <TooltipProviderLib>
         <Tooltiplib>
           <TooltipTriggerLib asChild>
             <ButtonLib
               key={option.title}
-              colorBackeGround="none"
-              colorBackeHouverGround="primary"
+              onClick={() => navigate(`${option.title}`)}
+              colorBackeGround={isCurrentRoute ? "success" : "none"}
+              colorBackeHouverGround="none"
               size={isCollapsed ? "collapsed" : "median"}
               className={`
                     flex
@@ -32,27 +39,29 @@ export const OptinsService = ({ isCollapsed }: DrawerServiceProps) => {
                   `}
             >
               {isCollapsed && (
-                <TooltipLib side="right">
+                <TooltipLib side="right" variant="accent" className="font-bold">
                   <div className="flex flex-col">
                     <Textlib as="span">{option?.title}</Textlib>
                   </div>
                 </TooltipLib>
               )}
-              
 
               {!isCollapsed ? (
                 <Textlib
                   className="font-bold flex flex-row items-center  gap-2"
                   as="h4"
                   size="md"
-                  color="success"
+                  color="secondary"
                   colorHover="none"
                 >
                   <Icon size={isCollapsed ? 18 : 20} />
                   {option?.title}
                 </Textlib>
               ) : (
-                <Icon color="#42C070" size={isCollapsed ? 18 : 20} />
+                <Icon
+                  color={`${isCurrentRoute ? "#ffff" : "#42C070"}`}
+                  size={isCollapsed ? 18 : 20}
+                />
               )}
             </ButtonLib>
           </TooltipTriggerLib>

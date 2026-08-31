@@ -1,5 +1,4 @@
 export interface ItemCallProps {
-  isCollapsed: boolean;
   isSelected: boolean;
   index: number;
   name: string;

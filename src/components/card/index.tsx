@@ -3,6 +3,7 @@ import {
   colorsBackGround,
   colorsBorder,
   colorsHouverBackGround,
+  colorsHouverText,
 } from "../../styles/colors";
 import { height, padding, rounded, shadow, width } from "../../styles/sizes";
 
@@ -19,6 +20,10 @@ const cardVariants = cva("transition-all border", {
       ...colorsHouverBackGround,
     },
 
+    colorsHouverText: {
+      ...colorsHouverText,
+    },
+
     shadow: {
       ...shadow,
     },
@@ -27,10 +32,11 @@ const cardVariants = cva("transition-all border", {
       ...colorsBorder,
     },
 
-    padding: padding
+    padding: padding,
   },
 
   defaultVariants: {
+    colorsHouverText: "none",
     rounded: "none",
     height: "full",
     shadow: "none",
@@ -52,13 +58,14 @@ export const CardLib = ({
   shadow,
   width,
   height,
+  colorsHouverText,
   colorBackeGround,
   colorsHouverBackGround,
   ...props
 }: CardProps) => {
   return (
     <div
-      className={`${cardVariants({ border, padding, colorBackeGround, colorsHouverBackGround, rounded, shadow, width, height })} ${className}`}
+      className={`${cardVariants({ border, padding, colorsHouverText, colorBackeGround, colorsHouverBackGround, rounded, shadow, width, height })} ${className}`}
       {...props}
     />
   );

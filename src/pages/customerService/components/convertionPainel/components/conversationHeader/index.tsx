@@ -15,9 +15,9 @@ export const ConversationHeader = ({
       colorBackeGround="default"
       border="none"
       width="full"
-      height="fit"
+      height="none"
       shadow="sm"
-      className="flex items-center justify-between gap-3"
+      className="flex items-center justify-between gap-3 h-20"
     >
       <div className="flex min-w-0 w-full items-center gap-3">
         <AvatarLib

@@ -8,13 +8,12 @@ import {
 } from "../../../../components/tabs";
 import { generateListOfCalls } from "./listOfCalls";
 import { ItemCall } from "./components/itemCall";
-import type { DrawerServiceProps } from "../drawerService/type";
 import { Textlib } from "../../../../components/text";
+import { FiltersOptionsService } from "../FiltersOptionsService";
+import { Phone, PhoneCall, PhoneIncoming } from "lucide-react";
 
-export function TabsCall({ isCollapsed }: DrawerServiceProps) {
-  const [listStateCalls, setListStateCalls] = useState(
-    generateListOfCalls(10),
-  );
+export function TabsCall() {
+  const [listStateCalls, setListStateCalls] = useState(generateListOfCalls(10));
 
   const selectCall = (indice: number) => {
     setListStateCalls((prev) =>
@@ -30,23 +29,25 @@ export function TabsCall({ isCollapsed }: DrawerServiceProps) {
       defaultValue="em atendimento"
       variant="default"
       padding="none"
-      className="flex h-full min-h-0 w-full min-w-0 flex-col gap-0 overflow-hidden"
+      border="muted"
+      className="flex h-full min-h-0 w-full min-w-0 flex-col gap-1 overflow-hidden"
     >
       <TabsListLib
-        variant="primary"
-        className="relative z-10 grid min-h-15 w-full min-w-0 shrink-0 grid-cols-3 grid-flow-col overflow-visible p-1"
+        variant="success"
+        className="relative z-10 grid min-h-20 w-full min-w-0 shrink-0 grid-cols-3 grid-flow-col overflow-visible p-1"
       >
         <TabsTriggerLib
           value="encerradas"
-          variant="primary"
+          variant="success"
           size="small"
-          className="min-w-0 overflow-visible px-1"
+          className="flex flex-row gap-2 min-w-0 overflow-visible px-1"
         >
+          <Phone  size={20} color="#ffff" />
           <Textlib
             color="secondary"
             as="span"
             size="sm"
-            className="block min-w-0 truncate"
+            className="block min-w-0 truncate font-semibold"
           >
             Encerradas: (1)
           </Textlib>
@@ -54,10 +55,11 @@ export function TabsCall({ isCollapsed }: DrawerServiceProps) {
 
         <TabsTriggerLib
           value="em atendimento"
-          variant="primary"
+          variant="success"
           size="small"
-          className="min-w-0 overflow-visible px-1"
+          className=" flex flex-row gap-2 min-w-0 overflow-visible px-1"
         >
+          <PhoneCall size={20} color="#ffff" />
           <Textlib
             color="secondary"
             as="span"
@@ -70,10 +72,11 @@ export function TabsCall({ isCollapsed }: DrawerServiceProps) {
 
         <TabsTriggerLib
           value="aguardando"
-          variant="primary"
+          variant="success"
           size="small"
-          className="min-w-0 overflow-visible px-1"
+          className="flex flex-row gap-2 min-w-0 overflow-visible px-1"
         >
+          <PhoneIncoming  size={20} color="#ffff" />
           <Textlib
             color="secondary"
             as="span"
@@ -85,10 +88,12 @@ export function TabsCall({ isCollapsed }: DrawerServiceProps) {
         </TabsTriggerLib>
       </TabsListLib>
 
+      <FiltersOptionsService />
+
       <TabsContentLib
         value="em atendimento"
         padding="none"
-        className="flex min-h-0 min-w-0 flex-1 basis-0 flex-col overflow-hidden p-0 data-[state=inactive]:hidden"
+        className="flex flex-col gap-5 min-h-0 min-w-0 flex-1 basis-0 overflow-hidden p-0 data-[state=inactive]:hidden"
       >
         <ScrollListLib
           variant="default"
@@ -102,7 +107,6 @@ export function TabsCall({ isCollapsed }: DrawerServiceProps) {
                 className="m-0 w-full min-w-0 p-0"
               >
                 <ItemCall
-                  isCollapsed={isCollapsed}
                   isSelected={item.selected}
                   name={item.name}
                   hour={item.hour}

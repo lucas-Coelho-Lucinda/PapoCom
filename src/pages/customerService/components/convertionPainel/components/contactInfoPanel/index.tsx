@@ -31,7 +31,7 @@ export const ContactInfoPanel = ({
 
   return (
     <div className="flex h-full min-h-0 w-100 shrink-0 flex-col border-l border-slate-200 bg-white">
-      <div className="flex flex-row  h-[93px] shrink-0 items-center justify-between  border-b border-slate-200 px-2">
+      <div className="flex flex-row  h-[81px] shrink-0 items-center justify-between  border-b border-slate-200 px-2">
         <h2 className="text-sm font-semibold text-slate-800">
           Informações do contato
         </h2>

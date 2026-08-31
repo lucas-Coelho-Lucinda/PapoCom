@@ -2,24 +2,22 @@ import { Search } from "lucide-react";
 import { CardLib } from "../../../../components/card";
 import { InputLib } from "../../../../components/Input";
 import { SelectLib } from "../../../../components/select";
-import type { DrawerServiceProps } from "../drawerService/type";
-import { optionsQueue, optionsStatus } from "./selectOptions";
-import { ItemCall } from "./components/itemCall";
+import { optionsQueue, optionsStatus } from "../TabsCall/selectOptions";
+import { CollpasedContext } from "../../../../context/collapsed";
 
-export const ListCalls = ({ isCollapsed }: DrawerServiceProps) => {
+export const FiltersOptionsService = () => {
+  const { isCollapsed } = CollpasedContext();
+
   return (
     <CardLib
-      className={`fixed top-0 bottom-0 right-0
-        ${isCollapsed ? "left-20 max-w-[32.5rem]" : "left-99 max-w-[25rem]"}
-        box-border flex min-w-0 flex-col items-center justify-center
-        overflow-hidden border-t-0 rounded-none`}
-      variant="default"
-      border="muted"
-      padding="median"
+      className="flex flex-col justify-center items-center"
+      colorBackeGround="default"
+      width="full"
+      height="min"
+      border="none"
+      padding="md"
     >
-      <div
-        className={`flex fixed top-25 flex-col gap-5 ${isCollapsed ? "w-110" : "w-90"}`}
-      >
+      <div className={`flex flex-col gap-5 ${isCollapsed ? "w-165" : "w-122"}`}>
         <InputLib
           variant="default"
           inputSize="small"
@@ -45,9 +43,6 @@ export const ListCalls = ({ isCollapsed }: DrawerServiceProps) => {
             defaultValue={optionsStatus[0].value}
           />
         </div>
-      </div>
-      <div className="fixed top-50  flex flex-col">
-        <ItemCall isCollapsed={isCollapsed} />
       </div>
     </CardLib>
   );

@@ -7,7 +7,7 @@ export const Login = () => {
   const navigate = useNavigate();
 
   const goToRegister = () => {
-    navigate("/cadastro");
+    navigate("/Cadastro");
   };
 
   return (

@@ -7,6 +7,7 @@ import { Users } from "../pages/users";
 import { Contacts } from "../pages/contacts";
 import { Devices } from "../pages/devices";
 import { CustomerService } from "../pages/customerService";
+import { ServiceLayout } from "../pages/serviceLayout";
 
 export const Router = createBrowserRouter([
   {
@@ -18,30 +19,34 @@ export const Router = createBrowserRouter([
         element: <Login />,
       },
       {
-        path: "cadastro",
+        path: "Cadastro",
         element: <Register />,
       },
     ],
   },
   {
-    path: "atendimento",
-    element: <CustomerService/>,
-  },
-
-  {
-    path: "filas",
-    element: <Queues />,
-  },
-  {
-    path: "usuarios",
-    element: <Users />,
-  },
-  {
-    path: "contatos",
-    element: <Contacts />,
-  },
-  {
-    path: "Dispositivos",
-    element: <Devices />,
+    element: <ServiceLayout />,
+    children: [
+      {
+        path: "Atendimentos",
+        element: <CustomerService />,
+      },
+      {
+        path: "Filas",
+        element: <Queues />,
+      },
+      {
+        path: "Usuarios",
+        element: <Users />,
+      },
+      {
+        path: "contatos",
+        element: <Contacts />,
+      },
+      {
+        path: "Dispositivos",
+        element: <Devices />,
+      },
+    ],
   },
 ]);

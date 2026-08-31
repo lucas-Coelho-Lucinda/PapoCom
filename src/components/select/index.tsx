@@ -248,6 +248,7 @@ interface SelectProps extends Omit<
  * ============================================================
  */
 type optionsDefineColor =
+  | "none"
   | "default"
   | "info"
   | "error"
@@ -256,7 +257,8 @@ type optionsDefineColor =
   | "primary"
   | "secondary"
   | "accent"
-  | "muted";
+  | "muted"
+  | "sendMessage";
 
 const defineColorItem = (option: optionsDefineColor) => {
   switch (option) {

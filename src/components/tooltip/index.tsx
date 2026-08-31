@@ -29,7 +29,12 @@ const tooltipVariants = cva(
         `,
         accent: `
           bg-accent
-          text-default
+          text-primary
+        `,
+
+        error: `
+          bg-error
+          text-secondary
         `,
       },
     },

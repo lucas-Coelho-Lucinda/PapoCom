@@ -11,12 +11,15 @@ export const ItemCall = ({
   index,
   selectCall,
 }: ItemCallProps) => {
+
   return (
     <CardLib
       colorBackeGround={isSelected ? "muted" : "default"}
-      className="m-0 block h-fit w-full min-w-0 cursor-pointer rounded-none p-0 hover:bg-success"
+      colorsHouverBackGround="success"
+      className="m-0 block h-fit w-full min-w-0 cursor-pointer rounded-none p-0"
       border="none"
       padding="md"
+      colorsHouverText="secondary"
       onClick={() => selectCall(index)}
     >
       <div className="m-0 flex w-full min-w-0 flex-row gap-2 p-0">
@@ -34,7 +37,7 @@ export const ItemCall = ({
         <div className="min-w-0 flex-1">
           <div className="flex min-w-0 items-start justify-between gap-2">
             <Textlib
-              color="default"
+              color="none"
               className="min-w-0 flex-1 truncate font-semibold"
               as="h2"
               size="lg"
@@ -43,7 +46,7 @@ export const ItemCall = ({
             </Textlib>
 
             <Textlib
-              color="primary"
+              color="none"
               as="span"
               size="sm"
               className="shrink-0 whitespace-nowrap font-semibold"
@@ -53,7 +56,7 @@ export const ItemCall = ({
           </div>
 
           <Textlib
-            color="primary"
+            color="none"
             as="p"
             size="sm"
             className="w-full min-w-0 truncate"
