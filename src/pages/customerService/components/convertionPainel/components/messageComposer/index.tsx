@@ -1,5 +1,8 @@
 import { ImagePlus, Paperclip, Send, Smile } from "lucide-react";
 import { useState, type ChangeEvent } from "react";
+import { CardLib } from "../../../../../../components/card";
+import { TextareaLib } from "../../../../../../components/textArea";
+import { ButtonLib } from "../../../../../../components/button";
 
 export const MessageComposer = ({
   onSend,
@@ -19,58 +22,94 @@ export const MessageComposer = ({
   }
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="flex items-center gap-2 border-t border-slate-200 bg-white/95 p-3"
+    <CardLib
+      padding="md"
+      height="fit"
+      shadow="sm"
+      border="none"
+      className="flex flex-col min-w-0"
     >
-      <div className="flex h-10 min-w-0 flex-1 items-center rounded-lg border border-slate-200 bg-white px-3 shadow-sm transition focus-within:border-emerald-400 focus-within:ring-2 focus-within:ring-emerald-100">
-        <input
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-row  justify-center items-center gap-5"
+      >
+        <TextareaLib
           value={value}
           onChange={(event) => setValue(event.target.value)}
           placeholder="Escreva uma mensagem"
           aria-label="Mensagem"
-          className="min-w-0 flex-1 bg-transparent text-sm text-slate-800 outline-none placeholder:text-slate-400"
+          className="min-w-0 flex-1"
         />
 
-        <div className="flex items-center gap-0.5 text-slate-500">
-          <button
+        <div className="flex items-center gap-5">
+          <ButtonLib
             type="button"
+            shadow="min"
+            colorBackeGround="secondary"
+            colorBackeHouverGround="primary"
+            textColor="primary"
+            textColorHover="secondary"
             aria-label="Adicionar emoji"
-            className="grid h-7 w-7 place-items-center rounded-md transition hover:bg-emerald-50 hover:text-emerald-700"
+            size="none"
+            className="w-9 h-9"
           >
             <Smile size={17} />
-          </button>
-          <button
+          </ButtonLib>
+          <ButtonLib
             type="button"
-            aria-label="Formatar texto"
-            className="grid h-7 w-7 place-items-center rounded-md text-sm transition hover:bg-emerald-50 hover:text-emerald-700"
+            shadow="min"
+            size="none"
+            className="w-9 h-9"
+            colorBackeGround="secondary"
+            colorBackeHouverGround="primary"
+            textColor="primary"
+            textColorHover="secondary"
+            aria-label="Adicionar negrito"
           >
             <strong>T</strong>
-          </button>
-          <button
+          </ButtonLib>
+          <ButtonLib
             type="button"
+            shadow="min"
+            size="none"
+            className="w-9 h-9"
+            colorBackeGround="secondary"
+            colorBackeHouverGround="primary"
+            textColor="primary"
+            textColorHover="secondary"
             aria-label="Anexar arquivo"
-            className="grid h-7 w-7 place-items-center rounded-md transition hover:bg-emerald-50 hover:text-emerald-700"
           >
             <Paperclip size={17} />
-          </button>
-          <button
+          </ButtonLib>
+          <ButtonLib
             type="button"
+            shadow="min"
+            size="none"
+            className="w-9 h-9"
+            colorBackeGround="secondary"
+            colorBackeHouverGround="primary"
+            textColor="primary"
+            textColorHover="secondary"
             aria-label="Adicionar imagem"
-            className="grid h-7 w-7 place-items-center rounded-md transition hover:bg-emerald-50 hover:text-emerald-700"
           >
             <ImagePlus size={17} />
-          </button>
+          </ButtonLib>
         </div>
-      </div>
 
-      <button
-        type="submit"
-        aria-label="Enviar mensagem"
-        className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-emerald-800 text-white shadow-md shadow-emerald-900/20 transition hover:bg-emerald-900 active:scale-[.97]"
-      >
-        <Send size={18} />
-      </button>
-    </form>
+        <ButtonLib
+          type="submit"
+          shadow="min"
+          size="none"
+          className="w-10 h-10"
+          colorBackeGround="primary"
+          colorBackeHouverGround="success"
+          textColor="secondary"
+          textColorHover="secondary"
+          aria-label="Enviar mensagem"
+        >
+          <Send size={18} />
+        </ButtonLib>
+      </form>
+    </CardLib>
   );
 };

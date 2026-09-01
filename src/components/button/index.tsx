@@ -29,6 +29,7 @@ const buttonVariants = cva(buttonDefaultBehavior, {
     colorBackeHouverGround: colorsHouverBackGround,
 
     size: {
+      none: "",
       small: "w-full h-2 p-3",
       median: "w-full h-7 p-3",
       large: "w-full h-12 p-3",
