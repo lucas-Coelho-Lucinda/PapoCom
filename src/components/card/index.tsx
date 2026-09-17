@@ -7,7 +7,7 @@ import {
 } from "../../styles/colors";
 import { height, padding, rounded, shadow, width } from "../../styles/sizes";
 
-const cardVariants = cva("transition-all border", {
+const cardVariants = cva("transition-all border break-words", {
   variants: {
     colorBackeGround: {
       ...colorsBackGround,

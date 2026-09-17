@@ -136,4 +136,6 @@ export const colorsBorder = {
     secondary: "border-border-strong",
 
     accent: "border-accent-strong",
+
+    sendMessage: "border-emerald-300"
 };
