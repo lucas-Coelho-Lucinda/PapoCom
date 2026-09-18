@@ -32,7 +32,7 @@ Durante o desenvolvimento foram aplicados conceitos utilizados em aplicações m
 * [x] Sistema de rotas;
 * [x] Componentes reutilizáveis;
 * [x] Interface responsiva;
-* [] Validação de formulários;
+* [ ] Validação de formulários;
 * [ ] Tratamento de feedbacks visuais.
 
 ## Em desenvolvimento
