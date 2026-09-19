@@ -28,10 +28,10 @@ Durante o desenvolvimento foram aplicados conceitos utilizados em aplicações m
 
 ## Implementadas
 
-* [ ] Estrutura inicial da aplicação;
-* [ ] Sistema de rotas;
-* [ ] Componentes reutilizáveis;
-* [ ] Interface responsiva;
+* [x] Estrutura inicial da aplicação;
+* [x] Sistema de rotas;
+* [x] Componentes reutilizáveis;
+* [x] Interface responsiva;
 * [ ] Validação de formulários;
 * [ ] Tratamento de feedbacks visuais.
 
