@@ -24,11 +24,7 @@ const tooltipVariants = cva(
     variants: {
       variant: {
         default: `
-          bg-primary
-          text-secondary
-        `,
-        accent: `
-          bg-accent
+          bg-background
           text-primary
         `,
 
