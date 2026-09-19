@@ -13,12 +13,14 @@ const defaultMessages: Message[] = [
     author: "Mensagem automática",
     text: "Olá! Você está na fila de Suporte Técnico. Em instantes um atendente assume sua conversa.",
     time: "21:31",
+    date: "18/09/2026",
   },
   {
     id: 2,
     type: "received",
     text: "Bom dia, minha internet caiu desde ontem à noite.",
     time: "21:33",
+    date: "18/09/2026",
   },
   {
     id: 3,
@@ -26,12 +28,14 @@ const defaultMessages: Message[] = [
     author: "Caio Ribeiro",
     text: "Bom dia, Joana! Sou o Caio. Já estou verificando o sinal da sua região.",
     time: "21:36",
+    date: "18/09/2026",
   },
   {
     id: 4,
     type: "received",
     text: "Obrigada! O modem fica com a luz vermelha piscando.",
     time: "21:44",
+    date: "19/09/2026",
   },
   {
     id: 5,
@@ -39,6 +43,7 @@ const defaultMessages: Message[] = [
     author: "Caio Ribeiro",
     text: "Certo. Vou enviar um reset remoto agora. Pode desligar o aparelho da tomada por 30 segundos?",
     time: "21:52",
+    date: "19/09/2026",
   },
 ];
 
