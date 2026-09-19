@@ -62,7 +62,7 @@ interface AvatarProps
     VariantProps<typeof wrapperVariants> {
   className?: string;
   src?: string;
-  photoOrText?: string;
+  textInfo?: string;
   isAdmin?: boolean;
   alt?: string;
   fit?: "cover" | "contain";
@@ -71,7 +71,7 @@ export const AvatarLib = ({
   className,
   shadow,
   isAdmin,
-  photoOrText,
+  textInfo,
   alt,
   fit,
   src,
@@ -105,7 +105,7 @@ export const AvatarLib = ({
               alt=""
             />
           )}
-          {photoOrText}
+          {textInfo}
         </AvatarPrimitive.Fallback>
       </AvatarPrimitive.Root>
     </div>
