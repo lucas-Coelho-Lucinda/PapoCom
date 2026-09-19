@@ -39,7 +39,7 @@ export const OptinsService = () => {
                   `}
             >
               {isCollapsed && (
-                <TooltipLib side="right" variant="accent" className="font-bold">
+                <TooltipLib side="right" variant="default" className="font-bold">
                   <div className="flex flex-col">
                     <Textlib as="span">{option?.title}</Textlib>
                   </div>

@@ -1,12 +1,11 @@
+import { AvatarLib } from "../../../../../../components/avatar";
 import { CardLib } from "../../../../../../components/card";
 import { Textlib } from "../../../../../../components/text";
 
 import type { Message } from "../../types";
 
 export const MessageBubble = ({ message }: { message: Message }) => {
-  const isSent =
-    message.type === "sent" ||
-    message.type === "system";
+  const isSent = message.type === "sent" || message.type === "system";
 
   const isServiceStatus =
     message.type === "start" ||
@@ -17,41 +16,57 @@ export const MessageBubble = ({ message }: { message: Message }) => {
     <div className="flex w-full justify-center">
       {isServiceStatus ? (
         <CardLib
-          className="w-full px-3 py-2 flex flex-col justify-center items-center"
-          colorBackeGround="muted"
+          width="full"
+          height="full"
+          rounded="sm"
           shadow="sm"
-          rounded="md"
           padding="sm"
-          width="fit"
-          height="max"
+          colorBackeGround="secondary"
+          className="flex flex-col justify-between items-center gap-2"
         >
-          <Textlib
-            as="span"
-            color="message"
-            size="xs"
-            className="font-medium"
-          >
+          <Textlib as="h3" size="sm" className="font-semibold" color="primary">
             {message.type === "system" && "Atendimento iniciado"}
             {message.type === "service" && "Atendimento em andamento"}
             {message.type === "end" && "Atendimento finalizado"}
           </Textlib>
+          <hr className="w-full border-t border-success" />
+          <CardLib
+            border="none"
+            colorBackeGround="none"
+            className="flex items-center justify-between gap-2"
+          >
+            <div className="flex items-center gap-1">
+              <AvatarLib
+                size="min"
+                shadow="none"
+                color="sendMessage"
+                border="none"
+                photoOrText="JP"
+              />
 
-          {message.time && (
+              <Textlib
+                as="span"
+                size="xs"
+                color="primary"
+                className="font-semibold"
+              >
+               Usuario: Caio Ribeiro
+              </Textlib>
+            </div>
+
             <Textlib
               as="span"
-              color="primary"
               size="xs"
-              className="ml-2"
+              color="primary"
+              className="font-semibold"
             >
-              {message.time}
+              Iniciado em {message.date} ás {message.time}
             </Textlib>
-          )}
+          </CardLib>
         </CardLib>
       ) : (
         <div
-          className={`flex w-full ${
-            isSent ? "justify-end" : "justify-start"
-          }`}
+          className={`flex w-full ${isSent ? "justify-end" : "justify-start"}`}
         >
           <CardLib
             className={`max-w-[50%] px-3 py-2.5 ${
@@ -60,9 +75,7 @@ export const MessageBubble = ({ message }: { message: Message }) => {
                 : "rounded-tl-xl rounded-b-xl"
             }`}
             colorBackeGround={
-              message.type === "received"
-                ? "default"
-                : "sendMessage"
+              message.type === "received" ? "default" : "sendMessage"
             }
             shadow="sm"
             rounded="none"
@@ -81,11 +94,7 @@ export const MessageBubble = ({ message }: { message: Message }) => {
               </Textlib>
             )}
 
-            <Textlib
-              as="p"
-              color="message"
-              size="md"
-            >
+            <Textlib as="p" color="message" size="md">
               {message.text}
             </Textlib>
 

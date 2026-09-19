@@ -2,6 +2,7 @@ import type { ItemCallProps } from "../type";
 import { AvatarLib } from "../../../../../../components/avatar";
 import { CardLib } from "../../../../../../components/card";
 import { Textlib } from "../../../../../../components/text";
+import { MessageCircleCheck, User } from "lucide-react";
 
 export const ItemCall = ({
   isSelected,
@@ -11,7 +12,6 @@ export const ItemCall = ({
   index,
   selectCall,
 }: ItemCallProps) => {
-
   return (
     <CardLib
       colorBackeGround={isSelected ? "muted" : "default"}
@@ -63,6 +63,52 @@ export const ItemCall = ({
           >
             {text}
           </Textlib>
+          <div className="flex flex-row justify-end items-center gap-5">
+            <CardLib
+              width="fit"
+              height="min"
+              rounded="xl"
+              shadow="sm"
+              padding="none"
+              border={isSelected ? "none" : "primary"}
+              colorBackeGround={isSelected ? "primary" : "default"}
+              colorsHouverBackGround="none"
+              className="flex flex-row justify-center items-center gap-1 p-1 mt-2 min-w-0"
+            >
+              <User size={20} className="shrink-0" color={isSelected? "#ffff": "#144F44"} />
+              <Textlib
+                color={isSelected ? "secondary" : "primary"}
+                colorHover="none"
+                as="span"
+                size="sm"
+                className="flex-1 min-w-0 truncate"
+              >
+                Carlos
+              </Textlib>
+            </CardLib>
+
+            <CardLib
+              width="fit"
+              height="min"
+              rounded="xl"
+              shadow="sm"
+              padding="xs"
+              border={isSelected ? "none" : "primary"}
+              colorBackeGround={isSelected ? "primary" : "default"}
+              className="flex flex-row justify-center items-center gap-1 p-1 mt-2 min-w-0"
+            >
+              <MessageCircleCheck size={18} className="shrink-0" color={isSelected? "#ffff": "#144F44"} />
+
+              <Textlib
+                color={isSelected ? "secondary" : "primary"}
+                as="span"
+                size="sm"
+                className="flex-1 min-w-0 truncate"
+              >
+                Vendas
+              </Textlib>
+            </CardLib>
+          </div>
         </div>
       </div>
     </CardLib>

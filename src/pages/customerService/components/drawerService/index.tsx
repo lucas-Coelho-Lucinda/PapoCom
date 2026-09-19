@@ -145,7 +145,7 @@ export const DrawerService = () => {
                 </TooltipTriggerLib>
 
                 {isCollapsed && (
-                  <TooltipLib side="right" variant="accent" className="font-bold">
+                  <TooltipLib side="right" variant="default" className="font-bold">
                     <div className="flex flex-col justify-center">
                       <Textlib as="span" color="none">
                         Usuario: Marina Duarte

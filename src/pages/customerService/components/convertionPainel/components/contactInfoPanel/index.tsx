@@ -41,7 +41,7 @@ export const ContactInfoPanel = ({
     <div
       className={`flex h-full min-h-0 ${isCollapsed ? "w-100" : "w-80"} shrink-0 flex-col border-l border-slate-200 bg-white`}
     >
-      <div className="flex flex-row  h-[81px] shrink-0 items-center justify-between  border-b border-slate-200 px-2">
+      <div className="flex flex-row  h-20.25 shrink-0 items-center justify-between  border-b border-slate-200 px-2">
         <Textlib as="h2" size="sm" color="default" className="font-semibold">
           Informações do contato
         </Textlib>
@@ -93,7 +93,7 @@ export const ContactInfoPanel = ({
               Joana Prado de Almeida
             </Textlib>
 
-            <Textlib as="p" size="xs" color="default" className="font-semibold">
+            <Textlib as="p" size="xs" color="primary" className="font-semibold">
               Cliente desde 01/06/2026, 09:00
             </Textlib>
           </div>
@@ -125,22 +125,20 @@ export const ContactInfoPanel = ({
               <Mail size={16} className="mt-0.5 shrink-0 text-slate-500" />
 
               <div>
-                <p className="text-[11px] uppercase tracking-wide text-slate-500">
+                <Textlib as="p" size="xs" className="text-[11px] uppercase tracking-wide text-slate-500">
                   Meio de contato
-                </p>
+                </Textlib>
 
-                <p className="text-sm text-slate-500">joana.prado@gmail.com</p>
-
-                <span className="mt-1 inline-flex rounded-md border border-slate-200 px-2 py-0.5 text-[10px] text-slate-700">
-                  E-mail (Gmail)
-                </span>
+                <Textlib as="p" size="xs" className="text-slate-500">
+                  joana.prado@gmail.com
+                </Textlib>
               </div>
             </div>
           </div>
 
           <div className="pt-4">
             <div className="mb-3 flex items-center justify-between gap-2">
-              <div className="flex items-center gap-2">
+              <div className="flex flex-row items-center gap-2 ">
                 <FileText size={17} className="text-slate-600" />
 
                 <Textlib
@@ -164,7 +162,7 @@ export const ContactInfoPanel = ({
 
               <ButtonLib
                 type="button"
-                shadow="min"
+                shadow="none"
                 size="median"
                 textColor={isAddingNote ? "secondary" : "primary"}
                 textColorHover="none"
@@ -183,6 +181,7 @@ export const ContactInfoPanel = ({
               <CardLib
                 padding="md"
                 rounded="2xl"
+                className="animate-fade-in"
                 colorBackeGround="sendMessage"
               >
                 <form onSubmit={handleAddNote}>
@@ -199,7 +198,7 @@ export const ContactInfoPanel = ({
                   <ButtonLib
                     shadow="min"
                     size="median"
-                    textColor="secondary"
+                    textColor="none"
                     textColorHover="none"
                     colorBackeGround="success"
                     colorBackeHouverGround="none"
@@ -207,7 +206,7 @@ export const ContactInfoPanel = ({
                     disabled={!noteText.trim()}
                     className="mt-2 inline-flex items-center px-3"
                   >
-                    <Textlib as="span" size="xs" color="none" colorHover="none">
+                    <Textlib as="span" size="xs" color="primary" colorHover="none">
                       Salvar anotação
                     </Textlib>
                   </ButtonLib>
@@ -227,7 +226,6 @@ export const ContactInfoPanel = ({
                   colorBackeGround="default"
                   className="flex flex-col gap-2"
                 >
-                 
                   <Textlib as="p" size="sm" color="message">
                     {note.text}
                   </Textlib>

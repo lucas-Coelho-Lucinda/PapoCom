@@ -31,6 +31,7 @@ export const FiltersOptionsService = () => {
             variant="default"
             size="small"
             options={optionsQueue}
+            textColor="primary"
             className="min-w-0 flex-1 w-full max-w-full"
             defaultValue={optionsQueue[0].value}
           />
