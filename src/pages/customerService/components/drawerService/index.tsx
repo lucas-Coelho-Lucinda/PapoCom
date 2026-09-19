@@ -140,6 +140,7 @@ export const DrawerService = () => {
                       shape="square"
                       fit="cover"
                       size="small"
+                      textInfo="t"
                     />
                   </div>
                 </TooltipTriggerLib>

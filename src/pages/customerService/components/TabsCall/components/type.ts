@@ -1,8 +1,10 @@
 export interface ItemCallProps {
   isSelected: boolean;
-  index: number;
+  id: number;
   name: string;
   text: string;
   hour: string;
+  queue: string;
+  user: string;
   selectCall: (indice: number) => void
 }

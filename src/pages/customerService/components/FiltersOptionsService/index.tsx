@@ -1,11 +1,15 @@
-import { Search } from "lucide-react";
+import { ListOrdered, Search, Users } from "lucide-react";
 import { CardLib } from "../../../../components/card";
 import { InputLib } from "../../../../components/Input";
 import { SelectLib } from "../../../../components/select";
 import { optionsQueue, optionsStatus } from "../TabsCall/selectOptions";
 import { CollpasedContext } from "../../../../context/collapsed";
+import type { FiltersOptionsServiceProps } from "./type";
 
-export const FiltersOptionsService = () => {
+export const FiltersOptionsService = ({
+  filterQueue,
+  filterUser,
+}: FiltersOptionsServiceProps) => {
   const { isCollapsed } = CollpasedContext();
 
   return (
@@ -28,8 +32,12 @@ export const FiltersOptionsService = () => {
 
         <div className="flex w-full min-w-0 gap-5">
           <SelectLib
+            searchable={true}
             variant="default"
             size="small"
+            onValueChange={(valueQueueSelected) => filterQueue(valueQueueSelected)}
+            searchPlaceholder="Pesquise uma fila..."
+            IconDefault={<ListOrdered size={20} />}
             options={optionsQueue}
             textColor="primary"
             className="min-w-0 flex-1 w-full max-w-full"
@@ -37,8 +45,13 @@ export const FiltersOptionsService = () => {
           />
 
           <SelectLib
+            searchable={true}
             variant="default"
             size="small"
+            textColor="primary"
+            onValueChange={(valueUserSelected)=> filterUser(valueUserSelected)}
+            searchPlaceholder="Pesquise um usuário..."
+            IconDefault={<Users size={20} />}
             options={optionsStatus}
             className="min-w-0 flex-1 w-full max-w-full"
             defaultValue={optionsStatus[0].value}

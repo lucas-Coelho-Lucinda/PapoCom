@@ -9,7 +9,9 @@ export const ItemCall = ({
   hour,
   name,
   text,
-  index,
+  id,
+  queue,
+  user,
   selectCall,
 }: ItemCallProps) => {
   return (
@@ -20,7 +22,7 @@ export const ItemCall = ({
       border="none"
       padding="md"
       colorsHouverText="secondary"
-      onClick={() => selectCall(index)}
+      onClick={() => selectCall(id)}
     >
       <div className="m-0 flex w-full min-w-0 flex-row gap-2 p-0">
         <div className="shrink-0">
@@ -30,7 +32,7 @@ export const ItemCall = ({
             color={isSelected ? "success" : "muted"}
             border={isSelected ? "primary" : "default"}
             fit="cover"
-            photoOrText="TAB"
+            textInfo="t"
           />
         </div>
 
@@ -83,7 +85,7 @@ export const ItemCall = ({
                 size="sm"
                 className="flex-1 min-w-0 truncate"
               >
-                Carlos
+                {user}
               </Textlib>
             </CardLib>
 
@@ -105,7 +107,7 @@ export const ItemCall = ({
                 size="sm"
                 className="flex-1 min-w-0 truncate"
               >
-                Vendas
+                {queue}
               </Textlib>
             </CardLib>
           </div>

@@ -25,7 +25,7 @@ export const ConversationHeader = ({
           shadow="default"
           color="success"
           border="primary"
-          photoOrText="JP"
+          textInfo="JP"
         />
         <div className="min-w-0 flex flex-col  justify-center items-center">
           <Textlib

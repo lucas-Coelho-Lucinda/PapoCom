@@ -41,7 +41,7 @@ export const MessageBubble = ({ message }: { message: Message }) => {
                 shadow="none"
                 color="sendMessage"
                 border="none"
-                photoOrText="JP"
+                textInfo="JP"
               />
 
               <Textlib

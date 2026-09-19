@@ -13,7 +13,7 @@ export const optionsQueue = [
         value: "financeiro",
     },
 
-     {
+    {
         label: "Vendas",
         value: "vendas",
     },
@@ -22,7 +22,7 @@ export const optionsQueue = [
 export const optionsStatus = [
     {
         label: "Todos os usuarios",
-        value: "Todos os usurios",
+        value: "Todos os usuarios",
     },
     {
         label: "lucas coelho lucinda",
@@ -34,8 +34,13 @@ export const optionsStatus = [
         value: "Marcos",
     },
 
-     {
+    {
         label: "Antonio",
         value: "Antonio",
     },
+
+    {
+        label: "Rafael",
+        value: "Rafael",
+    }
 ]

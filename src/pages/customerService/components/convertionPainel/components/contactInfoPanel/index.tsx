@@ -81,7 +81,7 @@ export const ContactInfoPanel = ({
               shadow="default"
               color="success"
               border="primary"
-              photoOrText="JP"
+              textInfo="JP"
             />
 
             <Textlib
@@ -240,7 +240,7 @@ export const ContactInfoPanel = ({
                         shadow="none"
                         color="sendMessage"
                         border="none"
-                        photoOrText="JP"
+                       textInfo="JP"
                       />
 
                       <Textlib

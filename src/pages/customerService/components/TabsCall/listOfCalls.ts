@@ -1,8 +1,109 @@
-export const generateListOfCalls = (quantity: number) => {
-  return Array.from({ length: quantity }, (_, index) => ({
+const calls = [
+  {
     name: "Joana Prado",
-    selected: index === 0,
+    queue: "suporte tecnico",
+    user: "lucas coelho lucinda",
+    color: "#3B82F6",
     hour: "21:52",
     text: "Este é um texto muito longo que será cortado quando ultrapassa largura disponível do componente",
-  }));
+  },
+  {
+    name: "Carlos Henrique",
+    queue: "financeiro",
+    user: "Marcos",
+    color: "#22C55E",
+    hour: "21:48",
+    text: "Preciso de ajuda para verificar uma cobrança que apareceu incorretamente no sistema",
+  },
+  {
+    name: "Mariana Oliveira",
+    queue: "vendas",
+    user: "Antonio",
+    color: "#F59E0B",
+    hour: "21:43",
+    text: "Gostaria de receber mais informações sobre os produtos disponíveis para contratação",
+  },
+  {
+    name: "Gabriel Martins",
+    queue: "suporte tecnico",
+    user: "Marcos",
+    color: "#3B82F6",
+    hour: "21:37",
+    text: "O sistema apresenta uma mensagem de erro ao tentar realizar o procedimento solicitado",
+  },
+  {
+    name: "Fernanda Almeida",
+    queue: "financeiro",
+    user: "lucas coelho lucinda",
+    color: "#22C55E",
+    hour: "21:31",
+    text: "Gostaria de confirmar os valores referentes à última fatura emitida para minha empresa",
+  },
+  {
+    name: "Ricardo Souza",
+    queue: "vendas",
+    user: "Antonio",
+    color: "#F59E0B",
+    hour: "21:25",
+    text: "Tenho interesse em conhecer as condições comerciais e formas de pagamento disponíveis",
+  },
+  {
+    name: "Amanda Rodrigues",
+    queue: "suporte tecnico",
+    user: "Antonio",
+    color: "#3B82F6",
+    hour: "21:19",
+    text: "Não estou conseguindo acessar minha conta mesmo utilizando minhas credenciais corretamente",
+  },
+  {
+    name: "Lucas Ferreira",
+    queue: "financeiro",
+    user: "Marcos",
+    color: "#22C55E",
+    hour: "21:14",
+    text: "Preciso esclarecer uma dúvida relacionada ao pagamento e ao vencimento da minha fatura",
+  },
+  {
+    name: "Beatriz Carvalho",
+    queue: "vendas",
+    user: "lucas coelho lucinda",
+    color: "#F59E0B",
+    hour: "21:08",
+    text: "Gostaria de falar com um atendente para entender melhor as opções de contratação",
+  },
+  {
+    name: "Rafael Mendes",
+    queue: "suporte tecnico",
+    user: "Marcos",
+    color: "#3B82F6",
+    hour: "21:02",
+    text: "Estou enfrentando dificuldades para utilizar uma funcionalidade específica da aplicação",
+  },
+  {
+    name: "Camila Martins",
+    queue: "financeiro",
+    user: "Antonio",
+    color: "#22C55E",
+    hour: "20:56",
+    text: "Minha empresa precisa atualizar algumas informações relacionadas ao cadastro financeiro",
+  },
+  {
+    name: "Pedro Henrique",
+    queue: "vendas",
+    user: "lucas coelho lucinda",
+    color: "#F59E0B",
+    hour: "20:49",
+    text: "Gostaria de solicitar uma proposta comercial para os serviços apresentados anteriormente",
+  },
+];
+
+export const generateListOfCalls = (quantity: number) => {
+  return Array.from(
+    { length: quantity },
+    (_, index) => ({
+      id: index + 1,
+      ...calls[index % calls.length],
+      selected: index === 0,
+    }),
+  );
 };

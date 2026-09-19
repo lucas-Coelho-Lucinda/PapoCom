@@ -14,12 +14,24 @@ import { Phone, PhoneCall, PhoneIncoming } from "lucide-react";
 
 export function TabsCall() {
   const [listStateCalls, setListStateCalls] = useState(generateListOfCalls(10));
+  const [optionQueue, setOptionQueue] = useState("Todas as filas");
+  const [optionUser, setOptionUser] = useState("Todos os usuarios");
 
-  const selectCall = (indice: number) => {
+  const listDefault = listStateCalls.filter((element) => {
+    const matchesQueue =
+      optionQueue === "Todas as filas" || element.queue === optionQueue;
+
+    const matchesUser =
+      optionUser === "Todos os usuarios" || element.user === optionUser;
+
+    return matchesQueue && matchesUser;
+  });
+
+  const selectCall = (id: number) => {
     setListStateCalls((prev) =>
-      prev.map((item, index) => ({
+      prev.map((item) => ({
         ...item,
-        selected: index === indice,
+        selected: item.id === id,
       })),
     );
   };
@@ -42,7 +54,7 @@ export function TabsCall() {
           size="small"
           className="flex flex-row gap-2 min-w-0 overflow-visible px-1"
         >
-          <Phone  size={20} color="#ffff" />
+          <Phone size={20} color="#ffff" />
           <Textlib
             color="secondary"
             as="span"
@@ -76,7 +88,7 @@ export function TabsCall() {
           size="small"
           className="flex flex-row gap-2 min-w-0 overflow-visible px-1"
         >
-          <PhoneIncoming  size={20} color="#ffff" />
+          <PhoneIncoming size={20} color="#ffff" />
           <Textlib
             color="secondary"
             as="span"
@@ -88,7 +100,10 @@ export function TabsCall() {
         </TabsTriggerLib>
       </TabsListLib>
 
-      <FiltersOptionsService />
+      <FiltersOptionsService
+        filterUser={setOptionUser}
+        filterQueue={setOptionQueue}
+      />
 
       <TabsContentLib
         value="em atendimento"
@@ -101,7 +116,7 @@ export function TabsCall() {
           className="min-h-0 w-full flex-1"
         >
           <div className="flex w-full min-w-0 flex-col pb-2">
-            {listStateCalls.map((item, index) => (
+            {listDefault.map((item, index) => (
               <div
                 key={`${item.name}-${index}`}
                 className="m-0 w-full min-w-0 p-0"
@@ -111,7 +126,9 @@ export function TabsCall() {
                   name={item.name}
                   hour={item.hour}
                   text={item.text}
-                  index={index}
+                  user={item.user}
+                  queue={item.queue}
+                  id={item.id}
                   selectCall={selectCall}
                 />
 
