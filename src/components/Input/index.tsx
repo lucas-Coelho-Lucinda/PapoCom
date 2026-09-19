@@ -1,6 +1,6 @@
 import { cva, type VariantProps } from "class-variance-authority";
 import { Eye, EyeClosed } from "lucide-react";
-import React, { useState } from "react";
+import React, { forwardRef, useState } from "react";
 import { colorsBackGround } from "../../styles/colors";
 
 const inputVariants = cva(
@@ -35,53 +35,66 @@ type InputProps = React.InputHTMLAttributes<HTMLInputElement> &
     isPassword?: boolean;
   };
 
-export const InputLib = ({
-  className,
-  variant,
-  inputSize,
-  leftIcon,
-  rightIcon,
-  isPassword,
-  type,
-  ...props
-}: InputProps) => {
-  const [showPassword, setShowPassword] = useState(false);
+export const InputLib = forwardRef<HTMLInputElement, InputProps>(
+  (
+    {
+      className,
+      variant,
+      inputSize,
+      leftIcon,
+      rightIcon,
+      isPassword,
+      type,
+      ...props
+    },
+    ref
+  ) => {
+    const [showPassword, setShowPassword] = useState(false);
 
-  const inputType = isPassword ? (showPassword ? "text" : "password") : type;
+    const inputType = isPassword
+      ? showPassword
+        ? "text"
+        : "password"
+      : type;
 
-  return (
-    <div className="relative flex items-center">
-      {/* Ícone esquerdo */}
-      {leftIcon && (
-        <div className="absolute left-3 text-black">{leftIcon}</div>
-      )}
-
-      <input
-        type={inputType}
-        className={`
-          ${inputVariants({ variant, inputSize })}
-          ${leftIcon ? "pl-10" : ""}
-          ${rightIcon || isPassword ? "pr-10" : ""}
-          ${className ?? ""}
-        `}
-        {...props}
-      />
-
-      {/* Ícone direito / senha */}
-      <div className="absolute right-3 flex items-center">
-        {isPassword ? (
-          <button
-            type="button"
-            onClick={() => setShowPassword(!showPassword)}
-            className="text-black hover:text-black"
-          >
-            {/* aqui você usa seu ícone */}
-            {showPassword ? <EyeClosed /> : <Eye />}
-          </button>
-        ) : (
-          rightIcon
+    return (
+      <div className="relative flex items-center">
+        {/* Ícone esquerdo */}
+        {leftIcon && (
+          <div className="absolute left-3 text-black">
+            {leftIcon}
+          </div>
         )}
+
+        <input
+          ref={ref}
+          type={inputType}
+          className={`
+            ${inputVariants({ variant, inputSize })}
+            ${leftIcon ? "pl-10" : ""}
+            ${rightIcon || isPassword ? "pr-10" : ""}
+            ${className ?? ""}
+          `}
+          {...props}
+        />
+
+        {/* Ícone direito / senha */}
+        <div className="absolute right-3 flex items-center">
+          {isPassword ? (
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              className="text-black hover:text-black"
+            >
+              {showPassword ? <EyeClosed /> : <Eye />}
+            </button>
+          ) : (
+            rightIcon
+          )}
+        </div>
       </div>
-    </div>
-  );
-};
+    );
+  }
+);
+
+InputLib.displayName = "InputLib";
