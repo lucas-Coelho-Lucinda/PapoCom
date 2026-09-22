@@ -16,6 +16,7 @@ export function TabsCall() {
   const [listStateCalls, setListStateCalls] = useState(generateListOfCalls(10));
   const [optionQueue, setOptionQueue] = useState("Todas as filas");
   const [optionUser, setOptionUser] = useState("Todos os usuarios");
+  const [searchCotactNumber, setSearchCotactNumber] = useState("");
 
   const listDefault = listStateCalls.filter((element) => {
     const matchesQueue =
@@ -24,7 +25,13 @@ export function TabsCall() {
     const matchesUser =
       optionUser === "Todos os usuarios" || element.user === optionUser;
 
-    return matchesQueue && matchesUser;
+    const matchesContactNumber =
+      searchCotactNumber === "" ||
+      element.name.toLowerCase().includes(searchCotactNumber.toLowerCase());
+
+    return searchCotactNumber !== ""
+      ? matchesContactNumber
+      : matchesQueue && matchesUser;
   });
 
   const selectCall = (id: number) => {
@@ -103,6 +110,7 @@ export function TabsCall() {
       <FiltersOptionsService
         filterUser={setOptionUser}
         filterQueue={setOptionQueue}
+        filterContactNumber={setSearchCotactNumber}
       />
 
       <TabsContentLib

@@ -17,29 +17,28 @@ export const ItemCall = ({
   return (
     <CardLib
       colorBackeGround={isSelected ? "muted" : "default"}
-      colorsHouverBackGround="success"
-      className="m-0 block h-fit w-full min-w-0 cursor-pointer rounded-none p-0"
+      colorsHouverBackGround="sendMessage"
+      className="block h-fit w-full min-w-0 cursor-pointer rounded-none p-0"
       border="none"
       padding="md"
       colorsHouverText="secondary"
       onClick={() => selectCall(id)}
     >
-      <div className="m-0 flex w-full min-w-0 flex-row gap-2 p-0">
-        <div className="shrink-0">
-          <AvatarLib
-            shadow="default"
-            size="large"
-            color={isSelected ? "success" : "muted"}
-            border={isSelected ? "primary" : "default"}
-            fit="cover"
-            textInfo="t"
-          />
-        </div>
+      <div className="flex w-full h-20 min-w-0 flex-row justify-center items-start gap-2">
+        <AvatarLib
+          shadow="default"
+          size="large"
+          color={isSelected ? "success" : "muted"}
+          border={isSelected ? "primary" : "none"}
+          fit="cover"
+          textInfo="t"
+          className="shrink-0"
+        />
 
         <div className="min-w-0 flex-1">
           <div className="flex min-w-0 items-start justify-between gap-2">
             <Textlib
-              color="none"
+              color="primary"
               className="min-w-0 flex-1 truncate font-semibold"
               as="h2"
               size="lg"
@@ -48,7 +47,7 @@ export const ItemCall = ({
             </Textlib>
 
             <Textlib
-              color="none"
+              color="primary"
               as="span"
               size="sm"
               className="shrink-0 whitespace-nowrap font-semibold"
@@ -58,7 +57,7 @@ export const ItemCall = ({
           </div>
 
           <Textlib
-            color="none"
+            color="primary"
             as="p"
             size="sm"
             className="w-full min-w-0 truncate"
@@ -77,7 +76,11 @@ export const ItemCall = ({
               colorsHouverBackGround="none"
               className="flex flex-row justify-center items-center gap-1 p-1 mt-2 min-w-0"
             >
-              <User size={20} className="shrink-0" color={isSelected? "#ffff": "#144F44"} />
+              <User
+                size={20}
+                className="shrink-0"
+                color={isSelected ? "#ffff" : "#144F44"}
+              />
               <Textlib
                 color={isSelected ? "secondary" : "primary"}
                 colorHover="none"
@@ -99,7 +102,11 @@ export const ItemCall = ({
               colorBackeGround={isSelected ? "primary" : "default"}
               className="flex flex-row justify-center items-center gap-1 p-1 mt-2 min-w-0"
             >
-              <MessageCircleCheck size={18} className="shrink-0" color={isSelected? "#ffff": "#144F44"} />
+              <MessageCircleCheck
+                size={18}
+                className="shrink-0"
+                color={isSelected ? "#ffff" : "#144F44"}
+              />
 
               <Textlib
                 color={isSelected ? "secondary" : "primary"}

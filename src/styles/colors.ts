@@ -12,6 +12,7 @@ export const colorsText = {
     muted: "text-muted",
     accent: "text-accent",
     secondary: "text-secondary",
+    sendMessage: "text-emerald-500"
 };
 
 
@@ -110,6 +111,8 @@ export const colorsHouverBackGround = {
 
     accent:
         "hover:bg-accent-hover",
+        
+    sendMessage: "hover:bg-emerald-100"
 };
 
 

@@ -20,7 +20,6 @@ import { OptinsService } from "./components/optionsService";
 import { CollpasedContext } from "../../../../context/collapsed";
 
 export const DrawerService = () => {
-
   const { isCollapsed } = CollpasedContext();
   const containerAlignment = isCollapsed
     ? "items-center justify-center"
@@ -140,22 +139,25 @@ export const DrawerService = () => {
                       shape="square"
                       fit="cover"
                       size="small"
-                      textInfo="t"
                     />
                   </div>
                 </TooltipTriggerLib>
 
                 {isCollapsed && (
-                  <TooltipLib side="right" variant="default" className="font-bold">
+                  <TooltipLib
+                    side="right"
+                    variant="default"
+                    className="font-bold"
+                  >
                     <div className="flex flex-col justify-center">
                       <Textlib as="span" color="none">
                         Usuario: Marina Duarte
                       </Textlib>
 
-                      <hr  className="border-primary" />
+                      <hr className="border-primary" />
 
                       <Textlib as="span" color="none">
-                       Permissão: Administrador
+                        Permissão: Administrador
                       </Textlib>
                     </div>
                   </TooltipLib>
@@ -185,9 +187,9 @@ export const DrawerService = () => {
             ${containerAlignment}
           `}
           >
-            <TooltipProviderLib >
+            <TooltipProviderLib>
               <Tooltip.Root>
-                <TooltipTriggerLib asChild >
+                <TooltipTriggerLib asChild>
                   <ButtonLib
                     colorBackeGround="none"
                     colorBackeHouverGround="error"
@@ -225,7 +227,15 @@ export const DrawerService = () => {
                   </ButtonLib>
                 </TooltipTriggerLib>
 
-                {isCollapsed && <TooltipLib side="right" variant="error" className="font-bold" >Sair</TooltipLib>}
+                {isCollapsed && (
+                  <TooltipLib
+                    side="right"
+                    variant="error"
+                    className="font-bold"
+                  >
+                    Sair
+                  </TooltipLib>
+                )}
               </Tooltip.Root>
             </TooltipProviderLib>
           </div>

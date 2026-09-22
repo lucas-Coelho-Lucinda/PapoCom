@@ -1,6 +1,7 @@
 import { CollpasedContext } from "../../context/collapsed";
 import { TabsCall } from "./components/TabsCall";
 import { ConversationPanel } from "./components/convertionPainel";
+/* import { DefautlPainelConvertion } from "./components/defaultPainelConvertion"; */
 
 export const CustomerService = () => {
   const { isCollapsed } = CollpasedContext();
@@ -20,6 +21,7 @@ export const CustomerService = () => {
 
         <div className="min-h-0 min-w-0 overflow-hidden">
           <ConversationPanel />
+          {/* <DefautlPainelConvertion/> */}
         </div>
       </div>
     </div>

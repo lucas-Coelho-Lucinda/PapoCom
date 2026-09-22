@@ -9,13 +9,14 @@ import type { FiltersOptionsServiceProps } from "./type";
 export const FiltersOptionsService = ({
   filterQueue,
   filterUser,
+  filterContactNumber,
 }: FiltersOptionsServiceProps) => {
   const { isCollapsed } = CollpasedContext();
 
   return (
     <CardLib
       className="flex flex-col justify-center items-center"
-      colorBackeGround="default"
+      colorBackeGround="secondary"
       width="full"
       height="min"
       border="none"
@@ -28,6 +29,7 @@ export const FiltersOptionsService = ({
           placeholder="Buscar contato ou número"
           className="w-full min-w-0 max-w-full text-accent"
           leftIcon={<Search size={20} color="#b9c1c7" />}
+          onChange={(e) => filterContactNumber(e?.target?.value.trim())}
         />
 
         <div className="flex w-full min-w-0 gap-5">
@@ -35,7 +37,9 @@ export const FiltersOptionsService = ({
             searchable={true}
             variant="default"
             size="small"
-            onValueChange={(valueQueueSelected) => filterQueue(valueQueueSelected)}
+            onValueChange={(valueQueueSelected) =>
+              filterQueue(valueQueueSelected)
+            }
             searchPlaceholder="Pesquise uma fila..."
             IconDefault={<ListOrdered size={20} />}
             options={optionsQueue}
@@ -49,7 +53,7 @@ export const FiltersOptionsService = ({
             variant="default"
             size="small"
             textColor="primary"
-            onValueChange={(valueUserSelected)=> filterUser(valueUserSelected)}
+            onValueChange={(valueUserSelected) => filterUser(valueUserSelected)}
             searchPlaceholder="Pesquise um usuário..."
             IconDefault={<Users size={20} />}
             options={optionsStatus}
