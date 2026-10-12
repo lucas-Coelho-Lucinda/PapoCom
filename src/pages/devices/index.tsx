@@ -21,12 +21,6 @@ export function Devices() {
     <>
       <Helmet title="Papo Com | Dispositívos" />
       <section className="flex h-full min-h-0 flex-col bg-background p-4 text-foreground">
-        <header className="mb-4">
-          <h1 className="text-xl font-bold">Dispositívos</h1>
-          <p className="text-sm text-muted-foreground">
-            Visualize os dispositivos conectados.
-          </p>
-        </header>
 
         <div className="grid gap-4 sm:grid-cols-2">
           {devices.map((device) => (

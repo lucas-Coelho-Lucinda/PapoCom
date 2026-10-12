@@ -8,15 +8,15 @@ export const DefautlPainelConvertion = () => {
       padding="md"
       height="full"
       shadow="sm"
-      border="none"
-      colorBackeGround="muted"
-      className="flex flex-col justify-center items-center gap-2"
+      border="default"
+      colorBackeGround="none"
+      className="flex flex-col justify-center items-center gap-2 bg-linear-to-br from-success/50 from-20% via-secondary via-48% to-success/50 to-90%"
     >
       <CardLib
         padding="md"
         width="fit"
         height="fit"
-        shadow="sm"
+        shadow="md"
         border="none"
         rounded="xl"
         colorBackeGround="secondary"
@@ -26,7 +26,12 @@ export const DefautlPainelConvertion = () => {
       <Textlib as="h1" size="2xl" color="primary">
         Selecione um atendimento para começar
       </Textlib>
-      <Textlib as="h1" className="break-normal text-center w-90" size="md" color="sendMessage">
+      <Textlib
+        as="h1"
+        className="break-normal text-center w-90"
+        size="md"
+        color="primary"
+      >
         Escolha uma conversa na lista ao lado para visualizar o histórico e
         responder o cliente.
       </Textlib>

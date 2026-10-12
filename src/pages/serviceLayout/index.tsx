@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import { PanelRightOpen } from "lucide-react";
 import { Helmet } from "react-helmet-async";
 
@@ -7,9 +7,14 @@ import { HeaderLib } from "../../components/header";
 import { ButtonLib } from "../../components/button";
 import { DrawerService } from "../customerService/components/drawerService";
 import { CollpasedContext } from "../../context/collapsed";
+import { optionsService } from "./const";
 
 export const ServiceLayout = () => {
   const { isCollapsed, setIsCollapsed } = CollpasedContext();
+
+  const { pathname } = useLocation();
+
+  const option = optionsService.find((options) => options.path == pathname);
 
   return (
     <>
@@ -58,7 +63,7 @@ export const ServiceLayout = () => {
                 color="primary"
                 size="lg"
               >
-                Painel de Atendimento
+                {option?.title}
               </Textlib>
 
               <Textlib
@@ -67,7 +72,7 @@ export const ServiceLayout = () => {
                 size="md"
                 className="block truncate font-semibold"
               >
-                Conversas recebidas via WhatsApp, filtradas por fila e usuarios
+                {option?.Subtitles}
               </Textlib>
             </div>
           </HeaderLib>

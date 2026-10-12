@@ -24,13 +24,6 @@ export function Contacts() {
     <>
       <Helmet title="Papo Com | Contatos" />
       <section className="flex h-full min-h-0 flex-col bg-background p-4 text-foreground">
-        <header className="mb-4">
-          <h1 className="text-xl font-bold">Contatos</h1>
-          <p className="text-sm text-muted-foreground">
-            Gerencie os contatos cadastrados.
-          </p>
-        </header>
-
         <div className="min-h-0 flex-1 overflow-y-auto rounded-lg border border-border bg-card">
           {contacts.map((contact) => (
             <div

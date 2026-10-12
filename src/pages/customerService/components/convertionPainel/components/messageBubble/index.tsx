@@ -66,7 +66,7 @@ export const MessageBubble = ({ message }: { message: Message }) => {
         </CardLib>
       ) : (
         <div
-          className={`flex w-full ${isSent ? "justify-end" : "justify-start"}`}
+          className={`flex w-full mt-5 ${isSent ? "justify-end" : "justify-start"}`}
         >
           <CardLib
             className={`max-w-[50%] px-3 py-2.5 ${

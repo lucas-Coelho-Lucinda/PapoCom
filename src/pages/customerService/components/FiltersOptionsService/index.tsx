@@ -22,12 +22,12 @@ export const FiltersOptionsService = ({
       border="none"
       padding="md"
     >
-      <div className={`flex flex-col gap-5 ${isCollapsed ? "w-165" : "w-122"}`}>
+      <div className={`flex flex-col gap-5 ${isCollapsed ? "w-150" : "w-100"}`}>
         <InputLib
           variant="default"
           inputSize="small"
           placeholder="Buscar contato ou número"
-          className="w-full min-w-0 max-w-full text-accent"
+          className="text-accent"
           leftIcon={<Search size={20} color="#b9c1c7" />}
           onChange={(e) => filterContactNumber(e?.target?.value.trim())}
         />

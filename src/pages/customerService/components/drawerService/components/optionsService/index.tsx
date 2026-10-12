@@ -21,7 +21,7 @@ export const OptinsService = () => {
     const isCurrentRoute = pathname === option.path;
 
     return (
-      <TooltipProviderLib>
+      <TooltipProviderLib key={option.title}>
         <Tooltiplib>
           <TooltipTriggerLib asChild>
             <ButtonLib

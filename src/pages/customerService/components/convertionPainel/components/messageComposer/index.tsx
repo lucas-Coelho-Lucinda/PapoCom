@@ -1,15 +1,42 @@
 import { ImagePlus, Paperclip, Send, Smile } from "lucide-react";
-import { useState, type ChangeEvent } from "react";
+import { useRef, useState, type ChangeEvent, type KeyboardEvent } from "react";
 import { CardLib } from "../../../../../../components/card";
 import { TextareaLib } from "../../../../../../components/textArea";
 import { ButtonLib } from "../../../../../../components/button";
+import type { MessageComposerProps } from "./type";
 
-export const MessageComposer = ({
-  onSend,
-}: {
-  onSend: (text: string) => void;
-}) => {
+export const MessageComposer = ({ onSend }: MessageComposerProps) => {
   const [value, setValue] = useState("");
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+  const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setValue(event.target.value);
+    const MAX_TEXTAREA_HEIGHT = 160;
+
+    const el = textareaRef.current;
+    if (el) {
+      el.style.height = "auto";
+      el.style.height = `${Math.min(el.scrollHeight, MAX_TEXTAREA_HEIGHT)}px`;
+    }
+  };
+
+  const handleSend = () => {
+    const trimmed = value.trim();
+    if (!trimmed) return;
+
+    onSend(trimmed);
+    setValue("");
+
+    const el = textareaRef.current;
+    if (el) el.style.height = "auto";
+  };
+
+  const handleKeyDown = (event: KeyboardEvent<HTMLTextAreaElement>) => {
+    if (event.key === "Enter" && !event.shiftKey) {
+      event.preventDefault();
+      handleSend();
+    }
+  };
 
   function handleSubmit(event: ChangeEvent<HTMLFormElement>): void {
     event.preventDefault();
@@ -34,11 +61,15 @@ export const MessageComposer = ({
         className="flex flex-row  justify-center items-center gap-5"
       >
         <TextareaLib
+          ref={textareaRef}
           value={value}
-          onChange={(event) => setValue(event.target.value)}
-          placeholder="Escreva uma mensagem"
+          rows={1}
+          textareaSize="small"
+          onChange={handleChange}
+          onKeyDown={handleKeyDown}
+          disabled={false}
+          placeholder="Digite sua mensagem..."
           aria-label="Mensagem"
-          className="min-w-0 flex-1"
         />
 
         <div className="flex items-center gap-5">
@@ -51,7 +82,7 @@ export const MessageComposer = ({
             textColorHover="secondary"
             aria-label="Adicionar emoji"
             size="none"
-            className="w-9 h-9"
+            className="w-10 h-10"
           >
             <Smile size={17} />
           </ButtonLib>
@@ -59,7 +90,7 @@ export const MessageComposer = ({
             type="button"
             shadow="min"
             size="none"
-            className="w-9 h-9"
+            className="w-10 h-10"
             colorBackeGround="secondary"
             colorBackeHouverGround="primary"
             textColor="primary"
@@ -72,7 +103,7 @@ export const MessageComposer = ({
             type="button"
             shadow="min"
             size="none"
-            className="w-9 h-9"
+            className="w-10 h-10"
             colorBackeGround="secondary"
             colorBackeHouverGround="primary"
             textColor="primary"
@@ -85,7 +116,7 @@ export const MessageComposer = ({
             type="button"
             shadow="min"
             size="none"
-            className="w-9 h-9"
+            className="w-10 h-10"
             colorBackeGround="secondary"
             colorBackeHouverGround="primary"
             textColor="primary"
@@ -100,12 +131,14 @@ export const MessageComposer = ({
           type="submit"
           shadow="min"
           size="none"
-          className="w-10 h-10"
+          className="w-15 h-10"
           colorBackeGround="primary"
           colorBackeHouverGround="success"
           textColor="secondary"
           textColorHover="secondary"
           aria-label="Enviar mensagem"
+          onClick={handleSend}
+          disabled={!value.trim()}
         >
           <Send size={18} />
         </ButtonLib>

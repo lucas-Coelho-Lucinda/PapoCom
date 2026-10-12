@@ -30,13 +30,6 @@ export function Queues() {
     <>
       <Helmet title="Papo Com | Filas" />
       <section className="flex h-full min-h-0 flex-col bg-background p-4 text-foreground">
-        <header className="mb-4">
-          <h1 className="text-xl font-bold">Filas</h1>
-          <p className="text-sm text-muted-foreground">
-            Acompanhe as filas de atendimento.
-          </p>
-        </header>
-
         <div className="grid gap-4 md:grid-cols-3">
           {queues.map((queue) => (
             <article

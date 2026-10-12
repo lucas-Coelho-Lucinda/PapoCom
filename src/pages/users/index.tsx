@@ -33,12 +33,6 @@ export function Users() {
     <>
       <Helmet title="Papo Com | Usuários" />
       <section className="flex h-full min-h-0 flex-col bg-background p-4 text-foreground">
-        <header className="mb-4">
-          <h1 className="text-xl font-bold">Usuários</h1>
-          <p className="text-sm text-muted-foreground">
-            Gerencie os usuários e suas permissões.
-          </p>
-        </header>
 
         <div className="min-h-0 flex-1 overflow-y-auto rounded-lg border border-border bg-card">
           {users.map((user) => (

@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import type { Message } from "./types";
 import { MessageBubble } from "./components/messageBubble";
 import { MessageComposer } from "./components/messageComposer";
 import { ConversationHeader } from "./components/conversationHeader";
 import { ContactInfoPanel } from "./components/contactInfoPanel";
 import type { ContactNote } from "./components/contactInfoPanel/type";
+import { ScrollListLib, type ScrollListHandle } from "../../../../components/scrollList";
 
 const defaultMessages: Message[] = [
   {
@@ -102,6 +103,8 @@ export const ConversationPanel = () => {
   const [messages, setMessages] = useState<Message[]>(defaultMessages);
   const [notes, setNotes] = useState<ContactNote[]>(defaultNotes);
   const [isContactOpen, setIsContactOpen] = useState(false);
+  
+  const scrollRef = useRef<ScrollListHandle>(null);
 
   function handleSend(text: string): void {
     const now = new Date();
@@ -120,6 +123,9 @@ export const ConversationPanel = () => {
         time,
       },
     ]);
+
+    // o envio do próprio usuário sempre força
+    scrollRef.current?.scrollToBottom();
   }
 
   function handleAddNote(text: string): void {
@@ -139,23 +145,32 @@ export const ConversationPanel = () => {
 
   return (
     <div className="relative flex h-full min-h-0 w-full border border-l overflow-hidden bg-[#f4f4ed]">
-      <div className="flex min-h-0 min-w-0 flex-1 flex-col">
+      <div className="flex min-h-0 min-w-20 flex-1 flex-col">
         <ConversationHeader
           onToggleContact={() => setIsContactOpen((current) => !current)}
         />
 
-        <div className="min-h-0 flex-1 shadow-sm overflow-y-auto bg-[radial-gradient(#d8ddd5_0.7px,transparent_0.7px)] bg-size-[14px_14px]">
-          <div className="flex min-h-full flex-col gap-3 p-4">
+        <div className="min-h-0 flex-1 shadow-sm overflow-y-auto bg-[radial-gradient(#d8ddd5_0.3px,transparent_0.3px)] bg-size-[14px_14px]">
+          <ScrollListLib
+            variant="none"
+            border="none"
+            padding="min"
+            ref={scrollRef}
+            stickToBottom={true}
+            className="flex min-h-full flex-col gap-3 p-4"
+          >
             {messages.map((message) => (
               <MessageBubble key={message.id} message={message} />
             ))}
-          </div>
+          </ScrollListLib>
         </div>
 
         <MessageComposer onSend={handleSend} />
       </div>
 
-      <div className={`h-full min-h-0 ${isContactOpen ? "block animate-slide-in-right" : "hidden"}`}>
+      <div
+        className={`h-full min-h-0 ${isContactOpen ? "block animate-slide-in-right" : "hidden"}`}
+      >
         <ContactInfoPanel
           notes={notes}
           onAddNote={handleAddNote}
