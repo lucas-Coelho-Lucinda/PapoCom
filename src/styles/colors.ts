@@ -16,36 +16,38 @@ export const colorsText = {
 };
 
 
+
 export const colorsHouverText = {
-    none: "",
+  none: "",
 
-    default:
-        "hover:text-primary-hover",
+  default:
+    "hover:text-primary-hover data-[highlighted]:text-primary-hover",
 
-    muted:
-        "hover:text-foreground",
+  muted:
+    "hover:text-foreground data-[highlighted]:text-foreground",
 
-    info:
-        "hover:text-info-active",
+  info:
+    "hover:text-info-active data-[highlighted]:text-info-active",
 
-    error:
-        "hover:text-error-active",
+  error:
+    "hover:text-error-active data-[highlighted]:text-error-active",
 
-    success:
-        "hover:text-success-active",
+  success:
+    "hover:text-success-active data-[highlighted]:text-success-active",
 
-    warning:
-        "hover:text-warning-active",
+  warning:
+    "hover:text-warning-active data-[highlighted]:text-warning-active",
 
-    primary:
-        "hover:text-primary-hover",
+  primary:
+    "hover:text-primary-hover data-[highlighted]:text-primary-hover",
 
-    secondary:
-        "hover:text-secondary",
+  secondary:
+    "hover:text-secondary data-[highlighted]:text-secondary",
 
-    accent:
-        "hover:text-accent-active",
+  accent:
+    "hover:text-accent-active data-[highlighted]:text-accent-active",
 };
+
 
 
 export const colorsBackGround = {

@@ -1,49 +1,140 @@
-import React from "react";
+import { LogOut, Menu, UserPen } from "lucide-react";
+import { useLocation, useNavigate } from "react-router";
 import {
-  colorsBackGround,
-  colorsBorder,
-  colorsText,
-} from "../../styles/colors";
-import { cva, type VariantProps } from "class-variance-authority";
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "../dropDownMenu";
+import { CardLib } from "../card";
+import { ButtonLib } from "../button";
+import { AvatarLib } from "../avatar";
+import type { HeaderProps } from "./types";
+import { Textlib } from "../text";
+import { NAV_ITEMS } from "./const";
 
-const headerDefaultBehavior =
-  "fixed top-0  right-0 z-50 h-18 border rounded-b-none rounded-t-none";
+export function Header({
+  onMenuClick,
+  isMenuOpen = false,
+  menuId,
+  user,
+  className = "",
+}: HeaderProps) {
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
 
-const headerVariants = cva(headerDefaultBehavior, {
-  variants: {
-    variant: colorsBackGround,
-    border: colorsBorder,
-    textColor: colorsText,
-  },
-  defaultVariants: {
-    border: "none",
-    textColor: "default",
-    variant: "default",
-  },
-});
+  const option = NAV_ITEMS.find((options) => options.to == pathname);
 
-type headerElement = React.ElementRef<"header">;
+  const exitSessionUser = () => {
+    try {
+      navigate("/");
+    } catch (error: unknown) {
+      console.log("Error ao tentar deslogar do sistema:", error);
+    }
+  };
 
-export interface headerProps
-  extends
-    React.ComponentPropsWithoutRef<"header">,
-    VariantProps<typeof headerVariants> {}
+  return (
+    <CardLib
+      rounded="none"
+      padding="xs"
+      colorBackeGround="secondary"
+      border="none"
+      className={`sticky top-0 z-40 h-18 shrink-0 border-b-3 ${className}`}
+    >
+      <div className="relative flex h-full items-center justify-between gap-4 px-4">
+        <div className="flex items-center gap-4">
+          <div className="min-w-0">
+            <ButtonLib
+              type="button"
+              size="large"
+              shadow="sm"
+              textColor="primary"
+              textColorHover="none"
+              colorBackeGround="default"
+              colorBackeHouverGround="none"
+              onClick={onMenuClick}
+              aria-label="Abrir menu"
+              aria-haspopup="dialog"
+              aria-expanded={isMenuOpen}
+              aria-controls={menuId}
+              className=" shrink-0 b rounded-full"
+            >
+              <Menu className="size-7" aria-hidden="true" />
+            </ButtonLib>
+          </div>
+          <div className="min-w-0">
+            <Textlib
+              as="h1"
+              className="truncate font-bold"
+              color="primary"
+              size="lg"
+            >
+              {option?.title}
+            </Textlib>
 
-export const HeaderLib = React.forwardRef<headerElement, headerProps>(
-  ({ variant, className, border, textColor, children, ...props }, ref) => {
-    return (
-      <header
-        ref={ref}
-        className={headerVariants({
-          variant,
-          className,
-          textColor,
-          border,
-        })}
-        {...props}
-      >
-        {children}
-      </header>
-    );
-  },
-);
+            <Textlib
+              as="span"
+              color="primary"
+              size="md"
+              className="block truncate font-semibold"
+            >
+              {option?.subtitle}
+            </Textlib>
+          </div>
+        </div>
+
+        {user && (
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <button
+                type="button"
+                aria-label="Abrir menu do usuário"
+                className="rounded-full outline-none cursor-pointer focus-visible:ring-2 focus-visible:ring-primary"
+              >
+                <AvatarLib
+                  src={user.avatarUrl}
+                  alt={user.name}
+                  size="median"
+                  border="primary"
+                  isAdmin={false}
+                  shape="circle"
+                  className="shadow-2xl"
+                />
+              </button>
+            </DropdownMenuTrigger>
+
+            <DropdownMenuContent
+              colorBackeGround="success"
+              align="end"
+              sideOffset={8}
+              className="min-w-44 p-1"
+            >
+              <DropdownMenuItem
+                colorsText="secondary"
+                colorHover="secondary"
+                className="font-semibold"
+                leftIcon={<UserPen className="size-4" />}
+                onSelect={() => navigate("/perfil")}
+              >
+                Perfil
+              </DropdownMenuItem>
+
+              <DropdownMenuSeparator />
+
+              <DropdownMenuItem
+                colorsText="error"
+                colorHover="secondary"
+                className="font-semibold"
+                leftIcon={<LogOut className="size-4" />}
+                onSelect={exitSessionUser}
+              >
+                Logout
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        )}
+      </div>
+    </CardLib>
+  );
+}

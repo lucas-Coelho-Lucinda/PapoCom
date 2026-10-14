@@ -33,7 +33,7 @@ export const MessageBubble = ({ message }: { message: Message }) => {
           <CardLib
             border="none"
             colorBackeGround="none"
-            className="flex items-center justify-between gap-2"
+            className="flex w-full flex-wrap items-center justify-between gap-x-2 gap-y-1"
           >
             <div className="flex items-center gap-1">
               <AvatarLib
@@ -69,7 +69,7 @@ export const MessageBubble = ({ message }: { message: Message }) => {
           className={`flex w-full mt-5 ${isSent ? "justify-end" : "justify-start"}`}
         >
           <CardLib
-            className={`max-w-[50%] px-3 py-2.5 ${
+            className={`max-w-[85%] px-3 py-2.5 sm:max-w-[70%] xl:max-w-[50%] ${
               message.type === "received"
                 ? "rounded-tr-xl rounded-b-xl"
                 : "rounded-tl-xl rounded-b-xl"

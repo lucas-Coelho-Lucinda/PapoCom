@@ -1,5 +1,5 @@
 import { ImagePlus, Paperclip, Send, Smile } from "lucide-react";
-import { useRef, useState, type ChangeEvent, type KeyboardEvent } from "react";
+import { useRef, useState, type FormEvent, type KeyboardEvent } from "react";
 import { CardLib } from "../../../../../../components/card";
 import { TextareaLib } from "../../../../../../components/textArea";
 import { ButtonLib } from "../../../../../../components/button";
@@ -38,14 +38,9 @@ export const MessageComposer = ({ onSend }: MessageComposerProps) => {
     }
   };
 
-  function handleSubmit(event: ChangeEvent<HTMLFormElement>): void {
+  function handleSubmit(event: FormEvent<HTMLFormElement>): void {
     event.preventDefault();
-
-    const text = value.trim();
-    if (!text) return;
-
-    onSend(text);
-    setValue("");
+    handleSend();
   }
 
   return (
@@ -54,28 +49,30 @@ export const MessageComposer = ({ onSend }: MessageComposerProps) => {
       height="fit"
       shadow="sm"
       border="none"
-      className="flex flex-col min-w-0"
+      className="w-full min-w-0 shrink-0"
     >
       <form
         onSubmit={handleSubmit}
-        className="flex flex-row  justify-center items-center gap-5"
+        className="flex w-full min-w-0 flex-wrap items-center gap-2 sm:flex-nowrap sm:gap-3"
       >
-        <TextareaLib
-          ref={textareaRef}
-          value={value}
-          rows={1}
-          textareaSize="small"
-          onChange={handleChange}
-          onKeyDown={handleKeyDown}
-          disabled={false}
-          placeholder="Digite sua mensagem..."
-          aria-label="Mensagem"
-        />
+        <div className="min-w-0 basis-full sm:basis-0 sm:flex-1">
+          <TextareaLib
+            ref={textareaRef}
+            value={value}
+            rows={1}
+            textareaSize="small"
+            onChange={handleChange}
+            onKeyDown={handleKeyDown}
+            disabled={false}
+            placeholder="Digite sua mensagem..."
+            aria-label="Mensagem"
+          />
+        </div>
 
-        <div className="flex items-center gap-5">
+        <div className="flex shrink-0 items-center gap-2">
           <ButtonLib
             type="button"
-            shadow="min"
+            shadow="xs"
             colorBackeGround="secondary"
             colorBackeHouverGround="primary"
             textColor="primary"
@@ -88,7 +85,7 @@ export const MessageComposer = ({ onSend }: MessageComposerProps) => {
           </ButtonLib>
           <ButtonLib
             type="button"
-            shadow="min"
+            shadow="xs"
             size="none"
             className="w-10 h-10"
             colorBackeGround="secondary"
@@ -101,7 +98,7 @@ export const MessageComposer = ({ onSend }: MessageComposerProps) => {
           </ButtonLib>
           <ButtonLib
             type="button"
-            shadow="min"
+            shadow="xs"
             size="none"
             className="w-10 h-10"
             colorBackeGround="secondary"
@@ -114,7 +111,7 @@ export const MessageComposer = ({ onSend }: MessageComposerProps) => {
           </ButtonLib>
           <ButtonLib
             type="button"
-            shadow="min"
+            shadow="xs"
             size="none"
             className="w-10 h-10"
             colorBackeGround="secondary"
@@ -126,22 +123,22 @@ export const MessageComposer = ({ onSend }: MessageComposerProps) => {
             <ImagePlus size={17} />
           </ButtonLib>
         </div>
-
-        <ButtonLib
-          type="submit"
-          shadow="min"
-          size="none"
-          className="w-15 h-10"
-          colorBackeGround="primary"
-          colorBackeHouverGround="success"
-          textColor="secondary"
-          textColorHover="secondary"
-          aria-label="Enviar mensagem"
-          onClick={handleSend}
-          disabled={!value.trim()}
-        >
-          <Send size={18} />
-        </ButtonLib>
+        <div className="ml-auto shrink-0 sm:ml-0">
+          <ButtonLib
+            type="submit"
+            shadow="lg"
+            size="none"
+            className="w-15 h-10"
+            colorBackeGround="primary"
+            colorBackeHouverGround="success"
+            textColor="secondary"
+            textColorHover="secondary"
+            aria-label="Enviar mensagem"
+            disabled={!value.trim()}
+          >
+            <Send size={18} />
+          </ButtonLib>
+        </div>
       </form>
     </CardLib>
   );

@@ -8,3 +8,8 @@ export type Message = {
   time: string;
   date?: string;
 };
+
+export interface ConversationPanelProps {
+  onToggleContact: () => void;
+  onBack?: () => void;
+}

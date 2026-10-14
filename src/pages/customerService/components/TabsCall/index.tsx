@@ -6,13 +6,16 @@ import {
   TabsListLib,
   TabsTriggerLib,
 } from "../../../../components/tabs";
-import { generateListOfCalls } from "./listOfCalls";
-import { ItemCall } from "./components/itemCall";
+
+
 import { Textlib } from "../../../../components/text";
+import { generateListOfCalls } from "./listOfCalls";
 import { FiltersOptionsService } from "../FiltersOptionsService";
 import { Phone, PhoneCall, PhoneIncoming } from "lucide-react";
+import { ItemCall } from "./components/itemCall";
 
-export function TabsCall() {
+
+export function TabsCall({ onSelectCall }: { onSelectCall?: () => void }) {
   const [listStateCalls, setListStateCalls] = useState(generateListOfCalls(10));
   const [optionQueue, setOptionQueue] = useState("Todas as filas");
   const [optionUser, setOptionUser] = useState("Todos os usuarios");
@@ -35,6 +38,7 @@ export function TabsCall() {
   });
 
   const selectCall = (id: number) => {
+    onSelectCall?.();
     setListStateCalls((prev) =>
       prev.map((item) => ({
         ...item,

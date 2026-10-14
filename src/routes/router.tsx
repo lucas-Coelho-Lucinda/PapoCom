@@ -6,8 +6,10 @@ import { Queues } from "../pages/queues";
 import { Users } from "../pages/users";
 import { Contacts } from "../pages/contacts";
 import { Devices } from "../pages/devices";
-import { CustomerService } from "../pages/customerService";
+
 import { ServiceLayout } from "../pages/serviceLayout";
+import { CustomerService } from "../pages/customerService";
+import { DashBoard } from "../pages/dashBoard";
 
 export const Router = createBrowserRouter([
   {
@@ -46,6 +48,11 @@ export const Router = createBrowserRouter([
       {
         path: "Dispositivos",
         element: <Devices />,
+      },
+
+      {
+        path: "DashBoard",
+        element: <DashBoard />,
       },
     ],
   },

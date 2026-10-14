@@ -1,8 +1,10 @@
-import type { ItemCallProps } from "../type";
+
+import type { ItemCallProps } from "./types";
 import { AvatarLib } from "../../../../../../components/avatar";
 import { CardLib } from "../../../../../../components/card";
 import { Textlib } from "../../../../../../components/text";
 import { MessageCircleCheck, User } from "lucide-react";
+
 
 export const ItemCall = ({
   isSelected,

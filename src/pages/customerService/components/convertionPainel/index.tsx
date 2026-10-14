@@ -1,11 +1,12 @@
 import { useRef, useState } from "react";
-import type { Message } from "./types";
+import type { ConversationPanelProps, Message } from "./types";
 import { MessageBubble } from "./components/messageBubble";
 import { MessageComposer } from "./components/messageComposer";
 import { ConversationHeader } from "./components/conversationHeader";
-import { ContactInfoPanel } from "./components/contactInfoPanel";
-import type { ContactNote } from "./components/contactInfoPanel/type";
-import { ScrollListLib, type ScrollListHandle } from "../../../../components/scrollList";
+import {
+  ScrollListLib,
+  type ScrollListHandle,
+} from "../../../../components/scrollList";
 
 const defaultMessages: Message[] = [
   {
@@ -48,62 +49,12 @@ const defaultMessages: Message[] = [
   },
 ];
 
-const defaultNotes: ContactNote[] = [
-  {
-    id: 1,
-    text: "Cliente deseja marcar uma visita.",
-    author: "Marina Duarte",
-    date: "20/08/2026, 12:14",
-  },
-  {
-    id: 2,
-    text: "Oi",
-    author: "Marina Duarte",
-    date: "20/08/2026, 12:13",
-  },
-  {
-    id: 3,
-    text: "Oi",
-    author: "Marina Duarte",
-    date: "20/08/2026, 12:13",
-  },
-  {
-    id: 4,
-    text: "Contato preferencial por WhatsApp após as 18h. Não ligar pela manhã.",
-    author: "Marina Duarte",
-    date: "06/08/2026, 21:10",
-  },
-  {
-    id: 5,
-    text: "Cliente já teve duas quedas de sinal no mês. Priorizar visita técnica se repetir.",
-    author: "Marina Duarte",
-    date: "01/08/2026, 09:40",
-  },
-  {
-    id: 6,
-    text: "Cliente já teve duas quedas de sinal no mês. Priorizar visita técnica se repetir.",
-    author: "Marina Duarte",
-    date: "01/08/2026, 09:40",
-  },
-  {
-    id: 7,
-    text: "Cliente já teve duas quedas de sinal no mês. Priorizar visita técnica se repetir.",
-    author: "Marina Duarte",
-    date: "01/08/2026, 09:40",
-  },
-  {
-    id: 8,
-    text: "Cliente já teve duas quedas de sinal no mês. Priorizar visita técnica se repetir.",
-    author: "Marina Duarte",
-    date: "01/08/2026, 09:40",
-  },
-];
-
-export const ConversationPanel = () => {
+export const ConversationPanel = ({
+  onToggleContact,
+  onBack,
+}: ConversationPanelProps) => {
   const [messages, setMessages] = useState<Message[]>(defaultMessages);
-  const [notes, setNotes] = useState<ContactNote[]>(defaultNotes);
-  const [isContactOpen, setIsContactOpen] = useState(false);
-  
+
   const scrollRef = useRef<ScrollListHandle>(null);
 
   function handleSend(text: string): void {
@@ -128,54 +79,27 @@ export const ConversationPanel = () => {
     scrollRef.current?.scrollToBottom();
   }
 
-  function handleAddNote(text: string): void {
-    setNotes((currentNotes) => [
-      {
-        id: Date.now(),
-        text,
-        author: "Caio Ribeiro",
-        date: new Date().toLocaleString("pt-BR", {
-          dateStyle: "short",
-          timeStyle: "short",
-        }),
-      },
-      ...currentNotes,
-    ]);
-  }
-
   return (
-    <div className="relative flex h-full min-h-0 w-full border border-l overflow-hidden bg-[#f4f4ed]">
-      <div className="flex min-h-0 min-w-20 flex-1 flex-col">
-        <ConversationHeader
-          onToggleContact={() => setIsContactOpen((current) => !current)}
-        />
+    <div className="flex h-full min-h-0 flex-col overflow-hidden border border-l bg-[#f4f4ed]">
+      <ConversationHeader onToggleContact={onToggleContact} onBack={onBack} />
 
-        <div className="min-h-0 flex-1 shadow-sm overflow-y-auto bg-[radial-gradient(#d8ddd5_0.3px,transparent_0.3px)] bg-size-[14px_14px]">
-          <ScrollListLib
-            variant="none"
-            border="none"
-            padding="min"
-            ref={scrollRef}
-            stickToBottom={true}
-            className="flex min-h-full flex-col gap-3 p-4"
-          >
-            {messages.map((message) => (
-              <MessageBubble key={message.id} message={message} />
-            ))}
-          </ScrollListLib>
-        </div>
-
-        <MessageComposer onSend={handleSend} />
+      <div className="min-h-0 min-w-0 flex-1 overflow-y-auto bg-[radial-gradient(#d8ddd5_0.3px,transparent_0.3px)] bg-size-[14px_14px]">
+        <ScrollListLib
+          variant="none"
+          border="none"
+          padding="min"
+          ref={scrollRef}
+          stickToBottom={true}
+          className="flex min-h-full flex-col gap-3 p-4"
+        >
+          {messages.map((message) => (
+            <MessageBubble key={message.id} message={message} />
+          ))}
+        </ScrollListLib>
       </div>
 
-      <div
-        className={`h-full min-h-0 ${isContactOpen ? "block animate-slide-in-right" : "hidden"}`}
-      >
-        <ContactInfoPanel
-          notes={notes}
-          onAddNote={handleAddNote}
-          onClose={() => setIsContactOpen(false)}
-        />
+      <div className="shrink-0">
+        <MessageComposer onSend={handleSend} />
       </div>
     </div>
   );

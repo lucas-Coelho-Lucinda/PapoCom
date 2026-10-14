@@ -7,6 +7,7 @@ import {
   colorsHouverText,
   colorsText,
 } from "../../styles/colors";
+import { shadow } from "../../styles/sizes";
 
 const buttonDefaultBehavior = [
   "cursor-pointer",
@@ -38,9 +39,7 @@ const buttonVariants = cva(buttonDefaultBehavior, {
     },
 
     shadow: {
-      default: "shadow-[0_4px_4px_rgba(0,0,0,0.25)]",
-      min: "shadow-[0px_0px_4px_rgba(0,0,0,0.25)]",
-      none: "shadow-none",
+      ...shadow
     },
 
     align: {

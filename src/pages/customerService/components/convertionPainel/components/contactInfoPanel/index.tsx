@@ -7,7 +7,6 @@ import { ScrollListLib } from "../../../../../../components/scrollList";
 import { AvatarLib } from "../../../../../../components/avatar";
 import { ButtonLib } from "../../../../../../components/button";
 import { Textlib } from "../../../../../../components/text";
-import { CollpasedContext } from "../../../../../../context/collapsed";
 import { TextareaLib } from "../../../../../../components/textArea";
 import { CardLib } from "../../../../../../components/card";
 
@@ -20,8 +19,6 @@ export const ContactInfoPanel = ({
   notes: ContactNote[];
   onAddNote: (text: string) => void;
 }) => {
-  const { isCollapsed } = CollpasedContext();
-
   const [isAddingNote, setIsAddingNote] = useState(false);
   const [noteText, setNoteText] = useState("");
 
@@ -38,21 +35,19 @@ export const ContactInfoPanel = ({
   }
 
   return (
-    <div
-      className={`flex h-full min-h-0 ${isCollapsed ? "w-100" : "w-80"} shrink-0 flex-col border-l border-slate-200 bg-white`}
-    >
+    <div className={`flex h-full min-h-0 shrink-0 flex-col  bg-white`}>
       <div className="flex flex-row  h-20.25 shrink-0 items-center justify-between  border-b border-slate-200 px-2">
-        <Textlib as="h2" size="sm" color="default" className="font-semibold">
+        <Textlib as="h2" size="sm" color="primary" className="font-semibold">
           Informações do contato
         </Textlib>
 
         <div>
           <ButtonLib
             onClick={onClose}
-            colorBackeGround="none"
-            colorBackeHouverGround="primary"
             size="median"
-            shadow="none"
+            shadow="xs"
+            colorBackeGround="secondary"
+            colorBackeHouverGround="primary"
             className="mt-2 flex items-center justify-center"
           >
             <Textlib
@@ -125,7 +120,11 @@ export const ContactInfoPanel = ({
               <Mail size={16} className="mt-0.5 shrink-0 text-slate-500" />
 
               <div>
-                <Textlib as="p" size="xs" className="text-[11px] uppercase tracking-wide text-slate-500">
+                <Textlib
+                  as="p"
+                  size="xs"
+                  className="text-[11px] uppercase tracking-wide text-slate-500"
+                >
                   Meio de contato
                 </Textlib>
 
@@ -196,7 +195,7 @@ export const ContactInfoPanel = ({
                   />
 
                   <ButtonLib
-                    shadow="min"
+                    shadow="md"
                     size="median"
                     textColor="none"
                     textColorHover="none"
@@ -206,7 +205,12 @@ export const ContactInfoPanel = ({
                     disabled={!noteText.trim()}
                     className="mt-2 inline-flex items-center px-3"
                   >
-                    <Textlib as="span" size="xs" color="primary" colorHover="none">
+                    <Textlib
+                      as="span"
+                      size="xs"
+                      color="primary"
+                      colorHover="none"
+                    >
                       Salvar anotação
                     </Textlib>
                   </ButtonLib>
@@ -240,7 +244,7 @@ export const ContactInfoPanel = ({
                         shadow="none"
                         color="sendMessage"
                         border="none"
-                       textInfo="JP"
+                        textInfo="JP"
                       />
 
                       <Textlib

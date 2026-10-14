@@ -4,7 +4,6 @@ import * as Select from "@radix-ui/react-select";
 import { Check, Search } from "lucide-react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { colorsBackGround, colorsText } from "../../styles/colors";
-import { CollpasedContext } from "../../context/collapsed";
 import { ScrollListLib } from "../scrollList";
 import { InputLib } from "../Input";
 
@@ -317,8 +316,7 @@ export function SelectLib({
   searchPlaceholder = "Buscar...",
   emptyMessage = "Nenhum resultado encontrado",
 }: SelectProps) {
-  const { isCollapsed } = CollpasedContext();
-  const truncateAt = isCollapsed ? 30 : 20;
+  const truncateAt = 30;
 
   const [open, setOpen] = useState(false);
   const [search, setSearch] = useState("");

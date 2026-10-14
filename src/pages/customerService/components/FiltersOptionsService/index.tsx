@@ -2,27 +2,26 @@ import { ListOrdered, Search, Users } from "lucide-react";
 import { CardLib } from "../../../../components/card";
 import { InputLib } from "../../../../components/Input";
 import { SelectLib } from "../../../../components/select";
-import { optionsQueue, optionsStatus } from "../TabsCall/selectOptions";
-import { CollpasedContext } from "../../../../context/collapsed";
-import type { FiltersOptionsServiceProps } from "./type";
+import type { FiltersOptionsServiceProps } from "./types";
+import { optionsQueue, optionsStatus } from "./const";
+
 
 export const FiltersOptionsService = ({
   filterQueue,
   filterUser,
   filterContactNumber,
 }: FiltersOptionsServiceProps) => {
-  const { isCollapsed } = CollpasedContext();
 
   return (
     <CardLib
-      className="flex flex-col justify-center items-center"
+      className="@container flex flex-col justify-center items-center"
       colorBackeGround="secondary"
       width="full"
       height="min"
       border="none"
       padding="md"
     >
-      <div className={`flex flex-col gap-5 ${isCollapsed ? "w-150" : "w-100"}`}>
+      <div className={`flex flex-col gap-5 w-full`}>
         <InputLib
           variant="default"
           inputSize="small"
@@ -32,7 +31,7 @@ export const FiltersOptionsService = ({
           onChange={(e) => filterContactNumber(e?.target?.value.trim())}
         />
 
-        <div className="flex w-full min-w-0 gap-5">
+        <div className="flex w-full min-w-0 flex-col gap-3 @xs:flex-row @xs:gap-5">
           <SelectLib
             searchable={true}
             variant="default"
