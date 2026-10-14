@@ -42,7 +42,7 @@ export const Router = createBrowserRouter([
         element: <Users />,
       },
       {
-        path: "contatos",
+        path: "Contatos",
         element: <Contacts />,
       },
       {
