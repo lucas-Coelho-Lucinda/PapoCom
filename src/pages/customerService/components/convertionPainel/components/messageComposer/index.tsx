@@ -3,7 +3,8 @@ import { useRef, useState, type FormEvent, type KeyboardEvent } from "react";
 import { CardLib } from "../../../../../../components/card";
 import { TextareaLib } from "../../../../../../components/textArea";
 import { ButtonLib } from "../../../../../../components/button";
-import type { MessageComposerProps } from "./type";
+import type { MessageComposerProps } from "./types";
+
 
 export const MessageComposer = ({ onSend }: MessageComposerProps) => {
   const [value, setValue] = useState("");

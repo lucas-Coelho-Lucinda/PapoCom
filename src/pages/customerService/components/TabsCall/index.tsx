@@ -7,13 +7,12 @@ import {
   TabsTriggerLib,
 } from "../../../../components/tabs";
 
-
 import { Textlib } from "../../../../components/text";
 import { generateListOfCalls } from "./listOfCalls";
 import { FiltersOptionsService } from "../FiltersOptionsService";
 import { Phone, PhoneCall, PhoneIncoming } from "lucide-react";
 import { ItemCall } from "./components/itemCall";
-
+import { NotFoundItem } from "./components/notFoundItem";
 
 export function TabsCall({ onSelectCall }: { onSelectCall?: () => void }) {
   const [listStateCalls, setListStateCalls] = useState(generateListOfCalls(10));
@@ -152,6 +151,7 @@ export function TabsCall({ onSelectCall }: { onSelectCall?: () => void }) {
           </div>
         </ScrollListLib>
       </TabsContentLib>
+      {listDefault.length == 0 && <NotFoundItem />}
 
       <TabsContentLib
         value="aguardando"
