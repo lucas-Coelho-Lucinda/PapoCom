@@ -4,7 +4,13 @@ import { Textlib } from "../../../../../../components/text";
 
 import type { Message } from "../../types";
 
-export const MessageBubble = ({ message }: { message: Message }) => {
+export const MessageBubble = ({
+  message,
+  nameUser,
+}: {
+  message: Message;
+  nameUser: string;
+}) => {
   const isSent = message.type === "sent" || message.type === "system";
 
   const isServiceStatus =
@@ -50,7 +56,7 @@ export const MessageBubble = ({ message }: { message: Message }) => {
                 color="primary"
                 className="font-semibold"
               >
-               Usuario: Caio Ribeiro
+                Usuario: {nameUser}
               </Textlib>
             </div>
 

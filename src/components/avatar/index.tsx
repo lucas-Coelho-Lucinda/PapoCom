@@ -56,6 +56,15 @@ const wrapperVariants = cva("inline-flex border", {
   },
 });
 
+function getInitials(name: string): string {
+  return name
+    .trim()
+    .split(/\s+/)
+    .slice(0, 2)
+    .map((word) => word[0].toUpperCase())
+    .join("");
+}
+
 interface AvatarProps
   extends
     VariantProps<typeof avatarVariants>,
@@ -105,7 +114,7 @@ export const AvatarLib = ({
               alt=""
             />
           )}
-          {textInfo}
+          {textInfo && getInitials(textInfo)}
         </AvatarPrimitive.Fallback>
       </AvatarPrimitive.Root>
     </div>

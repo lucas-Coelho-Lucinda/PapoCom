@@ -4,9 +4,11 @@ import { ConversationPanel } from "./components/convertionPainel";
 
 import type { ContactNote } from "./components/convertionPainel/components/contactInfoPanel/type";
 import { ContactInfoPanel } from "./components/convertionPainel/components/contactInfoPanel";
+import type { CallSelected } from "./components/convertionPainel/types";
 
 export const CustomerService = () => {
   const [isContactOpen, setIsContactOpen] = useState(false);
+  const [selectedCall, setSelectedCall] = useState<CallSelected>(null);
   const [mobileView, setMobileView] = useState<"list" | "chat">("list");
 
   const defaultNotes: ContactNote[] = [
@@ -90,7 +92,10 @@ export const CustomerService = () => {
           mobileView === "list" ? "block" : "hidden"
         } min-h-0 min-w-0 overflow-hidden md:block`}
       >
-        <TabsCall onSelectCall={() => setMobileView("chat")} />
+        <TabsCall
+          onSelectCall={() => setMobileView("chat")}
+          setSelectedCall={setSelectedCall}
+        />
       </div>
 
       {/* Conversa: tela cheia no celular, com botão de voltar para a lista */}
@@ -100,6 +105,8 @@ export const CustomerService = () => {
         } min-h-0 min-w-0 overflow-hidden md:block`}
       >
         <ConversationPanel
+          key={selectedCall?.id}
+          callSelected={selectedCall}
           onToggleContact={() => setIsContactOpen((v) => !v)}
           onBack={() => setMobileView("list")}
         />

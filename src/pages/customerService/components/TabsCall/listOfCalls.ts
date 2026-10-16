@@ -1,6 +1,7 @@
 const calls = [
   {
     name: "Joana Prado",
+    fone: "+55 11 98765-4321",
     queue: "suporte tecnico",
     user: "lucas coelho lucinda",
     color: "#3B82F6",
@@ -9,6 +10,7 @@ const calls = [
   },
   {
     name: "Carlos Henrique",
+    fone: "+55 11 97654-3210",
     queue: "financeiro",
     user: "Marcos",
     color: "#22C55E",
@@ -17,6 +19,7 @@ const calls = [
   },
   {
     name: "Mariana Oliveira",
+    fone: "+55 21 98543-2109",
     queue: "vendas",
     user: "Antonio",
     color: "#F59E0B",
@@ -25,6 +28,7 @@ const calls = [
   },
   {
     name: "Gabriel Martins",
+    fone: "+55 31 99432-1098",
     queue: "suporte tecnico",
     user: "Marcos",
     color: "#3B82F6",
@@ -33,6 +37,7 @@ const calls = [
   },
   {
     name: "Fernanda Almeida",
+    fone: "+55 41 98321-0987",
     queue: "financeiro",
     user: "lucas coelho lucinda",
     color: "#22C55E",
@@ -41,6 +46,7 @@ const calls = [
   },
   {
     name: "Ricardo Souza",
+    fone: "+55 51 97210-9876",
     queue: "vendas",
     user: "Antonio",
     color: "#F59E0B",
@@ -49,6 +55,7 @@ const calls = [
   },
   {
     name: "Amanda Rodrigues",
+    fone: "+55 11 99109-8765",
     queue: "suporte tecnico",
     user: "Antonio",
     color: "#3B82F6",
@@ -57,6 +64,7 @@ const calls = [
   },
   {
     name: "Lucas Ferreira",
+    fone: "+55 21 98098-7654",
     queue: "financeiro",
     user: "Marcos",
     color: "#22C55E",
@@ -65,6 +73,7 @@ const calls = [
   },
   {
     name: "Beatriz Carvalho",
+    fone: "+55 31 97987-6543",
     queue: "vendas",
     user: "lucas coelho lucinda",
     color: "#F59E0B",
@@ -73,6 +82,7 @@ const calls = [
   },
   {
     name: "Rafael Mendes",
+    fone: "+55 41 96876-5432",
     queue: "suporte tecnico",
     user: "Marcos",
     color: "#3B82F6",
@@ -81,6 +91,7 @@ const calls = [
   },
   {
     name: "Camila Martins",
+    fone: "+55 51 95765-4321",
     queue: "financeiro",
     user: "Antonio",
     color: "#22C55E",
@@ -89,6 +100,7 @@ const calls = [
   },
   {
     name: "Pedro Henrique",
+    fone: "+55 11 94654-3210",
     queue: "vendas",
     user: "lucas coelho lucinda",
     color: "#F59E0B",

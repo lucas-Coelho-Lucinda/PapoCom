@@ -3,14 +3,15 @@ import { AvatarLib } from "../../../../../../components/avatar";
 import { Textlib } from "../../../../../../components/text";
 import { ButtonLib } from "../../../../../../components/button";
 import { CardLib } from "../../../../../../components/card";
+import type { conversationHeaderProps } from "./type";
 
 export const ConversationHeader = ({
+  nameUser,
+  foneContact,
+  nameContact,
   onToggleContact,
   onBack,
-}: {
-  onToggleContact: () => void;
-  onBack?: () => void;
-}) => {
+}: conversationHeaderProps) => {
   return (
     <CardLib
       padding="sm"
@@ -49,7 +50,7 @@ export const ConversationHeader = ({
           shadow="default"
           color="success"
           border="primary"
-          textInfo="JP"
+          textInfo={nameContact}
         />
         <div className="min-w-0 flex flex-col  justify-center items-center">
           <Textlib
@@ -58,14 +59,14 @@ export const ConversationHeader = ({
             size="md"
             className="truncate  font-semibold leading-5"
           >
-            Joana Prado
+            {nameContact}
           </Textlib>
           <Textlib
             as="span"
             color="primary"
             className="truncate text-xs font-semibold leading-4"
           >
-            +5511998812345
+            {foneContact}
           </Textlib>
         </div>
       </div>
@@ -87,7 +88,7 @@ export const ConversationHeader = ({
             className="truncate leading-4 inline-flex items-center gap-1.5 p-3 -m-3"
           >
             <UserRound size={13} strokeWidth={2.4} />
-            <span className="hidden @xl:inline">Caio Ribeiro</span>
+            <span className="hidden @xl:inline">{nameUser}</span>
           </Textlib>
         </ButtonLib>
 

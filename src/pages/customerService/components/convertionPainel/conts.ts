@@ -1,0 +1,523 @@
+import type { TreatmentList } from "./types";
+
+export const defaultMessages: TreatmentList[] = [
+    // 1. Suporte técnico — conexão com a internet
+    {
+        id: 1,
+        mensagens: [
+            {
+                id: 1,
+                type: "system",
+                author: "Mensagem automática",
+                text: "Olá! Você está na fila de Suporte Técnico. Em instantes, um atendente assumirá sua conversa.",
+                time: "08:12",
+                date: "15/10/2026",
+            },
+            {
+                id: 2,
+                type: "received",
+                text: "Bom dia! Minha internet está muito lenta desde ontem. Não consigo nem assistir a vídeos sem travar.",
+                time: "08:14",
+                date: "15/10/2026",
+            },
+            {
+                id: 3,
+                type: "sent",
+                author: "Caio Ribeiro",
+                text: "Bom dia! Vou verificar sua conexão. Você percebeu essa lentidão em todos os dispositivos ou apenas em um deles?",
+                time: "08:16",
+                date: "15/10/2026",
+            },
+            {
+                id: 4,
+                type: "received",
+                text: "Em todos. Testei no celular e no notebook, e os dois estão com o mesmo problema.",
+                time: "08:18",
+                date: "15/10/2026",
+            },
+            {
+                id: 5,
+                type: "sent",
+                author: "Caio Ribeiro",
+                text: "Entendi. Identifiquei uma instabilidade no sinal do seu endereço. Vou registrar a ocorrência e acompanhar a normalização.",
+                time: "08:21",
+                date: "15/10/2026",
+            },
+            {
+                id: 6,
+                type: "received",
+                text: "Certo, obrigado pelo retorno. Vou aguardar a atualização.",
+                time: "08:23",
+                date: "15/10/2026",
+            },
+        ],
+    },
+
+    // 2. Financeiro — cobrança duplicada
+    {
+        id: 2,
+        mensagens: [
+            {
+                id: 1,
+                type: "system",
+                author: "Mensagem automática",
+                text: "Você entrou na fila do Financeiro. Aguarde enquanto direcionamos sua solicitação.",
+                time: "09:05",
+                date: "15/10/2026",
+            },
+            {
+                id: 2,
+                type: "received",
+                text: "Olá! Conferindo meu extrato, percebi que a mensalidade deste mês foi cobrada duas vezes.",
+                time: "09:07",
+                date: "15/10/2026",
+            },
+            {
+                id: 3,
+                type: "sent",
+                author: "Marina Duarte",
+                text: "Olá, Fernanda! Vou conferir os lançamentos para entender o que aconteceu. Você realizou o pagamento por cartão ou boleto?",
+                time: "09:10",
+                date: "15/10/2026",
+            },
+            {
+                id: 4,
+                type: "received",
+                text: "Foi pelo cartão de crédito. Os dois lançamentos aparecem com o mesmo valor e a mesma descrição.",
+                time: "09:12",
+                date: "15/10/2026",
+            },
+            {
+                id: 5,
+                type: "sent",
+                author: "Marina Duarte",
+                text: "Obrigada pelas informações. Encontrei dois lançamentos correspondentes à mensalidade. Encaminhei o caso para análise do setor financeiro.",
+                time: "09:16",
+                date: "15/10/2026",
+            },
+            {
+                id: 6,
+                type: "received",
+                text: "Perfeito. Vocês conseguem me avisar quando a análise for concluída?",
+                time: "09:18",
+                date: "15/10/2026",
+            },
+        ],
+    },
+
+    // 3. Comercial — informações sobre um plano
+    {
+        id: 3,
+        mensagens: [
+            {
+                id: 1,
+                type: "system",
+                author: "Mensagem automática",
+                text: "Bem-vindo ao atendimento comercial! Estamos aqui para ajudar você a escolher a melhor opção.",
+                time: "10:20",
+                date: "14/10/2026",
+            },
+            {
+                id: 2,
+                type: "received",
+                text: "Bom dia! Gostaria de saber se vocês têm algum plano com mais velocidade para trabalhar de casa.",
+                time: "10:22",
+                date: "14/10/2026",
+            },
+            {
+                id: 3,
+                type: "sent",
+                author: "Rafael Martins",
+                text: "Bom dia, André! Temos opções com velocidades maiores. Você costuma trabalhar com chamadas de vídeo, enviar arquivos grandes ou utilizar algum sistema remoto?",
+                time: "10:25",
+                date: "14/10/2026",
+            },
+            {
+                id: 4,
+                type: "received",
+                text: "Faço bastante reunião por vídeo e preciso acessar servidores da empresa. Às vezes também envio arquivos pesados.",
+                time: "10:27",
+                date: "14/10/2026",
+            },
+            {
+                id: 5,
+                type: "sent",
+                author: "Rafael Martins",
+                text: "Nesse caso, recomendo avaliarmos um plano com maior velocidade de download e upload. Posso consultar a disponibilidade para o seu endereço.",
+                time: "10:30",
+                date: "14/10/2026",
+            },
+            {
+                id: 6,
+                type: "received",
+                text: "Ótimo! Vou te enviar o endereço para verificar quais opções estão disponíveis.",
+                time: "10:32",
+                date: "14/10/2026",
+            },
+        ],
+    },
+
+    // 4. Agendamento — visita técnica
+    {
+        id: 4,
+        mensagens: [
+            {
+                id: 1,
+                type: "system",
+                author: "Mensagem automática",
+                text: "Olá! Este é o canal de Agendamento. Informe como podemos ajudar você.",
+                time: "11:03",
+                date: "14/10/2026",
+            },
+            {
+                id: 2,
+                type: "received",
+                text: "Preciso agendar uma visita técnica porque a conexão cai várias vezes durante o dia.",
+                time: "11:05",
+                date: "14/10/2026",
+            },
+            {
+                id: 3,
+                type: "sent",
+                author: "Beatriz Costa",
+                text: "Olá, Roberto! Vamos verificar os horários disponíveis. Você teria preferência por atendimento pela manhã ou à tarde?",
+                time: "11:08",
+                date: "14/10/2026",
+            },
+            {
+                id: 4,
+                type: "received",
+                text: "Se possível, prefiro pela manhã. Depois das 13h geralmente não tem ninguém em casa.",
+                time: "11:10",
+                date: "14/10/2026",
+            },
+            {
+                id: 5,
+                type: "sent",
+                author: "Beatriz Costa",
+                text: "Certo! Temos uma opção de visita para sexta-feira, no período da manhã. Posso confirmar esse horário para você?",
+                time: "11:13",
+                date: "14/10/2026",
+            },
+            {
+                id: 6,
+                type: "received",
+                text: "Pode confirmar, sim. Obrigado por encontrar um horário que funcione para mim.",
+                time: "11:15",
+                date: "14/10/2026",
+            },
+        ],
+    },
+
+    // 5. Acesso à conta — recuperação de senha
+    {
+        id: 5,
+        mensagens: [
+            {
+                id: 1,
+                type: "system",
+                author: "Mensagem automática",
+                text: "Você está na fila de Suporte de Acesso. Aguarde o atendimento de um especialista.",
+                time: "13:40",
+                date: "13/10/2026",
+            },
+            {
+                id: 2,
+                type: "received",
+                text: "Não consigo entrar na minha conta. Já tentei redefinir a senha, mas não recebo o e-mail.",
+                time: "13:42",
+                date: "13/10/2026",
+            },
+            {
+                id: 3,
+                type: "sent",
+                author: "Lucas Ferreira",
+                text: "Olá, Camila! Vamos resolver isso. Você já verificou a caixa de spam e confirmou se o endereço de e-mail cadastrado está correto?",
+                time: "13:45",
+                date: "13/10/2026",
+            },
+            {
+                id: 4,
+                type: "received",
+                text: "Sim, olhei no spam também. Meu e-mail está correto, mas não chegou nenhuma mensagem.",
+                time: "13:48",
+                date: "13/10/2026",
+            },
+            {
+                id: 5,
+                type: "sent",
+                author: "Lucas Ferreira",
+                text: "Entendi. Vou verificar o envio das mensagens de recuperação e conferir se existe alguma restrição no cadastro.",
+                time: "13:51",
+                date: "13/10/2026",
+            },
+            {
+                id: 6,
+                type: "received",
+                text: "Tudo bem. Preciso acessar a conta ainda hoje para atualizar meus dados.",
+                time: "13:53",
+                date: "13/10/2026",
+            },
+        ],
+    },
+
+    // 6. Cancelamento — encerramento de serviço
+    {
+        id: 6,
+        mensagens: [
+            {
+                id: 1,
+                type: "system",
+                author: "Mensagem automática",
+                text: "Você entrou em contato com o setor de Cancelamentos. Em breve, nossa equipe dará continuidade à sua solicitação.",
+                time: "14:10",
+                date: "13/10/2026",
+            },
+            {
+                id: 2,
+                type: "received",
+                text: "Boa tarde. Gostaria de cancelar meu plano porque vou me mudar para uma cidade onde vocês não atendem.",
+                time: "14:12",
+                date: "13/10/2026",
+            },
+            {
+                id: 3,
+                type: "sent",
+                author: "Juliana Mendes",
+                text: "Boa tarde, Felipe! Entendo. Posso consultar a cobertura no seu novo endereço e verificar as condições para o encerramento do contrato.",
+                time: "14:15",
+                date: "13/10/2026",
+            },
+            {
+                id: 4,
+                type: "received",
+                text: "Já consultei e realmente não tem cobertura por lá. Minha mudança será no final do mês.",
+                time: "14:17",
+                date: "13/10/2026",
+            },
+            {
+                id: 5,
+                type: "sent",
+                author: "Juliana Mendes",
+                text: "Certo. Vou registrar o motivo do cancelamento e conferir a data adequada para o encerramento, considerando as condições do seu contrato.",
+                time: "14:20",
+                date: "13/10/2026",
+            },
+            {
+                id: 6,
+                type: "received",
+                text: "Obrigado. Quero deixar tudo resolvido antes de entregar o imóvel.",
+                time: "14:23",
+                date: "13/10/2026",
+            },
+        ],
+    },
+
+    // 7. Reclamação — atraso na entrega
+    {
+        id: 7,
+        mensagens: [
+            {
+                id: 1,
+                type: "system",
+                author: "Mensagem automática",
+                text: "Este é o canal de Reclamações. Sua solicitação será direcionada à equipe responsável.",
+                time: "15:02",
+                date: "12/10/2026",
+            },
+            {
+                id: 2,
+                type: "received",
+                text: "Fiz um pedido há dez dias e a entrega ainda não aconteceu. O prazo informado já passou.",
+                time: "15:04",
+                date: "12/10/2026",
+            },
+            {
+                id: 3,
+                type: "sent",
+                author: "Pedro Almeida",
+                text: "Olá, Patrícia. Sinto muito pelo atraso. Vou consultar o rastreamento e verificar se existe alguma atualização sobre a entrega.",
+                time: "15:07",
+                date: "12/10/2026",
+            },
+            {
+                id: 4,
+                type: "received",
+                text: "No rastreamento aparece que o pedido está parado no centro de distribuição há quatro dias.",
+                time: "15:09",
+                date: "12/10/2026",
+            },
+            {
+                id: 5,
+                type: "sent",
+                author: "Pedro Almeida",
+                text: "Verifiquei a informação. O pacote ainda está em trânsito, mas o prazo foi ultrapassado. Registrei uma ocorrência para solicitar esclarecimentos à transportadora.",
+                time: "15:13",
+                date: "12/10/2026",
+            },
+            {
+                id: 6,
+                type: "received",
+                text: "Certo. Preciso receber o produto esta semana. Aguardo uma posição de vocês.",
+                time: "15:16",
+                date: "12/10/2026",
+            },
+        ],
+    },
+
+    // 8. Atualização cadastral — mudança de endereço
+    {
+        id: 8,
+        mensagens: [
+            {
+                id: 1,
+                type: "system",
+                author: "Mensagem automática",
+                text: "Bem-vindo ao atendimento cadastral! Estamos prontos para ajudar com seus dados.",
+                time: "09:30",
+                date: "11/10/2026",
+            },
+            {
+                id: 2,
+                type: "received",
+                text: "Olá! Preciso atualizar meu endereço de cobrança, pois me mudei recentemente.",
+                time: "09:32",
+                date: "11/10/2026",
+            },
+            {
+                id: 3,
+                type: "sent",
+                author: "Ana Paula Souza",
+                text: "Olá, Marcelo! Posso ajudar com isso. Você deseja alterar apenas o endereço de cobrança ou também o endereço de instalação do serviço?",
+                time: "09:35",
+                date: "11/10/2026",
+            },
+            {
+                id: 4,
+                type: "received",
+                text: "Por enquanto, somente o de cobrança. A instalação continua no endereço antigo porque ainda estou finalizando a mudança.",
+                time: "09:37",
+                date: "11/10/2026",
+            },
+            {
+                id: 5,
+                type: "sent",
+                author: "Ana Paula Souza",
+                text: "Perfeito. Vou orientar você sobre a atualização cadastral. Para sua segurança, os dados necessários serão confirmados pelo procedimento de validação da conta.",
+                time: "09:40",
+                date: "11/10/2026",
+            },
+            {
+                id: 6,
+                type: "received",
+                text: "Entendi. Pode me informar como faço essa confirmação?",
+                time: "09:42",
+                date: "11/10/2026",
+            },
+        ],
+    },
+
+    // 9. Dúvida técnica — configuração de equipamento
+    {
+        id: 9,
+        mensagens: [
+            {
+                id: 1,
+                type: "system",
+                author: "Mensagem automática",
+                text: "Você está na fila de Orientação Técnica. Um especialista responderá em instantes.",
+                time: "16:25",
+                date: "10/10/2026",
+            },
+            {
+                id: 2,
+                type: "received",
+                text: "Comprei um roteador novo e queria saber se posso utilizá-lo junto com o equipamento fornecido por vocês.",
+                time: "16:27",
+                date: "10/10/2026",
+            },
+            {
+                id: 3,
+                type: "sent",
+                author: "Diego Carvalho",
+                text: "Olá, Bruno! Em muitos casos é possível, sim. Para indicar a configuração correta, preciso saber o modelo do roteador que você comprou.",
+                time: "16:30",
+                date: "10/10/2026",
+            },
+            {
+                id: 4,
+                type: "received",
+                text: "É um modelo dual-band com Wi-Fi de 2,4 GHz e 5 GHz. Quero melhorar o sinal nos quartos.",
+                time: "16:33",
+                date: "10/10/2026",
+            },
+            {
+                id: 5,
+                type: "sent",
+                author: "Diego Carvalho",
+                text: "Ótimo! Precisamos confirmar o modelo exato e como o equipamento atual está configurado. Assim evitamos conflitos de rede e conseguimos recomendar a melhor instalação.",
+                time: "16:37",
+                date: "10/10/2026",
+            },
+            {
+                id: 6,
+                type: "received",
+                text: "Vou verificar a etiqueta e enviar o modelo assim que encontrar. Obrigado pela orientação.",
+                time: "16:39",
+                date: "10/10/2026",
+            },
+        ],
+    },
+
+    // 10. Atendimento geral — solicitação de segunda via
+    {
+        id: 10,
+        mensagens: [
+            {
+                id: 1,
+                type: "system",
+                author: "Mensagem automática",
+                text: "Olá! Você está no Atendimento Geral. Aguarde enquanto conectamos você a um de nossos atendentes.",
+                time: "17:05",
+                date: "09/10/2026",
+            },
+            {
+                id: 2,
+                type: "received",
+                text: "Boa tarde! Não encontrei a fatura deste mês no meu e-mail. Como consigo uma segunda via?",
+                time: "17:07",
+                date: "09/10/2026",
+            },
+            {
+                id: 3,
+                type: "sent",
+                author: "Caio Ribeiro",
+                text: "Boa tarde, Renata! Você pode consultar suas faturas pelo portal do cliente. Se preferir, também podemos orientar você durante o acesso.",
+                time: "17:10",
+                date: "09/10/2026",
+            },
+            {
+                id: 4,
+                type: "received",
+                text: "Tentei entrar no portal, mas não encontrei a opção de faturas. Só aparece meu cadastro.",
+                time: "17:13",
+                date: "09/10/2026",
+            },
+            {
+                id: 5,
+                type: "sent",
+                author: "Caio Ribeiro",
+                text: "Entendi. Após acessar o portal, procure a seção Financeiro ou Minhas Faturas. Caso a opção não apareça, podemos verificar se o seu perfil está com acesso correto.",
+                time: "17:16",
+                date: "09/10/2026",
+            },
+            {
+                id: 6,
+                type: "received",
+                text: "Encontrei! A fatura estava em outra seção. Consegui baixar o documento, muito obrigada.",
+                time: "17:18",
+                date: "09/10/2026",
+            },
+        ],
+    },
+];

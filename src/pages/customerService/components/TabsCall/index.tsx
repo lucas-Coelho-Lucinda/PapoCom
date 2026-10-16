@@ -13,31 +13,65 @@ import { FiltersOptionsService } from "../FiltersOptionsService";
 import { Phone, PhoneCall, PhoneIncoming } from "lucide-react";
 import { ItemCall } from "./components/itemCall";
 import { NotFoundItem } from "./components/notFoundItem";
+import type { TabsCallProps } from "./types";
+import type { CallSelected } from "../convertionPainel/types";
 
-export function TabsCall({ onSelectCall }: { onSelectCall?: () => void }) {
+export function TabsCall({ onSelectCall, setSelectedCall }: TabsCallProps) {
+  const ALL_QUEUES = "Todas as filas";
+  const ALL_USERS = "Todos os usuarios";
   const [listStateCalls, setListStateCalls] = useState(generateListOfCalls(10));
-  const [optionQueue, setOptionQueue] = useState("Todas as filas");
-  const [optionUser, setOptionUser] = useState("Todos os usuarios");
+
+  const [optionQueue, setOptionQueue] = useState<string | string[]>(ALL_QUEUES);
+  const [optionUser, setOptionUser] = useState<string | string[]>(ALL_USERS);
+  // Busca por texto: deve continuar string (não faz sentido como lista)
   const [searchCotactNumber, setSearchCotactNumber] = useState("");
 
+  // Fora do componente
+  const matchesSelection = (
+    selected: string | string[],
+    allLabel: string,
+    current: string,
+  ) => {
+    const values = Array.isArray(selected) ? selected : [selected];
+
+    if (values.length === 0 || values.includes(allLabel)) return true;
+
+    return values.includes(current);
+  };
+
   const listDefault = listStateCalls.filter((element) => {
-    const matchesQueue =
-      optionQueue === "Todas as filas" || element.queue === optionQueue;
+    const matchesQueue = matchesSelection(
+      optionQueue,
+      ALL_QUEUES,
+      element.queue,
+    );
+    const matchesUser = matchesSelection(optionUser, ALL_USERS, element.user);
 
-    const matchesUser =
-      optionUser === "Todos os usuarios" || element.user === optionUser;
+    const search = searchCotactNumber.toLowerCase();
 
-    const matchesContactNumber =
-      searchCotactNumber === "" ||
-      element.name.toLowerCase().includes(searchCotactNumber.toLowerCase());
+    const matchesContact =
+      search === "" || element.name.toLowerCase().includes(search);
 
-    return searchCotactNumber !== ""
-      ? matchesContactNumber
-      : matchesQueue && matchesUser;
+    const matchesNumber =
+      search === "" || element.fone.toLowerCase().includes(search);
+
+    return matchesQueue && matchesUser && (matchesContact || matchesNumber);
   });
 
   const selectCall = (id: number) => {
     onSelectCall?.();
+    const seletedCall = listDefault.find((element) => {
+      if (element.id == id) {
+        return {
+          id: element.id,
+          name: element.name,
+          user: element.user,
+          fone: element.fone,
+        };
+      }
+    }) as CallSelected;
+
+    setSelectedCall(seletedCall);
     setListStateCalls((prev) =>
       prev.map((item) => ({
         ...item,
@@ -133,14 +167,16 @@ export function TabsCall({ onSelectCall }: { onSelectCall?: () => void }) {
                 className="m-0 w-full min-w-0 p-0"
               >
                 <ItemCall
-                  isSelected={item.selected}
+                  key={`${item.name}-${index}`}
+                  id={item.id}
+                  fone={item.fone}
                   name={item.name}
                   hour={item.hour}
                   text={item.text}
                   user={item.user}
                   queue={item.queue}
-                  id={item.id}
                   selectCall={selectCall}
+                  isSelected={item.selected}
                 />
 
                 {index < listStateCalls.length - 1 && (

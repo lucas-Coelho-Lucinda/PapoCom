@@ -1,9 +1,5 @@
 export const optionsQueue = [
     {
-        label: "Todas as filas",
-        value: "Todas as filas",
-    },
-    {
         label: "Suporte Tecnico",
         value: "suporte tecnico",
     },
@@ -20,10 +16,6 @@ export const optionsQueue = [
 ]
 
 export const optionsStatus = [
-    {
-        label: "Todos os usuarios",
-        value: "Todos os usuarios",
-    },
     {
         label: "lucas coelho lucinda",
         value: "lucas coelho lucinda",

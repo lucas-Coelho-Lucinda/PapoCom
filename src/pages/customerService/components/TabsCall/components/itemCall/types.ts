@@ -1,6 +1,7 @@
 export interface ItemCallProps {
-  isSelected: boolean;
+  isSelected?: boolean;
   id: number;
+  fone: string;
   name: string;
   text: string;
   hour: string;

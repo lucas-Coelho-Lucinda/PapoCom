@@ -1,16 +1,15 @@
-
 import type { ItemCallProps } from "./types";
 import { AvatarLib } from "../../../../../../components/avatar";
 import { CardLib } from "../../../../../../components/card";
 import { Textlib } from "../../../../../../components/text";
-import { MessageCircleCheck, User } from "lucide-react";
-
+import { MessageCircleCheck, Phone, User } from "lucide-react";
 
 export const ItemCall = ({
   isSelected,
   hour,
   name,
   text,
+  fone,
   id,
   queue,
   user,
@@ -33,7 +32,7 @@ export const ItemCall = ({
           color={isSelected ? "success" : "muted"}
           border={isSelected ? "primary" : "none"}
           fit="cover"
-          textInfo="t"
+          textInfo={name}
           className="shrink-0"
         />
 
@@ -76,10 +75,36 @@ export const ItemCall = ({
               border={isSelected ? "none" : "primary"}
               colorBackeGround={isSelected ? "primary" : "default"}
               colorsHouverBackGround="none"
+              className="flex flex-row gap-1 justify-center items-center p-1 mt-2 min-w-0"
+            >
+              <Phone
+                size={16}
+                className="shrink-0"
+                color={isSelected ? "#ffff" : "#144F44"}
+              />
+              <Textlib
+                color={isSelected ? "secondary" : "primary"}
+                colorHover="none"
+                as="span"
+                size="sm"
+                className="flex-1 min-w-0 truncate"
+              >
+                {fone}
+              </Textlib>
+            </CardLib>
+            <CardLib
+              width="fit"
+              height="min"
+              rounded="xl"
+              shadow="sm"
+              padding="none"
+              border={isSelected ? "none" : "primary"}
+              colorBackeGround={isSelected ? "primary" : "default"}
+              colorsHouverBackGround="none"
               className="flex flex-row justify-center items-center gap-1 p-1 mt-2 min-w-0"
             >
               <User
-                size={20}
+                size={16}
                 className="shrink-0"
                 color={isSelected ? "#ffff" : "#144F44"}
               />
@@ -105,7 +130,7 @@ export const ItemCall = ({
               className="flex flex-row justify-center items-center gap-1 p-1 mt-2 min-w-0"
             >
               <MessageCircleCheck
-                size={18}
+                size={16}
                 className="shrink-0"
                 color={isSelected ? "#ffff" : "#144F44"}
               />

@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { KeyboardEvent as ReactKeyboardEvent } from "react";
 import * as Select from "@radix-ui/react-select";
+import * as Popover from "@radix-ui/react-popover";
 import { Check, Search } from "lucide-react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { colorsBackGround, colorsText } from "../../styles/colors";
@@ -111,6 +112,44 @@ const selectContentVariants = cva(
 );
 
 /**
+ * Equivalente ao selectContentVariants, mas para o Popover (modo múltiplo).
+ * As CSS vars mudam de prefixo (--radix-popover-*) e o conteúdo vira flex-col
+ * para que a lista role dentro da altura máxima.
+ */
+const popoverContentVariants = cva(
+  [
+    "z-50",
+
+    "flex",
+    "flex-col",
+    "overflow-hidden",
+
+    "rounded-md",
+    "border",
+    "border-soft",
+
+    "p-1",
+
+    "w-[var(--radix-popover-trigger-width)]",
+    "max-h-[var(--radix-popover-content-available-height)]",
+
+    "data-[state=open]:animate-[select-content-show_150ms_ease-out]",
+    "data-[state=closed]:animate-[select-content-hide_100ms_ease-in]",
+  ].join(" "),
+  {
+    variants: {
+      variant: {
+        ...colorsBackGround,
+      },
+    },
+
+    defaultVariants: {
+      variant: "default",
+    },
+  },
+);
+
+/**
  * ============================================================
  * VIEWPORT
  * ============================================================
@@ -200,24 +239,20 @@ const selectItemVariants = cva(
  * ============================================================
  */
 
-interface SelectProps extends Omit<
+interface SelectOption {
+  label: string;
+  value: string;
+}
+
+interface BaseSelectProps extends Omit<
   VariantProps<typeof selectTriggerVariants>,
   "textColor"
 > {
-  options: {
-    label: string;
-    value: string;
-  }[];
+  options: SelectOption[];
 
   placeholder?: string;
 
-  value?: string;
-
-  defaultValue?: string;
-
   IconDefault: React.ReactNode;
-
-  onValueChange?: (value: string) => void;
 
   disabled?: boolean;
 
@@ -238,6 +273,30 @@ interface SelectProps extends Omit<
   /** Mensagem exibida quando a busca não retorna resultados. */
   emptyMessage?: string;
 }
+
+/** Seleção única (comportamento original). */
+interface SingleSelectProps extends BaseSelectProps {
+  multiple?: false;
+
+  value?: string;
+
+  defaultValue?: string;
+
+  onValueChange?: (value: string) => void;
+}
+
+/** Seleção múltipla: o valor passa a ser um array de strings. */
+interface MultiSelectProps extends BaseSelectProps {
+  multiple: true;
+
+  value?: string[];
+
+  defaultValue?: string[];
+
+  onValueChange?: (value: string[]) => void;
+}
+
+export type SelectProps = SingleSelectProps | MultiSelectProps;
 
 /**
  * ============================================================
@@ -297,10 +356,27 @@ function normalizeText(text: string): string {
 
 /**
  * ============================================================
- * COMPONENT
+ * COMPONENT (ENTRADA PÚBLICA)
+ * ============================================================
+ * Escolhe o motor de acordo com a prop `multiple`:
+ *  - sem `multiple`  -> Radix Select (comportamento original, inalterado)
+ *  - `multiple`      -> Radix Popover + listbox (o Radix Select não suporta
+ *                       múltipla seleção)
+ */
+export function SelectLib(props: SelectProps) {
+  if (props.multiple === true) return <MultiSelect {...props} />;
+
+  return <SingleSelect {...props} />;
+}
+
+SelectLib.displayName = "SelectLib";
+
+/**
+ * ============================================================
+ * SELEÇÃO ÚNICA (código original)
  * ============================================================
  */
-export function SelectLib({
+function SingleSelect({
   options,
   placeholder = "Selecione uma opção",
   variant = "default",
@@ -315,7 +391,7 @@ export function SelectLib({
   searchable = false,
   searchPlaceholder = "Buscar...",
   emptyMessage = "Nenhum resultado encontrado",
-}: SelectProps) {
+}: SingleSelectProps) {
   const truncateAt = 30;
 
   const [open, setOpen] = useState(false);
@@ -571,7 +647,7 @@ export function SelectLib({
                       <Check className="h-4 w-4" />
                     </Select.ItemIndicator>
 
-                    <Select.ItemText className="bg-primary">
+                    <Select.ItemText className="">
                       {truncateText(option.label, truncateAt)}
                     </Select.ItemText>
                   </Select.Item>
@@ -594,4 +670,307 @@ export function SelectLib({
   );
 }
 
-SelectLib.displayName = "SelectLib";
+/**
+ * ============================================================
+ * SELEÇÃO MÚLTIPLA (Popover + listbox)
+ * ============================================================
+ * O Radix Select não suporta múltipla seleção, então este modo usa
+ * Popover. Como não há typeahead nem "item selecionado" do Radix para
+ * brigar com o foco, o filtro pode simplesmente não renderizar os itens
+ * que não combinam (sem os hacks de foco do modo único).
+ */
+function MultiSelect({
+  options,
+  placeholder = "Selecione uma ou mais opções",
+  variant = "default",
+  textColor = "default",
+  size = "small",
+  value,
+  IconDefault,
+  defaultValue,
+  onValueChange,
+  disabled = false,
+  className,
+  searchable = false,
+  searchPlaceholder = "Buscar...",
+  emptyMessage = "Nenhum resultado encontrado",
+}: MultiSelectProps) {
+  const truncateAt = 30;
+
+  const [open, setOpen] = useState(false);
+  const [search, setSearch] = useState("");
+
+  // Suporta uso controlado (value) e não controlado (defaultValue).
+  const [internalValue, setInternalValue] = useState<string[]>(
+    defaultValue ?? [],
+  );
+  const currentValue = value ?? internalValue;
+
+  const inputRef = useRef<HTMLInputElement>(null);
+  const listRef = useRef<HTMLDivElement>(null);
+
+  const selectedSet = useMemo(() => new Set(currentValue), [currentValue]);
+
+  // Mantém a ordem das opções para exibir no Trigger.
+  const selectedOptions = useMemo(
+    () => options.filter((option) => selectedSet.has(option.value)),
+    [options, selectedSet],
+  );
+
+  const triggerText = selectedOptions.map((option) => option.label).join(", ");
+
+  // Normaliza as labels UMA vez (e não a cada tecla digitada).
+  const searchableOptions = useMemo(
+    () =>
+      options.map((option) => ({
+        option,
+        searchKey: normalizeText(option.label),
+      })),
+    [options],
+  );
+
+  const term = searchable ? normalizeText(search) : "";
+
+  const filteredOptions = useMemo(() => {
+    if (!term) return options;
+
+    return searchableOptions
+      .filter((item) => item.searchKey.includes(term))
+      .map((item) => item.option);
+  }, [options, searchableOptions, term]);
+
+  const toggleValue = (optionValue: string) => {
+    const next = selectedSet.has(optionValue)
+      ? currentValue.filter((v) => v !== optionValue)
+      : [...currentValue, optionValue];
+
+    setInternalValue(next);
+    onValueChange?.(next);
+  };
+
+  const handleOpenChange = (next: boolean) => {
+    setOpen(next);
+
+    // Reseta ao abrir (e não ao fechar) para não piscar a lista completa
+    // durante a animação de fechamento.
+    if (next) setSearch("");
+  };
+
+  const getItems = () =>
+    Array.from(
+      listRef.current?.querySelectorAll<HTMLElement>('[role="option"]') ?? [],
+    );
+
+  // Ao abrir: foco no input (searchable) ou no primeiro item selecionado/primeiro item.
+  const handleOpenAutoFocus = (e: Event) => {
+    e.preventDefault();
+
+    if (searchable) {
+      inputRef.current?.focus({ preventScroll: true });
+      return;
+    }
+
+    const items = getItems();
+    const target =
+      items.find((item) => item.getAttribute("aria-selected") === "true") ??
+      items[0];
+
+    target?.focus({ preventScroll: true });
+  };
+
+  const handleSearchKeyDown = (e: ReactKeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+      getItems()[0]?.focus();
+      return;
+    }
+
+    // Enter alterna a primeira opção visível e mantém a lista aberta
+    if (e.key === "Enter") {
+      e.preventDefault();
+
+      const first = filteredOptions[0];
+      if (first) toggleValue(first.value);
+    }
+  };
+
+  const handleListKeyDown = (e: ReactKeyboardEvent<HTMLDivElement>) => {
+    const items = getItems();
+    const index = items.indexOf(document.activeElement as HTMLElement);
+
+    switch (e.key) {
+      case "ArrowDown":
+        e.preventDefault();
+        items[Math.min(index + 1, items.length - 1)]?.focus();
+        return;
+
+      case "ArrowUp":
+        e.preventDefault();
+
+        // Na primeira opção, devolve o foco ao campo de busca
+        if (index <= 0 && searchable) {
+          inputRef.current?.focus();
+          return;
+        }
+
+        items[Math.max(index - 1, 0)]?.focus();
+        return;
+
+      case "Home":
+        e.preventDefault();
+        items[0]?.focus();
+        return;
+
+      case "End":
+        e.preventDefault();
+        items[items.length - 1]?.focus();
+        return;
+
+      case "Enter":
+      case " ": {
+        if (index < 0) return;
+
+        e.preventDefault();
+
+        const optionValue = items[index].dataset.value;
+        if (optionValue !== undefined) toggleValue(optionValue);
+        return;
+      }
+    }
+
+    if (!searchable || e.ctrlKey || e.metaKey || e.altKey) return;
+
+    // Quem digita com o foco em um item continua pesquisando.
+    if (e.key.length === 1) {
+      e.preventDefault();
+      setSearch((prev) => prev + e.key);
+      inputRef.current?.focus();
+      return;
+    }
+
+    if (e.key === "Backspace") {
+      e.preventDefault();
+      setSearch((prev) => prev.slice(0, -1));
+      inputRef.current?.focus();
+    }
+  };
+
+  return (
+    <Popover.Root open={open} onOpenChange={handleOpenChange}>
+      <Popover.Trigger
+        disabled={disabled}
+        aria-haspopup="listbox"
+        className={selectTriggerVariants({
+          variant,
+          textColor,
+          size,
+          className,
+        })}
+      >
+        <div className="block min-w-0 flex flex-row items-center justify-center gap-2 flex-1  overflow-hidden whitespace-nowrap text-ellipsis">
+          <span className="shrink-0">{IconDefault}</span>
+
+          <span
+            className={`block min-w-0 w-full max-w-full overflow-hidden text-ellipsis whitespace-nowrap text-left ${colorsText[textColor]} ${
+              triggerText ? "" : "opacity-60"
+            }`}
+          >
+            {triggerText || placeholder}
+          </span>
+
+          {selectedOptions.length > 1 && (
+            <span className="shrink-0 rounded-full border border-soft px-1.5 text-xs">
+              {selectedOptions.length}
+            </span>
+          )}
+        </div>
+      </Popover.Trigger>
+
+      <Popover.Portal>
+        <Popover.Content
+          sideOffset={4}
+          align="start"
+          collisionPadding={8}
+          onOpenAutoFocus={handleOpenAutoFocus}
+          className={popoverContentVariants({ variant })}
+        >
+          {searchable && (
+            <div className="shrink-0 p-1 pb-2">
+              <div className="relative">
+                <InputLib
+                  ref={inputRef}
+                  leftIcon={<Search aria-hidden="true" className="shrink-0" size={15} />}
+                  inputSize="small"
+                  type="text"
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  onKeyDown={handleSearchKeyDown}
+                  placeholder={searchPlaceholder}
+                  aria-label={searchPlaceholder}
+                  autoComplete="off"
+                  spellCheck={false}
+                  className="placeholder:opacity-60 focus:border-primary"
+                />
+              </div>
+            </div>
+          )}
+
+          <div
+            ref={listRef}
+            role="listbox"
+            aria-multiselectable="true"
+            onKeyDown={handleListKeyDown}
+            className={`${selectViewportVariants()} min-h-0`}
+          >
+            <ScrollListLib
+              variant="default"
+              border="none"
+              padding="min"
+              className="min-h-0 flex-1 px-2 shadow-sm"
+            >
+              {filteredOptions.map((option) => {
+                const isSelected = selectedSet.has(option.value);
+
+                return (
+                  <div
+                    key={option.value}
+                    role="option"
+                    aria-selected={isSelected}
+                    data-value={option.value}
+                    data-state={isSelected ? "checked" : "unchecked"}
+                    tabIndex={-1}
+                    onClick={() => toggleValue(option.value)}
+                    className={`mt-1 focus:border-primary ${selectItemVariants({
+                      variant,
+                      textColor,
+                      size,
+                    })} ${defineColorItem(variant) ?? ""}`}
+                  >
+                    {isSelected && (
+                      <span className="absolute left-2 flex items-center">
+                        <Check className="h-4 w-4" />
+                      </span>
+                    )}
+
+                    <span className={isSelected ? "font-semibold": ""}>
+                      {truncateText(option.label, truncateAt)}
+                    </span>
+                  </div>
+                );
+              })}
+
+              {filteredOptions.length === 0 && (
+                <div
+                  role="status"
+                  className="px-2 py-3 text-center text-sm opacity-60"
+                >
+                  {emptyMessage}
+                </div>
+              )}
+            </ScrollListLib>
+          </div>
+        </Popover.Content>
+      </Popover.Portal>
+    </Popover.Root>
+  );
+}

@@ -5,13 +5,11 @@ import { SelectLib } from "../../../../components/select";
 import type { FiltersOptionsServiceProps } from "./types";
 import { optionsQueue, optionsStatus } from "./const";
 
-
 export const FiltersOptionsService = ({
   filterQueue,
   filterUser,
   filterContactNumber,
 }: FiltersOptionsServiceProps) => {
-
   return (
     <CardLib
       className="@container flex flex-col justify-center items-center"
@@ -33,31 +31,35 @@ export const FiltersOptionsService = ({
 
         <div className="flex w-full min-w-0 flex-col gap-3 @xs:flex-row @xs:gap-5">
           <SelectLib
+            multiple
             searchable={true}
             variant="default"
             size="small"
-            onValueChange={(valueQueueSelected) =>
-              filterQueue(valueQueueSelected)
+            onValueChange={(valuesQueueSelected) =>
+              filterQueue(valuesQueueSelected)
             }
             searchPlaceholder="Pesquise uma fila..."
             IconDefault={<ListOrdered size={20} />}
             options={optionsQueue}
             textColor="primary"
             className="min-w-0 flex-1 w-full max-w-full"
-            defaultValue={optionsQueue[0].value}
+            
           />
 
           <SelectLib
+            multiple
             searchable={true}
             variant="default"
             size="small"
-            textColor="primary"
-            onValueChange={(valueUserSelected) => filterUser(valueUserSelected)}
-            searchPlaceholder="Pesquise um usuário..."
+            onValueChange={(valueUserSelected) =>
+              filterUser(valueUserSelected)
+            }
+            searchPlaceholder="Pesquise uma usuário..."
             IconDefault={<Users size={20} />}
             options={optionsStatus}
+            textColor="primary"
             className="min-w-0 flex-1 w-full max-w-full"
-            defaultValue={optionsStatus[0].value}
+            
           />
         </div>
       </div>
