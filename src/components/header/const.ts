@@ -31,7 +31,7 @@ export const NAV_ITEMS: SideMenuItem[] = [
         title: "Contatos",
         to: "/Contatos",
         icon: Contact,
-        subtitle: "Números que já conversaram com a empresa",
+        subtitle: "Números que já conversaram ou estão conversando com sua empresa",
     },
     {
         title: "Dispositivos",

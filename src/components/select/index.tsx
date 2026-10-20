@@ -54,9 +54,9 @@ const selectTriggerVariants = cva(
       size: {
         small: ["h-8", "px-2", "text-sm"].join(" "),
 
-        medium: ["h-8", "px-2", "text-sm"].join(" "),
+        medium: ["h-10", "px-2", "text-sm"].join(" "),
 
-        large: ["h-16", "px-3", "text-base"].join(" "),
+        large: ["h-20", "px-3", "text-base"].join(" "),
       },
     },
 
@@ -219,9 +219,9 @@ const selectItemVariants = cva(
       size: {
         small: ["h-8", "py-1", "pl-8", "pr-2", "text-sm"].join(" "),
 
-        medium: ["h-8", "py-1", "pl-8", "pr-2", "text-sm"].join(" "),
+        medium: ["h-10", "py-1", "pl-8", "pr-2", "text-sm"].join(" "),
 
-        large: ["h-16", "py-2", "pl-10", "pr-3", "text-base"].join(" "),
+        large: ["h-20", "py-2", "pl-10", "pr-3", "text-base"].join(" "),
       },
     },
 
