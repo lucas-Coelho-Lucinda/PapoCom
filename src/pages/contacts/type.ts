@@ -1,7 +1,23 @@
 import { useMemo, useState } from "react";
-import { DEFAULT_PAGE_SIZE } from "../../components/contactsTable/conts";
-import { createContactMatcher, digitsOnly, normalizePhone } from "../../utils";
-import type { Contact, ContactFormValues } from "../../components/contactsTable/type";
+import { DEFAULT_PAGE_SIZE } from "../../components/table/conts";
+import { createContactMatcher, normalizePhone } from "../../utils";
+import type { ItensTableProps } from "../../components/table";
+
+export interface Contact {
+  id: number;
+  /** `null` quando o WhatsApp não informou o nome ("Sem nome"). */
+  name: string | null;
+  /** Formato internacional, ex.: +5511998812345. */
+  phone: string;
+  /** Data do primeiro contato em ISO 8601. */
+  firstContactAt: string;
+};
+
+export type ContactFormValues = {
+  name: string;
+  phone: string;
+};
+
 
 /**
  * Estado da lista: busca, paginação e seleção.
@@ -10,8 +26,8 @@ import type { Contact, ContactFormValues } from "../../components/contactsTable/
  * (items / total / page / pageCount) pode ser mantida: basta trocar
  * `filtered`/`items` pelo resultado paginado do servidor.
  */
-export function useContactsList(initialContacts: Contact[]) {
-  const [contacts, setContacts] = useState<Contact[]>(initialContacts);
+export function useContactsList(initialContacts: ItensTableProps[]) {
+  const [contacts, setContacts] = useState<ItensTableProps[]>(initialContacts);
   const [search, setSearchState] = useState("");
   const [page, setPage] = useState(1);
   const [pageSize, setPageSizeState] = useState(DEFAULT_PAGE_SIZE);
@@ -97,11 +113,11 @@ export function useContactsList(initialContacts: Contact[]) {
   /** Retorna a mensagem de erro, ou `null` se salvou. */
   const updateContact = (id: number, values: ContactFormValues) => {
     const phone = normalizePhone(values.phone);
-    const duplicated = contacts.some(
-      (contact) =>
-        contact.id !== id && digitsOnly(contact.phone) === digitsOnly(phone),
-    );
-    if (duplicated) return "Já existe um contato com este número.";
+    /*  const duplicated = contacts.some(
+       (contact) =>
+         contact.id !== id && digitsOnly(contact.text) === digitsOnly(phone),
+     );
+     if (duplicated) return "Já existe um contato com este número."; */
 
     const name = values.name.trim();
     setContacts((prev) =>

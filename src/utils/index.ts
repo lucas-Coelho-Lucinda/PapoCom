@@ -1,4 +1,5 @@
-import type { Contact } from "../components/contactsTable/type";
+import type { Contact } from "../pages/contacts/type";
+
 
 /** Minúsculas e sem acentos, para busca tolerante ("jose" acha "José"). */
 export const normalizeText = (value: string) =>
@@ -61,4 +62,51 @@ export function validatePhone(value: string): string | null {
     return "Informe o número com DDI e DDD. Ex.: +5511998812345";
   }
   return null;
+}
+
+
+export function formatWhatsAppPhone(
+  input: string | number | null | undefined,
+): string {
+  if (input == null || !String(input).trim()) return "";
+
+  const original = String(input).trim();
+  let phone = original.replace(/\D/g, "");
+
+  if (!phone) return original;
+
+  const international = original.startsWith("+") || original.startsWith("00");
+
+  if (phone.startsWith("00")) phone = phone.slice(2);
+
+  if (international && !phone.startsWith("55")) {
+    return `+${phone}`;
+  }
+
+  const hasCountryCode =
+    phone.startsWith("55") &&
+    (phone.length >= 12 || international);
+
+  if (hasCountryCode) phone = phone.slice(2);
+
+  if (phone.length >= 11 && phone.startsWith("0")) {
+    phone = phone.slice(1);
+  }
+
+  const prefix = hasCountryCode ? "+55 " : "";
+
+  if (phone.length < 10) return prefix + phone;
+
+  const ddd = phone.slice(0, 2);
+  const number = phone.slice(2);
+
+  if (number.length === 8) {
+    return `${prefix}(${ddd}) ${number.slice(0, 4)}-${number.slice(4)}`;
+  }
+
+  if (number.length === 9) {
+    return `${prefix}(${ddd}) ${number.slice(0, 5)}-${number.slice(5)}`;
+  }
+
+  return `${prefix}(${ddd}) ${number}`;
 }

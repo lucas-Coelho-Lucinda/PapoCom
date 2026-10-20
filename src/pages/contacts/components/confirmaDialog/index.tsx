@@ -1,14 +1,21 @@
 import { useState } from "react";
-import { validatePhone } from "../../../../utils";
+import { formatWhatsAppPhone, validatePhone } from "../../../../utils";
 import { InputLib } from "../../../../components/Input";
 import { ButtonLib } from "../../../../components/button";
 import { DialogContentLib, DialogLib } from "../../../../components/dialog";
-import { ALLOW_PHONE_EDIT } from "../../../../components/contactsTable/conts";
-import type { Contact, ContactFormValues } from "../../../../components/contactsTable/type";
+import { ALLOW_PHONE_EDIT } from "../../../../components/table/conts";
+import type { ContactFormValues } from "../../type";
+import type { ItensTableProps } from "../../../../components/table";
+
+type ContactFormProps = {
+  contact: ItensTableProps;
+  onCancel: () => void;
+  onSubmit: (values: ContactFormValues) => string | null;
+};
 
 type ContactFormDialogProps = {
   /** `null` = fechado. */
-  contact: Contact | null;
+  contact: ItensTableProps | null;
   onClose: () => void;
   /** Retorna a mensagem de erro (ex.: número duplicado) ou `null` se salvou. */
   onSubmit: (id: number, values: ContactFormValues) => string | null;
@@ -48,15 +55,16 @@ export function ContactFormDialog({
   );
 }
 
-type ContactFormProps = {
-  contact: Contact;
-  onCancel: () => void;
-  onSubmit: (values: ContactFormValues) => string | null;
-};
-
 function ContactForm({ contact, onCancel, onSubmit }: ContactFormProps) {
-  const [name, setName] = useState(contact.name ?? "");
-  const [phone, setPhone] = useState(contact.phone);
+  const contactName = [
+    ...new Set(contact.columns.map((item) => item.value)),
+  ][0];
+  const contactPhone = formatWhatsAppPhone(
+    [...new Set(contact.columns.map((item) => item.value))][1],
+  );
+
+  const [name, setName] = useState(contactName ?? "");
+  const [phone, setPhone] = useState(contactPhone);
   const [phoneError, setPhoneError] = useState<string | null>(null);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -109,7 +117,11 @@ function ContactForm({ contact, onCancel, onSubmit }: ContactFormProps) {
           }}
         />
         {phoneError ? (
-          <p id="contact-phone-error" role="alert" className="text-xs text-error">
+          <p
+            id="contact-phone-error"
+            role="alert"
+            className="text-xs text-error"
+          >
             {phoneError}
           </p>
         ) : null}

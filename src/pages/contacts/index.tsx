@@ -10,16 +10,18 @@ import { InputLib } from "../../components/Input";
 import { SelectLib } from "../../components/select";
 
 import { useContactsList } from "./type";
-import type { Contact } from "../../components/contactsTable/type";
 import { EmptyState } from "../../components/empyState";
 import { PaginationLib } from "../../components/pagination";
-import { ContactsTable } from "../../components/contactsTable";
-import {
-  defaultContacts,
-  PAGE_SIZE_OPTIONS,
-} from "../../components/contactsTable/conts";
 
-type DeleteTarget = { ids: number[]; label: string };
+import { PAGE_SIZE_OPTIONS } from "../../components/table/conts";
+
+import {
+  Table,
+  type ItensTableProps,
+  type TableTargets,
+  
+} from "../../components/table";
+import { defaultContacts, titlesContacts } from "./conts";
 
 const plural = (count: number, singular: string, pluralForm: string) =>
   count === 1 ? singular : pluralForm;
@@ -31,18 +33,23 @@ const linkButton =
 export function Contacts() {
   const list = useContactsList(defaultContacts);
 
-  const [editing, setEditing] = useState<Contact | null>(null);
-  const [deleteTarget, setDeleteTarget] = useState<DeleteTarget | null>(null);
+  const [editing, setEditing] = useState<ItensTableProps | null>(null);
+  const [deleteTarget, setDeleteTarget] = useState<TableTargets | null>(null);
 
   const hasContacts = list.total > 0;
   const hasResults = list.filteredTotal > 0;
   const isSearching = list.search.trim().length > 0;
 
-  const askDeleteOne = (contact: Contact) =>
+  const askDeleteOne = (contact: ItensTableProps) => {
+    const contactName = [
+      ...new Set(contact.columns.map((item) => item.value)),
+    ][0];
+
     setDeleteTarget({
       ids: [contact.id],
-      label: `${contact.name ?? "Sem nome"} (${contact.phone})`,
+      label: `(${contactName})`,
     });
+  };
 
   const askDeleteSelected = () =>
     setDeleteTarget({
@@ -178,8 +185,9 @@ export function Contacts() {
               }
             />
           ) : (
-            <ContactsTable
-              contacts={list.items}
+            <Table
+              itens={list.items}
+              titles={titlesContacts}
               selectedIds={list.selectedIds}
               pageSelectionState={list.pageSelectionState}
               onTogglePage={list.togglePage}
