@@ -314,6 +314,7 @@ type optionsDefineColor =
   | "secondary"
   | "accent"
   | "muted"
+  | "messageforeground"
   | "sendMessage";
 
 const defineColorItem = (option: optionsDefineColor) => {
