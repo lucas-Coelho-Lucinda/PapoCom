@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { ChevronDown, SearchX, Search, Trash2, UserX, X } from "lucide-react";
 import { ConfirmDialog } from "../../components/dialog";
-import { ContactFormDialog } from "./components/confirmaDialog";
+import { ContactModel } from "./components/contactModel";
 
 import { InputLib } from "../../components/Input";
 
@@ -19,9 +19,9 @@ import {
   Table,
   type ItensTableProps,
   type TableTargets,
-  
 } from "../../components/table";
 import { defaultContacts, titlesContacts } from "./conts";
+import { CardLib } from "../../components/card";
 
 const plural = (count: number, singular: string, pluralForm: string) =>
   count === 1 ? singular : pluralForm;
@@ -70,9 +70,9 @@ export function Contacts() {
   return (
     <>
       <Helmet title="Papo Com | Contatos" />
-      <section className="flex h-full min-h-0 flex-col gap-4 bg-background py-4 px-4 text-foreground">
+      <section className="flex h-fit min-h-0 flex-col gap-4 bg-background py-4 px-4 text-foreground">
         {/* ------------------------------ Busca + total ------------------------------ */}
-        <div className="flex  flex-wrap items-center justify-between gap-3">
+        <div className="flex  flex-col items-start justify-start gap-3">
           <div className="flex flex-row items-end gap-5">
             <div className="w-full max-w-sm">
               <InputLib
@@ -162,7 +162,7 @@ export function Contacts() {
         ) : null}
 
         {/* --------------------------------- Tabela --------------------------------- */}
-        <div className="min-h-0 flex-1 overflow-y-auto rounded-lg border border-border bg-card shadow-sm">
+        <div className="min-h-0 flex flex-col  flex-1 overflow-y-auto rounded-lg border border-border bg-card shadow-sm">
           {!hasContacts ? (
             <EmptyState
               icon={<UserX className="size-6" aria-hidden="true" />}
@@ -196,22 +196,28 @@ export function Contacts() {
               onDelete={askDeleteOne}
             />
           )}
-        </div>
 
-        {/* --------------------------- Rodapé: contagem + paginação --------------------------- */}
-        {hasResults ? (
-          <div className="flex flex-row items-center justify-end gap-3">
-            <PaginationLib
-              page={list.page}
-              pageCount={list.pageCount}
-              onPageChange={list.setPage}
-            />
-          </div>
-        ) : null}
+          {/* --------------------------- Rodapé: contagem + paginação --------------------------- */}
+          {hasResults ? (
+            <CardLib
+              padding="sm"
+              width="full"
+              height="fit"
+              colorBackeGround="primary"
+              className="flex flex-row items-center justify-end gap-3"
+            >
+              <PaginationLib
+                page={list.page}
+                pageCount={list.pageCount}
+                onPageChange={list.setPage}
+              />
+            </CardLib>
+          ) : null}
+        </div>
       </section>
 
       {/* --------------------------------- Diálogos --------------------------------- */}
-      <ContactFormDialog
+      <ContactModel
         contact={editing}
         onClose={() => setEditing(null)}
         onSubmit={list.updateContact}

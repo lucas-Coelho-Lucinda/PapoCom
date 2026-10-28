@@ -25,8 +25,8 @@ export const CheckboxLib = React.forwardRef<
         outline-none transition-all
         focus-visible:ring-2 focus-visible:ring-primary
         disabled:cursor-not-allowed disabled:opacity-50
-        data-[state=checked]:border-primary data-[state=checked]:bg-primary
-        data-[state=indeterminate]:border-primary data-[state=indeterminate]:bg-primary
+        data-[state=checked]:border-success data-[state=checked]:bg-success
+        data-[state=indeterminate]:border-success data-[state=indeterminate]:bg-success
         ${className}
       `}
       {...props}

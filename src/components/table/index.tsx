@@ -134,7 +134,7 @@ export function Table({
       <div className="overflow-x-auto">
         <table className="w-full min-w-176 border-collapse text-sm">
           <thead>
-            <tr className="flex w-full items-center border-b border-border-soft text-left text-muted-foreground">
+            <tr className="flex w-full items-center bg-primary border-b border-border-soft text-left text-secondary">
               <th scope="col" className={`${actionsCell} py-3 text-left`}>
                 <div className="flex items-center gap-2">
                   <CheckboxLib

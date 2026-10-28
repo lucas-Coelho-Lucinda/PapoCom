@@ -62,7 +62,6 @@ export function PaginationLib({
   const items = getPageRange(page, pageCount, siblings);
 
   const baseButton = "h-8 min-w-8 px-2 text-sm";
-  const outlined = "border border-border hover:bg-secondary-hover";
 
   return (
     <nav
@@ -72,14 +71,14 @@ export function PaginationLib({
       <ButtonLib
         type="button"
         size="none"
-        colorBackeGround="default"
+        colorBackeGround="success"
         textColor="primary"
         colorBackeHouverGround="none"
         textColorHover="none"
         disabled={page <= 1}
         onClick={() => onPageChange(page - 1)}
         aria-label="Página anterior"
-        className={`${baseButton} ${outlined}`}
+        className={`${baseButton}`}
       >
         <ChevronLeft className="size-4" aria-hidden="true" />
       </ButtonLib>
@@ -89,7 +88,7 @@ export function PaginationLib({
           <span
             key={item}
             aria-hidden="true"
-            className="flex h-8 min-w-8 items-center justify-center text-sm text-muted-foreground"
+            className="flex h-8 min-w-8 items-center justify-center rounded-sm  text-sm text-secondary"
           >
             …
           </span>
@@ -98,14 +97,15 @@ export function PaginationLib({
             key={item}
             type="button"
             size="none"
-            colorBackeGround={item === page ? "primary" : "default"}
-            textColor={item === page ? "secondary" : "primary"}
+            colorBackeGround={item === page ? "success" : "default"}
+            textColor={item === page ? "default" : "primary"}
             colorBackeHouverGround="none"
             textColorHover="none"
             onClick={() => onPageChange(item)}
             aria-label={`Página ${item}`}
             aria-current={item === page ? "page" : undefined}
-            className={`${baseButton} ${item === page ? "" : outlined}`}
+            /*  className={`${baseButton} ${item === page ? "" : ""}`} */
+            className={`${baseButton}`}
           >
             {item}
           </ButtonLib>
@@ -115,14 +115,14 @@ export function PaginationLib({
       <ButtonLib
         type="button"
         size="none"
-        colorBackeGround="default"
+        colorBackeGround="success"
         textColor="primary"
         colorBackeHouverGround="none"
         textColorHover="none"
         disabled={page >= pageCount}
         onClick={() => onPageChange(page + 1)}
         aria-label="Próxima página"
-        className={`${baseButton} ${outlined}`}
+        className={`${baseButton}`}
       >
         <ChevronRight className="size-4" aria-hidden="true" />
       </ButtonLib>

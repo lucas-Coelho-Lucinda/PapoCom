@@ -21,7 +21,7 @@ type ContactFormDialogProps = {
   onSubmit: (id: number, values: ContactFormValues) => string | null;
 };
 
-export function ContactFormDialog({
+export function ContactModel({
   contact,
   onClose,
   onSubmit,

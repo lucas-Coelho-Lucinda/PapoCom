@@ -1,4 +1,4 @@
-import type { Contact } from "../pages/contacts/type";
+import type { ItensTableProps } from "../components/table";
 
 
 /** Minúsculas e sem acentos, para busca tolerante ("jose" acha "José"). */
@@ -12,23 +12,19 @@ export const normalizeText = (value: string) =>
 export const digitsOnly = (value: string) => value.replace(/\D/g, "");
 
 /**
- * Cria o predicado de busca por nome OU número.
- * - Nome: ignora acentos e maiúsculas.
- * - Número: compara só os dígitos, então "11 99881", "(11) 99881"
- *   e "+5511998" encontram o mesmo contato.
+ * Busca um o elemento que corresponda ao valor do texto pesquisado
  */
-export function createContactMatcher(query: string) {
+export function searchMatcher(query: string) {
   const text = normalizeText(query);
   const digits = digitsOnly(query);
 
   if (!text) return () => true;
 
-  return (contact: Contact) => {
-    const nameMatch =
-      contact.name !== null && normalizeText(contact.name).includes(text);
-    const phoneMatch =
-      digits.length > 0 && digitsOnly(contact.phone).includes(digits);
-    return nameMatch || phoneMatch;
+  return (contact: ItensTableProps) => {
+
+    const nameOrPhoneMatch = contact.columns.find((element) => (element.value !== null && normalizeText(element.value).includes(text) || digits.length > 0 && digitsOnly(element.value).includes(digits)))
+
+    return nameOrPhoneMatch
   };
 }
 

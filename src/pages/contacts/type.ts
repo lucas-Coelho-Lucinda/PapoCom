@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
-import { DEFAULT_PAGE_SIZE } from "../../components/table/conts";
-import { createContactMatcher, normalizePhone } from "../../utils";
 import type { ItensTableProps } from "../../components/table";
+import { DEFAULT_PAGE_SIZE } from "../../components/table/conts";
+import { searchMatcher, normalizePhone } from "../../utils";
 
 export interface Contact {
   id: number;
@@ -34,7 +34,7 @@ export function useContactsList(initialContacts: ItensTableProps[]) {
   const [selectedIds, setSelectedIds] = useState<Set<number>>(new Set());
 
   const filtered = useMemo(() => {
-    const matches = createContactMatcher(search);
+    const matches = searchMatcher(search);
     return contacts.filter(matches);
   }, [contacts, search]);
 

@@ -6,7 +6,6 @@ import { Header } from "../../components/header";
 import { SideMenu } from "../../components/sideMenu";
 import { NAV_ITEMS } from "../../components/header/const";
 
-
 export const ServiceLayout = () => {
   const menuId = useId();
 
@@ -20,16 +19,6 @@ export const ServiceLayout = () => {
       <Helmet title="Papo Com | Atendimentos" />
 
       <div className="flex  flex-col overflow-hidden">
-        <Header
-          onMenuClick={openMenu}
-          isMenuOpen={isMenuOpen}
-          menuId={menuId}
-          user={{
-            name: "lucas coelho",
-            avatarUrl: ""
-          }}
-        />
-
         <SideMenu
           id={menuId}
           isOpen={isMenuOpen}
@@ -44,9 +33,18 @@ export const ServiceLayout = () => {
           }
         />
 
-        <main className="flex min-h-0 flex-1 flex-col overflow-y-auto">
-          <Outlet />
-        </main>
+        <div className="grid h-dvh grid-rows-[auto_minmax(0,1fr)] overflow-hidden">
+          <Header
+            onMenuClick={openMenu}
+            isMenuOpen={isMenuOpen}
+            menuId={menuId}
+            user={{ name: "lucas coelho", avatarUrl: "" }}
+          />
+
+          <main className="flex min-h-0 flex-col overflow-hidden">
+            <Outlet />
+          </main>
+        </div>
       </div>
     </>
   );
